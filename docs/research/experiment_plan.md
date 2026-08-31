@@ -200,7 +200,10 @@ Decision:
 \boxed{\text{SHRINKAGE PERSISTS AFTER STRONG BASELINES}}
 \]
 
-## Phase 3.2 — Current Experiment
+## Phase 3.2 — Current Stage
+
+Candidate-method design is justified but has **not started**. No proposed
+objective is frozen.
 
 ### Research Question
 > Can a minimal training objective reduce rare upper-extreme inward shrinkage while preserving RPS-like ordinal risk alignment, severe-error detection, selective prediction, and global predictive quality?
@@ -391,8 +394,10 @@ Do not currently:
 - launch all datasets
 - claim novelty before literature verification and seed-0 evidence
 
-## Immediate Next Action
-Design a small set of minimal Phase 3.2 candidate objectives that explicitly target **rare upper-extreme probability-location shrinkage**.
+## Next Authorized Work
+When a separate Phase 3.2 task authorizes candidate design, begin with a small set
+of minimal objectives that explicitly target **rare upper-extreme
+probability-location shrinkage**.
 
 Before training:
 1. check overlap with existing literature

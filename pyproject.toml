@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ordinal-uncertainty"
 version = "0.1.0"
-description = "Experiment 0: ordinal uncertainty diagnostics for RetinaMNIST"
+description = "Research code for uncertainty quantification and decision-risk analysis in imbalanced ordinal classification"
 requires-python = ">=3.10"
 dependencies = [
     "medmnist>=3.0.2",

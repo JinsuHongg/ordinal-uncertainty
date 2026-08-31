@@ -156,5 +156,8 @@ Do not currently:
 - return to 64×64 RetinaMNIST
 - start ensemble or conformal extensions
 
-## Immediate Next Action
-Design a small number of minimal Phase 3.2 candidate objectives that directly target probability-location shrinkage. Validate each with a controlled seed-0 GO/NO-GO experiment before any multi-seed or multi-dataset expansion.
+## Next Authorized Work
+When a separate Phase 3.2 task authorizes candidate design, test only a small
+number of minimal objectives that directly target probability-location shrinkage.
+Validate each with a controlled seed-0 GO/NO-GO experiment before any multi-seed
+or multi-dataset expansion.
