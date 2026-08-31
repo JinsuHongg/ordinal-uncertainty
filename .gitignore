@@ -219,6 +219,8 @@ __marimo__/
 
 # Experiment artifacts
 data/
+!src/ordinal_uncertainty/data/
+!src/ordinal_uncertainty/data/*.py
 outputs/
 outputs_smoke/
 *.pt

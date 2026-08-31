@@ -12,6 +12,7 @@
 | Weighted CE | Stop — scientifically noncompetitive | Complete | Increased rare-class mass without recovering class-4 decisions; global quality degraded. |
 | SLACE | Stop — scientifically noncompetitive | Complete | Did not recover class-4 geometry despite useful seed-0 risk ranking. |
 | Phase 3.2 gate | Justified, narrowly | Pending candidate design | Reduce rare upper-extreme inward shrinkage while preserving RPS-like ordinal risk alignment, severe detection, selective prediction, and global predictive quality. |
+| Phase 3.2 Candidate 1 | Branch closed — NO-GO | Complete seed-0 diagnostics | Neighborhood correction trained adjacent class-4 recovery but did not jointly preserve global/selective-risk controls. Fixed-rho true-endpoint preference did not improve p4 or yield exact recovery. Do not create Candidate 1c from RetinaMNIST test diagnostics. |
 
 ## SLACE infrastructure correction
 

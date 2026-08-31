@@ -2,7 +2,7 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Phase 3.2 — method design justified, not started
+**Current stage:** Phase 3.2 — Candidate 1 branch closed after seed-0 diagnostics
 
 The project now focuses on a specific failure in imbalanced ordinal classification: rare upper-extreme samples can receive high predicted decision risk while their predictive probability mass is still pulled strongly toward central classes.
 
@@ -146,6 +146,39 @@ Strong existing controls do not resolve the rare upper-extreme location collapse
 > **Reduce rare upper-extreme inward shrinkage while preserving RPS-like ordinal risk alignment, severe-error detection, selective prediction, and global predictive quality.**
 
 No Phase 3.2 method is frozen yet.
+
+The Phase 3.2 candidate-design audit is complete.  See
+[`phase3_2_candidate_method_design.md`](phase3_2_candidate_method_design.md).
+
+### Phase 3.2 Candidate 1 — Endpoint-Neighborhood RPS seed 0
+
+The three predeclared lambda values (`0.1`, `0.3`, `1.0`) were evaluated with
+minimum validation-RPS checkpoint selection.  The correction moved class-4 L1
+routing substantially from central class 2 toward adjacent class 3, but no run
+recovered class 4 exactly and every run degraded at least one global or
+RPS-risk/selective-prediction control.  Decision:
+
+\[
+\boxed{\text{TRADE-OFF — REVIEW BEFORE MULTI-SEED}}
+\]
+
+No seeds 1--4 are authorized.  See
+[`phase3_2_endpoint_neighborhood_seed0.md`](phase3_2_endpoint_neighborhood_seed0.md).
+
+### Phase 3.2 Candidate 1b — True-endpoint preference seed 0
+
+Candidate 1b fixed `rho=0.5` to prefer class 4 over class 3. It did not improve
+class-4 `p4` relative to Candidate 1, produced no `4->4` L1 decision, and
+weakened Candidate 1's adjacent recovery. Mixed global, class-0, and risk
+changes do not support method freeze. Decision:
+
+\[
+\boxed{\text{CANDIDATE 1 BRANCH — NO-GO}}
+\]
+
+Do not create Candidate 1c from RetinaMNIST test diagnostics, run Candidate 1
+seeds 1--4, or alter this objective after the observed test results. See
+[`phase3_2_endpoint_preference_seed0.md`](phase3_2_endpoint_preference_seed0.md).
 
 ## Guardrails
 Do not currently:
