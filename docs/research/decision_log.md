@@ -13,6 +13,8 @@
 | SLACE | Stop — scientifically noncompetitive | Complete | Did not recover class-4 geometry despite useful seed-0 risk ranking. |
 | Phase 3.2 gate | Justified, narrowly | Pending candidate design | Reduce rare upper-extreme inward shrinkage while preserving RPS-like ordinal risk alignment, severe detection, selective prediction, and global predictive quality. |
 | Phase 3.2 Candidate 1 | Branch closed — NO-GO | Complete seed-0 diagnostics | Neighborhood correction trained adjacent class-4 recovery but did not jointly preserve global/selective-risk controls. Fixed-rho true-endpoint preference did not improve p4 or yield exact recovery. Do not create Candidate 1c from RetinaMNIST test diagnostics. |
+| Phase 3.3 representation audit | Mixed representation / head failure | Complete frozen seed-0 audit | Some true class-4 features are nearest to central training centroids, while others are nearest to class 4 but still receive central head decisions. No representation method selected. |
+| Phase 3.4 frozen-head audit | Mixed but decomposable failure | Complete frozen seed-0 audit | Balanced/prior-adjusted linear heads recover part of the feature-nearest-to-4 subset, but leave the feature-nearest-central subset largely collapsed and weaken global/risk quality. No new method selected. |
 
 ## SLACE infrastructure correction
 

@@ -2,7 +2,7 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Phase 3.2 — Candidate 1 branch closed after seed-0 diagnostics
+**Current stage:** Phase 3.4 — frozen-feature head intervention audit complete
 
 The project now focuses on a specific failure in imbalanced ordinal classification: rare upper-extreme samples can receive high predicted decision risk while their predictive probability mass is still pulled strongly toward central classes.
 
@@ -150,6 +150,18 @@ No Phase 3.2 method is frozen yet.
 The Phase 3.2 candidate-design audit is complete.  See
 [`phase3_2_candidate_method_design.md`](phase3_2_candidate_method_design.md).
 
+## Phase 3.4 — Frozen-Feature Head Intervention Audit
+
+Using only the frozen Phase 3.3 seed-0 512-dimensional CE/RPS features, eight
+linear-head controls separated head effects from representation effects. CE/RPS
+heads alone did not recover class 4. Training-only balanced CE and standard
+logit-adjusted CE moved the feature-nearest-to-class-4 subset outward (CE
+features: 3/9 exact recoveries under logit adjustment), but most
+feature-nearest-central class-4 examples remained unrecovered and risk/global
+quality weakened. Outcome: **MIXED BUT DECOMPOSABLE FAILURE**. No new method
+is selected; no seeds 1--4 were run. See
+[`phase3_4_frozen_head_intervention_audit.md`](phase3_4_frozen_head_intervention_audit.md).
+
 ### Phase 3.2 Candidate 1 — Endpoint-Neighborhood RPS seed 0
 
 The three predeclared lambda values (`0.1`, `0.3`, `1.0`) were evaluated with
@@ -179,6 +191,16 @@ changes do not support method freeze. Decision:
 Do not create Candidate 1c from RetinaMNIST test diagnostics, run Candidate 1
 seeds 1--4, or alter this objective after the observed test results. See
 [`phase3_2_endpoint_preference_seed0.md`](phase3_2_endpoint_preference_seed0.md).
+
+## Phase 3.3 — Frozen Representation Audit
+
+Frozen CE/RPS seed-0 inference shows a **MIXED REPRESENTATION / HEAD FAILURE**.
+For true class 4, 11/20 CE and 14/20 RPS raw penultimate features are nearest to
+a non-class-4 training centroid, but 9/20 CE and 6/20 RPS features are already
+nearest to class 4 and are still mapped centrally by the classifier/output
+pipeline. RPS does not improve class-4 representation separation relative to CE.
+No representation method is selected; no training was launched. See
+[`phase3_3_representation_failure_audit.md`](phase3_3_representation_failure_audit.md).
 
 ## Guardrails
 Do not currently:
