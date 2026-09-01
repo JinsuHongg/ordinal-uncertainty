@@ -2,15 +2,15 @@
 
 ## Project status
 
-Phase 3.2 candidate-method design is justified but has not started.
+Completed through **Phase 3.4**. The current diagnosis is a **dual-component rare-extreme failure** involving both representation collapse and head-level inward bias. **Phase 3.5 method-design audit is next; no proposed method is frozen or implemented.**
 
 ## Research question
 
-Existing ordinal and imbalance-aware methods can provide useful decision-risk
-information, but rare upper-extreme samples can still be systematically pulled
-toward central classes. The current target is to reduce rare upper-extreme inward
-shrinkage while preserving RPS-like ordinal risk alignment, severe-error
-detection, selective prediction, and global predictive quality.
+Existing ordinal and imbalance-aware methods can provide useful decision-risk information, but rare upper-extreme samples can still be systematically pulled toward central classes. Current evidence shows that this occurs at both the learned-representation and probabilistic-head levels.
+
+The next research question is:
+
+> Can ordinal decision risk guide representation learning so that rare, high-risk extreme samples become better localized without destroying probabilistic risk quality?
 
 ## Canonical setup
 
@@ -18,6 +18,8 @@ detection, selective prediction, and global predictive quality.
 - Native 28×28 RGB inputs
 - Unpretrained small-image ResNet18
 - Primary seeds: 0–4
+
+RetinaMNIST is now treated as a **development benchmark**; a promising next seed-0 method should be frozen before multi-seed and multi-dataset confirmation.
 
 ## Repository structure
 
@@ -44,3 +46,4 @@ pytest -q
 - [Experiment plan](docs/research/experiment_plan.md)
 - [Decision log](docs/research/decision_log.md)
 - [Phase 2 model-level study](docs/research/phase2_model_level_ordinal_uq.md)
+- Phase 3.3 representation audit and Phase 3.4 head-intervention audit should be included once their local files are pushed.

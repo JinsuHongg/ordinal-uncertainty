@@ -1,30 +1,29 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.1**.
+Completed through **Phase 3.4**.
 
 Current gate:
 
 \[
-\boxed{\text{PHASE 3.2 JUSTIFIED}}
+\boxed{\text{PHASE 3.5 — METHOD-DESIGN AUDIT NEXT}}
 \]
 
-The next experiment should test whether a minimal objective can reduce rare upper-extreme inward shrinkage while preserving the useful decision-risk geometry observed with RPS.
+No new proposed method is frozen or implemented.
 
-No proposed method is frozen yet.
-
-## Canonical Experimental Setup
-### Dataset
+## Canonical Development Setup
 Primary development dataset: **RetinaMNIST**
 
-Use:
-- native **28×28 RGB**
+- native 28×28 RGB
 - official train/validation/test splits
-- fixed class order `0,1,2,3,4`
+- class order `0,1,2,3,4`
+- unpretrained small-image ResNet18
+- 3×3 stride-1 stem, no max-pool
+- canonical seeds `0,1,2,3,4`
 
 Class counts:
 
-| Split | Class 0 | Class 1 | Class 2 | Class 3 | Class 4 |
+| Split | C0 | C1 | C2 | C3 | C4 |
 |---|---:|---:|---:|---:|---:|
 | Train | 486 | 128 | 206 | 194 | 66 |
 | Validation | 54 | 12 | 28 | 20 | 6 |
@@ -32,377 +31,177 @@ Class counts:
 
 Class 4 is the rare upper extreme.
 
-### Backbone
-- unpretrained ResNet18
-- 3×3 stride-1 first convolution
-- no max-pool
-- same backbone across probability-based baselines unless a published method requires otherwise
-
-### Seeds
-Primary seeds: `0, 1, 2, 3, 4`
-
-For a new Phase 3.2 candidate:
-1. unit tests
-2. short seed-0 smoke run
-3. full seed-0 GO/NO-GO
-4. seeds 1–4 only after explicit review
-
-Do not launch multi-seed training automatically.
-
-## Core Evaluation Decomposition
-Evaluate probability-based methods as:
+## Current Evaluation Decomposition
+Future experiments must separate:
 
 \[
-\text{Predictive distribution}
+\text{Representation}
+\rightarrow
+\text{Probabilistic head}
 \rightarrow
 \text{Decision rule}
 \rightarrow
 \text{Expected decision risk}.
 \]
 
-### Decision rules
-Mode:
+Primary decision control remains **CE + L1**; RPS remains the strongest probabilistic ordinal risk-quality baseline.
 
-\[
-\hat y_{\mathrm{mode}}=\arg\max_k p_k.
-\]
+## Completed Evidence
+### Phase 1–2.5
+- CE native-28 baseline complete.
+- Simple new uncertainty-metric branch stopped.
+- L1 decision correction is required as a control.
+- CORAL stopped.
+- RPS retained: mixed predictive result but stronger risk alignment/severe detection/selective prediction.
+- Temperature scaling does not explain away the RPS advantage.
 
-L1-optimal:
+### Phase 3.0–3.1
+- Rare class 4 shows strong inward shrinkage and high-risk but poor localization.
+- Weighted CE and SLACE do not solve the failure.
 
-\[
-\hat y_{L1}
-=
-\arg\min_a\sum_kp_k|k-a|.
-\]
+### Phase 3.2 — Output-only candidates
+Candidate 1 moved class-4 decisions from class 2 toward class 3 but introduced global/risk trade-offs and no exact recovery.
 
-L2-optimal:
-
-\[
-\hat y_{L2}
-=
-\arg\min_a\sum_kp_k(k-a)^2.
-\]
-
-Use the existing exact discrete implementations and established tie-breaking rule.
-
-### Decision risks
-Mode-centered L1 risk:
-
-\[
-R_{L1}^{\mathrm{mode}}
-=
-\sum_kp_k|k-\hat y_{\mathrm{mode}}|.
-\]
-
-L1 Bayes risk:
-
-\[
-R_{L1}^{*}
-=
-\min_a\sum_kp_k|k-a|.
-\]
-
-L2 Bayes risk:
-
-\[
-R_{L2}^{*}
-=
-\min_a\sum_kp_k(k-a)^2.
-\]
-
-These are established decision-risk quantities, not proposed new uncertainty measures.
-
-## Completed Stages
-
-### Experiment 0 / Phase 1
-Status: **COMPLETE**
-
-Established the native-28 CE baseline and showed that simple ordinal uncertainty measures do not universally dominate nominal uncertainty.
-
-### Phase 1.5
-Status: **COMPLETE**
-
-Strong ordinal-UQ audit showed that decision-risk quantities are more useful than inventing a new simple ordinal spread metric.
-
-### Resolution Sanity Check
-Status: **COMPLETE**
-
-Decision: native **28×28** is canonical. Historical 64×64 results remain sensitivity evidence only.
-
-### Phase 1.75
-Status: **COMPLETE**
-
-L1-optimal decisions improve MAE and severe-error burden relative to mode. L2 can reduce severe errors further but with a larger accuracy trade-off.
-
-Critical control:
-
-\[
-\boxed{\text{Compare new ordinal models against CE + L1}}
-\]
-
-not only CE + mode.
-
-### Phase 2
-Status: **COMPLETE**
-
-Methods:
-- CE
-- CORAL
-- RPS
-
-Decisions:
-- CORAL: **STOP — SCIENTIFICALLY NONCOMPETITIVE**
-- RPS: **RETAIN**
-
-RPS gives a mixed model-level signal: stronger risk alignment, severe-error detection, and ordinal selective prediction, but no uniform ordinal-decision improvement.
-
-### Phase 2.5
-Status: **COMPLETE**
-
-Validation-only temperature scaling does not remove the RPS decision-risk advantage.
-
-Decision: **MIXED AFTER CALIBRATION**.
-
-### Phase 3.0
-Status: **COMPLETE**
-
-Rare class 4 shows:
-- suppressed true-class probability
-- strong center shrinkage
-- high risk but poor location
-- no recovery from L1/L2 decision changes
-- no correction from temperature scaling
-
-Primary actionable failure: **ordinal center shrinkage under imbalance**.
-
-### Phase 3.1
-Status: **COMPLETE**
-
-Baselines:
-- Weighted CE
-- SLACE
-
-Weighted CE:
-- increases class-4 mass somewhat
-- does not recover class-4 decisions
-- damages global performance
-- **STOP**
-
-SLACE:
-- does not reduce class-4 shrinkage relative to CE
-- no exact or meaningful adjacent class-4 recovery
-- retains some risk-ranking utility
-- **STOP**
+Candidate 1b added fixed true-endpoint preference but did not improve p4 or exact recovery and weakened adjacent recovery.
 
 Decision:
 
 \[
-\boxed{\text{SHRINKAGE PERSISTS AFTER STRONG BASELINES}}
+\boxed{\text{OUTPUT-ONLY CANDIDATE BRANCH — STOP}}
 \]
 
-## Phase 3.2 — Current Stage
+No Candidate 1c. No Candidate 1/1b multi-seed expansion.
 
-Candidate-method design is justified but has **not started**. No proposed
-objective is frozen.
+### Phase 3.3 — Representation Audit
+Frozen CE/RPS seed-0 features showed:
+- representation collapse for many class-4 examples;
+- worse class3/class4 separation for RPS than CE;
+- but some class-4 samples are correctly nearest to the class-4 centroid and still fail at the head.
 
-### Research Question
-> Can a minimal training objective reduce rare upper-extreme inward shrinkage while preserving RPS-like ordinal risk alignment, severe-error detection, selective prediction, and global predictive quality?
-
-### Required Contribution Gap
-A Phase 3.2 candidate is only justified if it targets a failure not adequately resolved by:
-- CE
-- RPS
-- class-weighted CE
-- SLACE
-- scalar temperature scaling
-- L1/L2 Bayes decision correction
-
-### Candidate-Design Principles
-Do not freeze a method before literature review and diagnostic reasoning.
-
-Candidate directions may include:
-- probability-location correction
-- class-conditional target-distribution shaping
-- ordinal location-bias regularization
-- extreme-aware cumulative-distribution penalties
-- a minimal RPS-based location correction
-
-These are hypotheses only.
-
-### Seed-0 GO/NO-GO Protocol
-For each candidate:
-1. verify overlap with existing literature
-2. state the exact failure mechanism it targets
-3. implement tests
-4. run a short seed-0 smoke test
-5. run one full seed-0 experiment
-6. compare with frozen CE and RPS seed-0 baselines
-7. inspect class-4 geometry before any multi-seed expansion
-
-## Primary Global Metrics
-Report:
-- Accuracy
-- MAE
-- QWK
-- severe-error prevalence
-- NLL
-- Brier score
-- RPS
-- ECE
-
-## Primary Decision-Controlled Metrics
-For mode, L1, and L2:
-- Accuracy
-- MAE
-- QWK
-- severe-error prevalence
-
-Primary global control:
+Decision:
 
 \[
-\boxed{\text{RPS + L1}}
+\boxed{\text{MIXED REPRESENTATION / HEAD FAILURE}}
 \]
 
-A candidate is not successful merely because it beats CE + mode.
+### Phase 3.4 — Head Intervention Audit
+Eight simple linear-head conditions on frozen CE/RPS features showed:
+- some feature-nearest-to-4 cases are head-recoverable;
+- CE features + logit adjustment recovered 3/9 such cases exactly;
+- most feature-nearest-central class-4 cases remained unrecovered: 10/11 CE and 11/14 RPS;
+- global/risk-quality trade-offs remain.
 
-## Primary Class-4 Metrics
-For true class 4:
-- Accuracy
-- MAE
-- severe-error prevalence
-- `4→4`, `4→3`, `4→2`, `4→1`, `4→0`
-- mean `p4`
-- mean `p3+p4`
-- predictive mean
-- inward shrinkage
-- decision bias
-- L1 Bayes risk
+Decision:
 
-The main question is whether probability mass and decisions actually move toward the true upper extreme.
+\[
+\boxed{\text{MIXED BUT DECOMPOSABLE FAILURE}}
+\]
 
-## Class-0 Control
-For true class 0:
-- Accuracy
-- MAE
-- severe-error prevalence
-- `p0`
-- `p0+p1`
-- predictive mean
-- inward bias/shrinkage
-- L1 Bayes risk
+## Current Diagnosis
 
-Any class-4 gain must be checked for damage to the majority lower extreme.
+\[
+\boxed{\text{Dual-component rare-extreme failure}}
+\]
 
-## Risk-Quality Metrics
-Using L1-optimal decisions and L1 Bayes risk:
-- risk/error Spearman
-- severe-error AUROC
-- severe-error AUPRC
-- ordinal-MAE risk–coverage
-- mean selective MAE risk
+- representation collapse affects many rare extreme samples;
+- head/prior bias affects a recoverable subset;
+- neither head-only nor representation-only explanations are sufficient.
 
-A successful candidate should preserve or improve the useful risk geometry seen with RPS.
+## Phase 3.5 — Design Audit
+### Research Question
+> Can ordinal decision risk guide representation learning so that rare, high-risk extreme samples become better localized without destroying probabilistic risk quality?
 
-## Phase 3.2 Decision Rules
+### Candidate Limit
+Compare exactly three candidates at most:
+1. risk-conditioned ordinal separation;
+2. collapse-aware adjacent margin;
+3. risk-weighted prototype/compactness regularization.
 
-### GO
-Proceed to multi-seed validation if a candidate meaningfully improves rare upper-extreme geometry while maintaining acceptable global and risk quality.
+### Design Requirements
+A candidate should:
+- preserve RPS or another strong probabilistic ordinal base objective;
+- directly target representation geometry;
+- use ordinal structure explicitly;
+- use established decision-risk quantities rather than inventing a new UQ metric;
+- avoid class-4 hard-coding;
+- use training-only class counts/statistics if imbalance enters;
+- require at most 1–2 new hyperparameters;
+- be testable with one seed-0 falsification experiment.
 
-Possible evidence:
-- higher class-4 `p4`
-- higher `p3+p4`
-- predictive mean closer to 4
-- lower inward shrinkage
-- fewer `4→0/1/2` errors
-- more `4→3/4` outcomes
-- lower class-4 MAE/severe burden
-- acceptable overall accuracy/QWK
-- preserved RPS-like risk alignment and selective prediction
+### Literature Guardrail
+Reject/high-risk any design that reduces to standard SupCon, balanced SupCon, generic center/prototype loss, generic hard-example mining, simple distance-weighted SupCon, or a known contrastive + logit-adjustment formulation.
 
-### TRADE-OFF
-Pause before expansion if class-4 recovery causes substantial:
-- overall Accuracy/QWK loss
-- class-0 collapse
-- worse severe-error detection
-- worse selective prediction
+### Phase 3.5 Deliverable
+The design audit should produce:
+- literature-overlap table;
+- exactly three candidates;
+- one primary candidate;
+- one backup;
+- one defer;
+- exact mathematical primary objective;
+- gradient-detachment policy for risk weighting;
+- minimal hyperparameter policy;
+- predeclared seed-0 falsification criteria;
+- method-freeze rule.
 
-Document the exact trade-off first.
+No implementation/training during the design audit.
 
-### NO-GO
-Stop a candidate if it:
-- does not improve class-4 location geometry
-- only changes confidence/sharpness
-- reproduces generic class weighting
-- severely damages global performance
-- destroys useful risk alignment
+## Final RetinaMNIST Seed-0 Gate
+After Phase 3.5 review, authorize at most one primary method for a final major RetinaMNIST seed-0 method-selection experiment.
 
-Preserve valid negative results.
+A promising method must improve representation-specific quantities such as:
+- class-4 nearest-centroid assignment;
+- class-4 vs class-3/class-2 margins;
+- class3/class4 separation;
 
-## Artifact Requirements
-Every full run must save:
-- `config.json`
-- training history
-- validation history
-- selected epoch / validation criterion
-- `best_checkpoint.pt`
-- logits/probabilities
-- labels/sample IDs
-- predictive metrics
-- decision metrics
-- classwise metrics
-- risk-alignment metrics
-- severe-detection metrics
-- risk–coverage artifacts
-- extreme-class/shrinkage diagnostics
+and downstream quantities such as:
+- p4 / p3+p4;
+- predictive mean / inward shrinkage;
+- 4→3/4 routing;
+- class-4 severe burden;
 
-## Future Multi-Seed Gate
-Only after seed-0 GO:
-- run seeds 1–4
-- aggregate mean ± SD
-- inspect paired per-seed differences
-- confirm class-4 gains are not seed-specific
-- confirm stable risk-quality preservation
+while preserving acceptable:
+- global Accuracy/MAE/QWK;
+- NLL/Brier/RPS;
+- L1-risk Spearman;
+- severe AUROC/AUPRC;
+- selective MAE;
+- class-0 behavior.
 
-## Multi-Dataset Expansion
-Do not begin the full suite until a Phase 3.2 candidate survives RetinaMNIST.
+## Method Freeze Rule
+If the final seed-0 candidate is promising:
 
-Potential later datasets:
-- UTKFace
-- solar flare ordinal classification
-- Amazon Reviews
-- additional ordinal benchmarks from the literature
+\[
+\boxed{\text{METHOD FREEZE}}
+\]
+
+Then:
+- no more RetinaMNIST-test-driven objective redesign;
+- run seeds 1–4;
+- aggregate paired multi-seed results;
+- move to new datasets for confirmatory evidence.
+
+If the candidate fails representation geometry:
+
+\[
+\boxed{\text{NO-GO}}
+\]
+
+Do not iterate repeatedly on RetinaMNIST test results.
+
+## Development-Benchmark Guardrail
+RetinaMNIST is now a **development benchmark** because the test set has been inspected extensively during method development. The next seed-0 method experiment should be the last major method-selection step using its test diagnostics.
+
+## Future Confirmatory Expansion
+Only after method freeze:
+- RetinaMNIST seeds 1–4;
+- UTKFace;
+- solar flare ordinal classification;
+- Amazon Reviews or another appropriate ordinal benchmark;
+- additional literature-supported datasets as needed.
 
 ## Phase 4 — Epistemic UQ
-Not active.
+Not active. MC Dropout / Deep Ensemble should be considered only after the single-model method is established.
 
-Only after the single-model method is established:
-1. MC Dropout
-2. Deep Ensemble with `M=3`
-3. larger/snapshot ensemble only if justified
-
-The epistemic backend is not the primary novelty target.
-
-## Current Guardrails
-Do not currently:
-- add a new uncertainty metric
-- restart CORAL
-- rerun Weighted CE or SLACE multi-seed
-- return to 64×64 RetinaMNIST
-- add ensembles
-- add conformal prediction
-- tune on test data
-- launch all datasets
-- claim novelty before literature verification and seed-0 evidence
-
-## Next Authorized Work
-When a separate Phase 3.2 task authorizes candidate design, begin with a small set
-of minimal objectives that explicitly target **rare upper-extreme
-probability-location shrinkage**.
-
-Before training:
-1. check overlap with existing literature
-2. define each candidate's intended mechanism
-3. specify seed-0 GO/NO-GO criteria
-4. implement only the smallest candidate needed for diagnosis
-
-Do not launch multi-seed training until one candidate shows a clear seed-0 signal.
+## Immediate Next Action
+Run the **Phase 3.5 Risk-Conditioned Ordinal Representation Method Design Audit**. Do not implement or train during this task.
