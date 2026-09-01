@@ -1,15 +1,15 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.4**.
+Completed through **Phase 3.6 RG-ACR seed-0 falsification**.
 
 Current gate:
 
 \[
-\boxed{\text{PHASE 3.5 — METHOD-DESIGN AUDIT NEXT}}
+\boxed{\text{RG-ACR — NO-GO; NO RETINAMNIST TEST-INFORMED VARIANT AUTHORIZED}}
 \]
 
-No new proposed method is frozen or implemented.
+RG-ACR was implemented and tested only under its predeclared seed-0 protocol, then stopped. No method is frozen.
 
 ## Canonical Development Setup
 Primary development dataset: **RetinaMNIST**
@@ -107,15 +107,11 @@ Decision:
 - head/prior bias affects a recoverable subset;
 - neither head-only nor representation-only explanations are sufficient.
 
-## Phase 3.5 — Design Audit
+## Phase 3.5 — Design Audit (complete)
 ### Research Question
 > Can ordinal decision risk guide representation learning so that rare, high-risk extreme samples become better localized without destroying probabilistic risk quality?
 
-### Candidate Limit
-Compare exactly three candidates at most:
-1. risk-conditioned ordinal separation;
-2. collapse-aware adjacent margin;
-3. risk-weighted prototype/compactness regularization.
+The literature audit compared exactly three mechanisms. It selected risk-gated adjacent-centroid ranking (RG-ACR) as one empirically unvalidated primary candidate, retained collapse-aware adaptive adjacent margin as backup, and deferred risk-weighted prototype compactness because of high overlap/risk. RG-ACR uses RPS plus detached L1 Bayes-risk-weighted local adjacent-centroid ranking. Full mathematical specification, literature overlap, and safeguards are in [the Phase 3.5 note](phase3_5_risk_conditioned_representation_design.md).
 
 ### Design Requirements
 A candidate should:
@@ -131,23 +127,10 @@ A candidate should:
 ### Literature Guardrail
 Reject/high-risk any design that reduces to standard SupCon, balanced SupCon, generic center/prototype loss, generic hard-example mining, simple distance-weighted SupCon, or a known contrastive + logit-adjustment formulation.
 
-### Phase 3.5 Deliverable
-The design audit should produce:
-- literature-overlap table;
-- exactly three candidates;
-- one primary candidate;
-- one backup;
-- one defer;
-- exact mathematical primary objective;
-- gradient-detachment policy for risk weighting;
-- minimal hyperparameter policy;
-- predeclared seed-0 falsification criteria;
-- method-freeze rule.
-
-No implementation/training during the design audit.
+No implementation/training occurred during the design audit.
 
 ## Final RetinaMNIST Seed-0 Gate
-After Phase 3.5 review, authorize at most one primary method for a final major RetinaMNIST seed-0 method-selection experiment.
+The one authorized final major RetinaMNIST seed-0 method-selection experiment was RG-ACR. The validation-selected λ=.05 condition failed the representation gate and violated predeclared class-0/risk tolerances. Decision: **NO-GO**. See [Phase 3.6](phase3_6_rg_acr_seed0.md).
 
 A promising method must improve representation-specific quantities such as:
 - class-4 nearest-centroid assignment;
@@ -204,4 +187,4 @@ Only after method freeze:
 Not active. MC Dropout / Deep Ensemble should be considered only after the single-model method is established.
 
 ## Immediate Next Action
-Run the **Phase 3.5 Risk-Conditioned Ordinal Representation Method Design Audit**. Do not implement or train during this task.
+Do not create RG-ACR-v2, run seeds 1–4, or launch datasets from this branch. A separate authorized literature-and-method-design audit is required before any new method family is considered.

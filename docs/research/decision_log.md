@@ -19,7 +19,10 @@
 | Head-only solution | Insufficient | Complete | Head/prior correction helps a subset but introduces global/risk trade-offs and cannot recover representation-collapsed cases. |
 | Representation-only explanation | Insufficient | Complete | Some class-4 representations are already correctly localized but still fail at the head. |
 | Current diagnosis | Dual-component rare-extreme failure | Active | Representation collapse and head-level inward bias are both supported and affect different subsets. |
-| Phase 3.5 gate | Ready for design audit | Next | Evaluate risk-conditioned ordinal representation candidates before any new implementation/training. |
+| Phase 3.5 design audit | One predeclared seed-0 falsification candidate selected; no implementation | Complete | RG-ACR uses detached L1 Bayes-risk weighting with local adjacent-centroid ranking on top of RPS. Literature overlap is material, so this is not a novelty claim or method freeze. |
+| Phase 3.5 backup/defer | Adaptive margin backup; risk-weighted prototype compactness deferred | Complete | Adaptive margins add moving-geometry instability; prototype compactness has high overlap with center/prototype methods and risks erasing useful uncertainty. |
+| Phase 3.5 execution gate | One final RetinaMNIST seed-0 falsification experiment executed as Phase 3.6 | Complete | Validation-only selection was used; the result was NO-GO rather than method freeze. |
+| Phase 3.6 RG-ACR | NO-GO — branch stopped | Complete | Validation-selected λ=.05 lacked clear class-4 representation improvement across raw/normalized geometry and violated class-0 MAE and risk-Spearman tolerances. Downstream gains cannot rescue the mechanism failure. No RG-ACR-v2. |
 
 ## SLACE infrastructure correction
 The prior SLACE persistence issue was a **false diagnosis** caused by premature artifact inspection / delayed workspace visibility. The scientific artifacts are valid; evaluation-only reproduction completed successfully. This is an infrastructure correction, not a revision of the negative SLACE scientific result.

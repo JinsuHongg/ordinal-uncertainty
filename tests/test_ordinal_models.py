@@ -10,6 +10,9 @@ from ordinal_uncertainty.models.ordinal import (
     endpoint_neighborhood_weights,
     endpoint_preference_loss,
     endpoint_preference_rps_loss,
+    adjacent_classes,
+    l1_bayes_risk,
+    rg_acr_loss,
     rps_loss,
 )
 def test_coral_targets_probs_and_gradients():
@@ -93,3 +96,42 @@ def test_coral_head_does_not_hard_constrain_threshold_ordering():
  head=CoralHead(2,4)
  with torch.no_grad(): head.bias.copy_(torch.tensor([0.,2.,1.]))
  logits=head(torch.randn(8,2)); assert not torch.all(logits[:,:-1] >= logits[:,1:])
+
+
+def test_rg_acr_adjacency_leave_one_out_and_missing_adjacent_handling():
+ assert adjacent_classes(0, 5) == (1,) and adjacent_classes(4, 5) == (3,)
+ assert adjacent_classes(2, 5) == (1, 3)
+ features = torch.tensor([[1., 0.], [0.9, 0.1], [0., 1.]], requires_grad=True)
+ logits = torch.tensor([[1., 0., 0.], [1., 0., 0.], [0., 1., 0.]], requires_grad=True)
+ labels = torch.tensor([0, 0, 1])
+ loss, diagnostic = rg_acr_loss(logits, features, labels, margin=.05)
+ assert diagnostic["valid_mask"].tolist() == [True, True, False]
+ assert diagnostic["adjacent_terms"].tolist() == [2, 0, 0]
+ assert torch.isfinite(loss) and loss >= 0
+
+
+def test_rg_acr_empty_valid_batch_detaches_risk_and_reaches_features():
+ features = torch.randn(3, 4, requires_grad=True)
+ logits = torch.randn(3, 3, requires_grad=True)
+ labels = torch.tensor([0, 1, 2])
+ empty, diagnostic = rg_acr_loss(logits, features, labels)
+ assert empty == 0 and not diagnostic["valid_mask"].any()
+ empty.backward()
+ assert torch.isfinite(features.grad).all()
+ features = torch.tensor([[1., 0.], [.8, .2], [0., 1.]], requires_grad=True)
+ logits = torch.tensor([[1., .2, -.2], [.3, 1., -.2], [0., 1., .1]], requires_grad=True)
+ labels = torch.tensor([0, 0, 1])
+ loss, diagnostic = rg_acr_loss(logits, features, labels, margin=.05, risk_cap=2.)
+ loss.backward()
+ assert torch.isfinite(features.grad).all() and logits.grad is None
+ assert diagnostic["weights"].max() <= 2 and diagnostic["weights"][diagnostic["valid_mask"]].mean() > 0
+
+
+def test_l1_bayes_risk_and_rg_acr_margin_are_finite():
+ logits = torch.tensor([[4., -2., -2.], [0., 0., 0.]], requires_grad=True)
+ risk = l1_bayes_risk(logits)
+ assert risk.shape == (2,) and risk[0] < risk[1]
+ features = torch.randn(4, 3, requires_grad=True)
+ labels = torch.tensor([0, 0, 1, 1])
+ loss, _ = rg_acr_loss(torch.randn(4, 3), features, labels, margin=.05)
+ assert torch.isfinite(loss)

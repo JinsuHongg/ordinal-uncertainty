@@ -2,7 +2,7 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Pre-Phase 3.5 checkpoint — method-design audit next, no new method frozen
+**Current stage:** Post-Phase 3.6 RG-ACR seed-0 falsification — RG-ACR branch stopped (NO-GO)
 
 The project now has a decomposed diagnosis of the rare upper-extreme failure on RetinaMNIST. Output-only corrections are stopped. Phase 3.3 and 3.4 show that the remaining failure has both representation-level and classifier/head-level components.
 
@@ -138,17 +138,18 @@ with two components:
 
 RPS remains valuable because its decision-risk signal identifies difficult samples better than CE, even though it does not localize the rare endpoint well.
 
-## Pre-Phase 3.5 Research Question
-The next design question is:
+## Phase 3.5 Research Question
+The design question addressed by the completed audit was:
 
 > **Can ordinal decision risk guide representation learning so that rare, high-risk extreme samples become better localized without destroying probabilistic risk quality?**
 
 The most promising design direction is an **ordinally structured representation intervention**, with any prior/logit-adjusted head treated as an established control/secondary component rather than the primary novelty.
 
 ## Phase 3.5 Status
-**Not started.** The next task is a literature-and-method-design audit only. It should compare at most three candidates, including risk-conditioned ordinal separation, collapse-aware adjacent margin, and risk-weighted prototype/compactness regularization.
+**Method-design audit complete; no implementation or training started.** The audit selected risk-gated adjacent-centroid ranking for one predeclared final RetinaMNIST seed-0 falsification experiment, with detached L1 Bayes-risk weighting and an RPS base loss. It is literature-overlapping and empirically unvalidated; it is neither a novelty nor an effectiveness claim. The collapse-aware adaptive margin is backup and risk-weighted prototype compactness is deferred. See [Phase 3.5 design audit](phase3_5_risk_conditioned_representation_design.md).
 
-No Phase 3.5 method is frozen or implemented.
+## Phase 3.6 — RG-ACR Seed-0 Falsification
+**NO-GO — RG-ACR branch stopped.** The validation-selected λ=.05 condition did not produce a clear, cross-geometry class-4 representation improvement and violated predeclared class-0 and risk-quality tolerances. Its favorable downstream class-4 output changes do not establish the intended representation mechanism. The unselected λ=.20 geometry observation must not be used for post-hoc redesign. See [Phase 3.6 seed-0 record](phase3_6_rg_acr_seed0.md).
 
 ## Development-Benchmark Guardrail
 RetinaMNIST has been inspected extensively during method development and should now be treated as a **development benchmark**. The next seed-0 method experiment should be the last major method-selection step based on RetinaMNIST test diagnostics. If promising, freeze the method before multi-seed and multi-dataset confirmation.
@@ -165,10 +166,4 @@ Do not currently:
 - tune a new method on RetinaMNIST test outcomes repeatedly.
 
 ## Next Authorized Work
-Run **Phase 3.5 — Risk-Conditioned Ordinal Representation Method Design Audit**:
-1. literature overlap audit;
-2. exactly three candidate mechanisms;
-3. rank novelty/mechanistic fit/stability;
-4. specify one primary mathematical objective;
-5. predeclare one final RetinaMNIST seed-0 falsification experiment;
-6. no implementation or training during the design audit.
+RG-ACR-v2, seeds 1–4, and additional datasets are not authorized. Any revised representation-method design space requires a separate literature-and-method-design authorization; it must not be derived post hoc from RetinaMNIST test diagnostics.

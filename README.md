@@ -2,7 +2,7 @@
 
 ## Project status
 
-Completed through **Phase 3.4**. The current diagnosis is a **dual-component rare-extreme failure** involving both representation collapse and head-level inward bias. **Phase 3.5 method-design audit is next; no proposed method is frozen or implemented.**
+Completed through **Phase 3.6**. The current diagnosis is a **dual-component rare-extreme failure** involving both representation collapse and head-level inward bias. The predeclared RG-ACR seed-0 falsification was **NO-GO**; the branch is stopped and no method is frozen.
 
 ## Research question
 
@@ -46,4 +46,7 @@ pytest -q
 - [Experiment plan](docs/research/experiment_plan.md)
 - [Decision log](docs/research/decision_log.md)
 - [Phase 2 model-level study](docs/research/phase2_model_level_ordinal_uq.md)
-- Phase 3.3 representation audit and Phase 3.4 head-intervention audit should be included once their local files are pushed.
+- [Phase 3.3 representation audit](docs/research/phase3_3_representation_failure_audit.md)
+- [Phase 3.4 head-intervention audit](docs/research/phase3_4_frozen_head_intervention_audit.md)
+- [Phase 3.5 risk-conditioned representation design audit](docs/research/phase3_5_risk_conditioned_representation_design.md)
+- [Phase 3.6 RG-ACR seed-0 falsification](docs/research/phase3_6_rg_acr_seed0.md)

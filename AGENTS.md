@@ -13,8 +13,8 @@ repository is a separate research archive.
 
 ## Current Stage
 
-**Pre-Phase 3.5 checkpoint — Phase 3.5 method-design audit is next; no new
-method is frozen or implemented.**
+**Post-Phase 3.6 RG-ACR seed-0 falsification — RG-ACR is NO-GO and stopped; no
+new method is frozen.**
 
 Completed:
 
@@ -29,6 +29,8 @@ Completed:
 - Phase 3.2 output-level Candidate 1 / 1b diagnostics
 - Phase 3.3 frozen representation audit
 - Phase 3.4 frozen-feature head intervention audit
+- Phase 3.5 risk-conditioned representation method-design audit
+- Phase 3.6 RG-ACR seed-0 falsification
 
 Canonical RetinaMNIST uses:
 
@@ -104,38 +106,29 @@ The next research question is:
 > high-risk extreme samples become better localized without destroying
 > probabilistic risk quality?**
 
-This question should guide Phase 3.5 method design.
+RG-ACR provided a negative answer under its predeclared seed-0 falsification:
+the selected condition did not clearly improve the intended representation
+mechanism while preserving all controls.
 
 ---
 
-## Phase 3.5 Policy
+## Phase 3.5 Design-Audit Decision
 
-Phase 3.5 is a **method-design audit first**.
+The Phase 3.6 RG-ACR seed-0 falsification is complete: **NO-GO**. The
+validation-selected λ=.05 model lacked clear cross-geometry class-4
+representation improvement and violated class-0/risk tolerances. RG-ACR is
+stopped; see docs/research/phase3_6_rg_acr_seed0.md.
 
 Required behavior:
 
-1. Search the literature before implementation or novelty claims.
-2. Compare at most three candidate mechanisms.
-3. Initial candidate families for consideration are:
-   - risk-conditioned ordinal separation;
-   - collapse-aware adjacent margin;
-   - risk-weighted prototype/compactness regularization.
-4. Do not select as the proposed-method candidate any design that reduces to:
-   - standard SupCon;
-   - balanced SupCon;
-   - generic prototype or center loss;
-   - simple distance-weighted contrastive learning;
-   - generic hard-example mining;
-   - a known contrastive + logit-adjustment combination.
-5. Specify the primary candidate mathematically before training.
-6. Predeclare one final RetinaMNIST seed-0 falsification experiment.
-7. Do not implement or train during the Phase 3.5 design-audit task.
-8. If the later seed-0 experiment is promising, freeze the method before
-   seeds 1–4 and additional datasets.
+RG-ACR branch guardrails:
 
-If literature review shows that all initial candidate families have high overlap
-or poor mechanistic fit, do not force selection from the initial list. Document
-the result and revise the design space explicitly.
+1. Do not create RG-ACR-v2 or tune it from observed test outcomes.
+2. Do not run RG-ACR seeds 1–4 or additional datasets.
+3. Preserve the valid negative result and its artifacts.
+
+The Phase 3.5 design note remains the rationale for the now-completed test; it
+does not authorize a variant.
 
 ---
 
@@ -317,33 +310,8 @@ Do not currently:
 
 The next authorized task is:
 
-**Phase 3.5 — Risk-Conditioned Ordinal Representation Method Design Audit**
-
-This task is design-only.
-
-Required outputs:
-
-- focused literature-overlap audit;
-- exactly three candidate mechanisms at most;
-- one primary candidate;
-- one backup candidate;
-- one deferred candidate;
-- exact mathematical specification of the primary candidate;
-- explicit risk-signal choice;
-- gradient-detachment policy;
-- minimal hyperparameter policy;
-- predeclared seed-0 falsification criteria;
-- method-freeze criteria.
-
-Do not:
-
-- implement the method;
-- train a model;
-- launch any seed;
-- create a new head method;
-- begin multi-dataset experiments
-
-unless separately authorized.
+No RG-ACR follow-up is authorized. Any new method family requires a separate
+authorized literature-and-method-design audit, not test-informed iteration.
 
 ---
 

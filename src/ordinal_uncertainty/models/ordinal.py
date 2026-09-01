@@ -30,6 +30,100 @@ def rps_loss(logits: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
  return ((p.cumsum(1)[:,:-1]-target.cumsum(1)[:,:-1])**2).sum(1).mean()/(logits.shape[1]-1)
 
 
+def adjacent_classes(label: int, num_classes: int) -> tuple[int, ...]:
+ """Return ordinally adjacent valid class indices."""
+ if not 0 <= label < num_classes or num_classes < 2:
+  raise ValueError("label/num_classes are outside the ordinal range")
+ return tuple(index for index in (label - 1, label + 1) if 0 <= index < num_classes)
+
+
+def l1_bayes_risk(logits: torch.Tensor) -> torch.Tensor:
+ """Differentiable L1 Bayes risk from categorical logits, one value per row."""
+ if logits.ndim != 2 or logits.shape[1] < 2:
+  raise ValueError("logits must be [batch, classes >= 2]")
+ probabilities = F.softmax(logits, dim=1)
+ classes = torch.arange(logits.shape[1], device=logits.device, dtype=logits.dtype)
+ actions = classes[None, :, None]
+ outcomes = classes[None, None, :]
+ expected = (probabilities[:, None, :] * (outcomes - actions).abs()).sum(dim=2)
+ return expected.min(dim=1).values
+
+
+def rg_acr_loss(
+ logits: torch.Tensor,
+ features: torch.Tensor,
+ labels: torch.Tensor,
+ margin: float = 0.05,
+ risk_cap: float = 2.0,
+ epsilon: float = 1e-8,
+) -> tuple[torch.Tensor, dict[str, torch.Tensor]]:
+ """Risk-gated adjacent-centroid ranking with detached L1 Bayes-risk weights.
+
+ Centroids are batch-derived.  Each anchor uses a leave-one-out own-class
+ centroid and every present adjacent-class centroid.  The returned diagnostics
+ are detached so callers can accumulate participation statistics safely.
+ """
+ if logits.ndim != 2 or features.ndim != 2 or labels.ndim != 1:
+  raise ValueError("logits/features/labels must be rank 2/2/1")
+ if logits.shape[0] != features.shape[0] or labels.numel() != features.shape[0]:
+  raise ValueError("batch dimensions must agree")
+ if logits.shape[1] < 2 or margin < 0 or risk_cap <= 0 or epsilon <= 0:
+  raise ValueError("invalid RG-ACR configuration")
+ num_classes = logits.shape[1]
+ if bool((labels < 0).any()) or bool((labels >= num_classes).any()):
+  raise ValueError("labels are outside the ordinal class range")
+ z = F.normalize(features, p=2, dim=1, eps=epsilon)
+ counts = torch.bincount(labels, minlength=num_classes)
+ class_sums = torch.zeros(num_classes, z.shape[1], dtype=z.dtype, device=z.device)
+ class_sums.index_add_(0, labels, z)
+ raw_risk = l1_bayes_risk(logits).detach()
+ per_anchor: list[torch.Tensor] = []
+ valid_indices: list[int] = []
+ adjacent_terms = torch.zeros(num_classes, dtype=torch.long, device=z.device)
+ for index in range(z.shape[0]):
+  label = int(labels[index].item())
+  if int(counts[label].item()) < 2:
+   continue
+  present = tuple(adjacent for adjacent in adjacent_classes(label, num_classes) if int(counts[adjacent].item()) >= 1)
+  if not present:
+   continue
+  own = F.normalize((class_sums[label] - z[index]).unsqueeze(0), p=2, dim=1, eps=epsilon).squeeze(0)
+  distances = []
+  for adjacent in present:
+   other = F.normalize(class_sums[adjacent].unsqueeze(0), p=2, dim=1, eps=epsilon).squeeze(0)
+   distances.append(F.relu(margin + (1.0 - (z[index] * own).sum()) - (1.0 - (z[index] * other).sum())))
+   adjacent_terms[label] += 1
+  per_anchor.append(torch.stack(distances).mean())
+  valid_indices.append(index)
+ if not valid_indices:
+  zero = features.sum() * 0.0
+  return zero, {
+   "valid_mask": torch.zeros(features.shape[0], dtype=torch.bool, device=features.device),
+   "weights": torch.zeros(features.shape[0], dtype=features.dtype, device=features.device),
+   "per_anchor": torch.zeros(features.shape[0], dtype=features.dtype, device=features.device),
+   "class_counts": counts.detach(),
+   "adjacent_terms": adjacent_terms.detach(),
+  }
+ valid = torch.tensor(valid_indices, dtype=torch.long, device=features.device)
+ per_anchor_valid = torch.stack(per_anchor)
+ # Phase 3.5 froze the denominator to the mean detached risk over the full batch.
+ weights_valid = (raw_risk[valid] / (raw_risk.mean() + epsilon)).clamp(max=risk_cap)
+ loss = (weights_valid * per_anchor_valid).sum() / (weights_valid.sum() + epsilon)
+ valid_mask = torch.zeros(features.shape[0], dtype=torch.bool, device=features.device)
+ valid_mask[valid] = True
+ weights = torch.zeros(features.shape[0], dtype=features.dtype, device=features.device)
+ weights[valid] = weights_valid.detach()
+ per_anchor_full = torch.zeros(features.shape[0], dtype=features.dtype, device=features.device)
+ per_anchor_full[valid] = per_anchor_valid.detach()
+ return loss, {
+  "valid_mask": valid_mask.detach(),
+  "weights": weights,
+  "per_anchor": per_anchor_full,
+  "class_counts": counts.detach(),
+  "adjacent_terms": adjacent_terms.detach(),
+ }
+
+
 def endpoint_neighborhood_weights(training_counts: torch.Tensor) -> torch.Tensor:
  """Return symmetric endpoint weights from positive ordinal training counts.
 
