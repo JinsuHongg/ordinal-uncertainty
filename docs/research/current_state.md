@@ -2,7 +2,8 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Post-Phase 3.6 RG-ACR seed-0 falsification — RG-ACR branch stopped (NO-GO)
+**Current stage:** Phase 3.7A-UTKFace complete — PARTIAL REPLICATION. Next:
+**Phase 3.8 Solar Rare-Extreme Shrinkage Confirmation**.
 
 The project now has a decomposed diagnosis of the rare upper-extreme failure on RetinaMNIST. Output-only corrections are stopped. Phase 3.3 and 3.4 show that the remaining failure has both representation-level and classifier/head-level components.
 
@@ -37,7 +38,10 @@ After Phase 3.3–3.4, representation and head effects must also be separated:
 
 ## Established Baselines
 - **CE:** canonical nominal probabilistic baseline.
-- **RPS:** retain as the strongest probabilistic ordinal baseline for decision-risk alignment, severe-error detection, and selective ordinal prediction.
+- **RPS:** retain as a core probabilistic ordinal baseline. Its RetinaMNIST
+  risk-quality results were strong, and it partly improved UTKFace class-4
+  localization, but its broad risk-quality advantage did not replicate on
+  UTKFace.
 - **CORAL:** STOP — scientifically noncompetitive.
 - **Weighted CE:** STOP — scientifically noncompetitive.
 - **SLACE:** STOP — scientifically noncompetitive.
@@ -46,7 +50,9 @@ After Phase 3.3–3.4, representation and head effects must also be separated:
 ## Phase 1–2.5 Summary
 - Native-28 CE five-seed baseline established.
 - L1-optimal decision reduces MAE/severe burden relative to mode; all new methods must be compared against **CE + L1**, not only CE + mode.
-- RPS gives a **mixed model-level signal**: stronger risk alignment/severe detection/selective prediction, but no uniform ordinal-decision improvement.
+- RPS gives a **mixed RetinaMNIST model-level signal**: stronger risk
+  alignment/severe detection/selective prediction, but no uniform
+  ordinal-decision improvement.
 - Validation-only temperature scaling does not remove the RPS risk-quality advantage.
 
 ## Phase 3.0–3.1 — Failure Diagnosis and Strong Baselines
@@ -136,7 +142,9 @@ with two components:
 1. **representation collapse** for many rare class-4 samples;
 2. **head-level inward bias** for some samples whose representation is already class-4-like.
 
-RPS remains valuable because its decision-risk signal identifies difficult samples better than CE, even though it does not localize the rare endpoint well.
+On RetinaMNIST, RPS remains valuable because its decision-risk signal identifies
+difficult samples better than CE, even though it does not localize the rare
+endpoint well. This is not a universal cross-dataset conclusion.
 
 ## Phase 3.5 Research Question
 The design question addressed by the completed audit was:
@@ -151,8 +159,49 @@ The most promising design direction is an **ordinally structured representation 
 ## Phase 3.6 — RG-ACR Seed-0 Falsification
 **NO-GO — RG-ACR branch stopped.** The validation-selected λ=.05 condition did not produce a clear, cross-geometry class-4 representation improvement and violated predeclared class-0 and risk-quality tolerances. Its favorable downstream class-4 output changes do not establish the intended representation mechanism. The unselected λ=.20 geometry observation must not be used for post-hoc redesign. See [Phase 3.6 seed-0 record](phase3_6_rg_acr_seed0.md).
 
+## Phase 3.7A-UTKFace — Ordinal Failure Replication
+Using the frozen historical UTKFace manifest, five age bins (`<20`, `20–39`,
+`40–59`, `60–79`, `>=80`), and matched CE/RPS seed-0 ResNet18 runs, the
+independent replication was **PARTIAL**.
+
+- The rare oldest class remains elevated-risk and inward-shrunk; its predictive
+  mean was 3.25 (CE) / 3.27 (RPS), below the true class 4.
+- RPS partly improved class-4 L1 recovery (35/67 exact vs CE 24/67), but at a
+  global and lower-endpoint cost.
+- The broad RetinaMNIST RPS L1 risk-quality advantage did not reproduce: CE had
+  higher L1 Spearman, AUPRC, and lower selective MAE; RPS only had higher AUROC.
+
+Decision: no automatic UTKFace representation/head audit. See
+[the detailed replication record](phase3_7a_utkface_failure_replication.md).
+
+**Phase 3.7A-Solar remains recorded as PAUSED BEFORE TRAINING.** No solar
+CE/RPS full run or scientific conclusion exists; Phase 3.8 has not yet started.
+
+## Updated Cross-Dataset Diagnosis
+
+The common evidence across RetinaMNIST and UTKFace is:
+
+\[
+\boxed{\text{Rare upper-extreme inward localization bias under ordinal imbalance}}
+\]
+
+RetinaMNIST showed severe upper-extreme collapse and a useful RPS risk-quality
+advantage. UTKFace showed a milder but clear inward shift, elevated upper-endpoint
+risk, and a lower endpoint that was materially easier; RPS partly improved
+class-4 localization but was not globally or broadly risk-quality superior.
+
+The current research question is:
+
+> **Why do imbalanced ordinal classifiers exhibit systematic inward
+> localization bias for rare upper-extreme classes, even when uncertainty,
+> risk quality, and exact-class performance differ across datasets and
+> objectives?**
+
 ## Development-Benchmark Guardrail
-RetinaMNIST has been inspected extensively during method development and should now be treated as a **development benchmark**. The next seed-0 method experiment should be the last major method-selection step based on RetinaMNIST test diagnostics. If promising, freeze the method before multi-seed and multi-dataset confirmation.
+RetinaMNIST has been inspected extensively during method development and remains
+a **development benchmark**. Do not use either RetinaMNIST or UTKFace test
+diagnostics for iterative method redesign while Phase 3.8 confirms the
+cross-dataset failure pattern.
 
 ## Guardrails
 Do not currently:
@@ -166,4 +215,11 @@ Do not currently:
 - tune a new method on RetinaMNIST test outcomes repeatedly.
 
 ## Next Authorized Work
-RG-ACR-v2, seeds 1–4, and additional datasets are not authorized. Any revised representation-method design space requires a separate literature-and-method-design authorization; it must not be derived post hoc from RetinaMNIST test diagnostics.
+**Phase 3.8 — Solar Rare-Extreme Shrinkage Confirmation** is authorized. Its
+primary replication target is upper-extreme elevated risk, inward shrinkage,
+endpoint asymmetry, and the insufficiency of L1/L2 decision correction under
+matched CE/RPS controls. RPS superiority is secondary, not required.
+
+Do not restart method development, revive RG-ACR, create UTKFace-specific
+objectives, perform automatic representation/head audits, or launch multi-seed
+expansions before the third-dataset evidence is reviewed.

@@ -1,15 +1,18 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.6 RG-ACR seed-0 falsification**.
+Completed through **Phase 3.7A-UTKFace CE/RPS seed-0 replication**. Active
+stage: **Phase 3.8 Solar Rare-Extreme Shrinkage Confirmation**.
 
 Current gate:
 
 \[
-\boxed{\text{RG-ACR — NO-GO; NO RETINAMNIST TEST-INFORMED VARIANT AUTHORIZED}}
+\boxed{\text{Solar confirmation — next authorized cross-dataset gate}}
 \]
 
-RG-ACR was implemented and tested only under its predeclared seed-0 protocol, then stopped. No method is frozen.
+RG-ACR was implemented and tested only under its predeclared seed-0 protocol,
+then stopped. The independent UTKFace CE/RPS seed-0 gate found a partial, not
+strong, replication. No method is frozen.
 
 ## Canonical Development Setup
 Primary development dataset: **RetinaMNIST**
@@ -44,7 +47,9 @@ Future experiments must separate:
 \text{Expected decision risk}.
 \]
 
-Primary decision control remains **CE + L1**; RPS remains the strongest probabilistic ordinal risk-quality baseline.
+Primary decision control remains **CE + L1**; RPS remains a core probabilistic
+ordinal baseline, with its risk-quality advantage established on RetinaMNIST
+but not broadly replicated on UTKFace.
 
 ## Completed Evidence
 ### Phase 1–2.5
@@ -173,18 +178,67 @@ If the candidate fails representation geometry:
 Do not iterate repeatedly on RetinaMNIST test results.
 
 ## Development-Benchmark Guardrail
-RetinaMNIST is now a **development benchmark** because the test set has been inspected extensively during method development. The next seed-0 method experiment should be the last major method-selection step using its test diagnostics.
+RetinaMNIST is now a **development benchmark** because the test set has been
+inspected extensively during method development. No additional
+RetinaMNIST-test-informed method experiment is authorized while Phase 3.8
+confirms the cross-dataset failure pattern.
 
-## Future Confirmatory Expansion
-Only after method freeze:
-- RetinaMNIST seeds 1–4;
-- UTKFace;
-- solar flare ordinal classification;
-- Amazon Reviews or another appropriate ordinal benchmark;
-- additional literature-supported datasets as needed.
+## Phase 3.7A — Independent Replication Gate
+
+UTKFace was evaluated only as a frozen-manifest seed-0 CE/RPS baseline
+replication. The age bins were `<20`, `20–39`, `40–59`, `60–79`, and `>=80`;
+the oldest class has 67 test examples.
+
+Decision:
+
+\[
+\boxed{\text{PARTIAL REPLICATION}}
+\]
+
+The upper endpoint remained high-risk and inward-shrunk, and RPS partly
+improved its exact recovery. However, the RetinaMNIST RPS advantage in matched
+L1 risk/error association, AUPRC, and ordinal selective MAE did not reproduce;
+RPS only improved severe AUROC and had worse global/lower-endpoint results.
+Therefore no UTKFace representation/head audit, bin redesign, multi-seed run,
+or method iteration is authorized automatically. See
+[the Phase 3.7A record](phase3_7a_utkface_failure_replication.md).
+
+**Phase 3.7A-Solar remains recorded as paused before training.** Its
+implementation artifacts must be preserved, and no scientific solar outcome
+may be assigned. Phase 3.8 has not yet started.
+
+## Phase 3.8 — Solar Rare-Extreme Shrinkage Confirmation
+
+### Primary question
+
+> Does rare upper-extreme inward localization bias observed on RetinaMNIST and
+> UTKFace also appear in ordinal solar-flare classification?
+
+Use matched CE and RPS controls. The primary cross-dataset phenomena are:
+
+1. the upper extreme has elevated decision risk;
+2. the upper extreme is inward-shrunk;
+3. the upper endpoint is harder than the lower endpoint;
+4. L1/L2 decision correction is insufficient to remove the bias; and
+5. localization bias persists across CE/RPS objectives.
+
+Whether RPS improves risk quality or extreme-class localization is secondary;
+it is not required for replication. Do not restart method development or tune a
+new method from the solar result. Review third-dataset evidence before any new
+objective, representation/head audit, or multi-seed expansion is authorized.
+
+## Future Expansion
+After Phase 3.8 evidence is reviewed and only with separate authorization:
+- any multi-seed confirmation on RetinaMNIST or UTKFace;
+- additional ordinal datasets beyond solar;
+- method design, if the cross-dataset phenomenon is sufficiently stable;
+- later epistemic-UQ baselines, if the single-model question warrants them.
 
 ## Phase 4 — Epistemic UQ
 Not active. MC Dropout / Deep Ensemble should be considered only after the single-model method is established.
 
 ## Immediate Next Action
-Do not create RG-ACR-v2, run seeds 1–4, or launch datasets from this branch. A separate authorized literature-and-method-design audit is required before any new method family is considered.
+Run only the predeclared Phase 3.8 solar CE/RPS confirmation protocol. Do not
+create RG-ACR-v2, run seeds 1–4, perform an automated UTKFace follow-up, or
+restart method development. Any new method family or expansion requires a
+separate authorization after the solar evidence is reviewed.

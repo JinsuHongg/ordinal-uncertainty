@@ -2,15 +2,15 @@
 
 ## Project status
 
-Completed through **Phase 3.6**. The current diagnosis is a **dual-component rare-extreme failure** involving both representation collapse and head-level inward bias. The predeclared RG-ACR seed-0 falsification was **NO-GO**; the branch is stopped and no method is frozen.
+Completed through **Phase 3.7A-UTKFace**. RetinaMNIST established a dataset-specific **dual-component rare-extreme failure** involving representation collapse and head-level inward bias; the predeclared RG-ACR seed-0 falsification was **NO-GO**. UTKFace provided a **PARTIAL REPLICATION**: rare upper-endpoint inward shrinkage and endpoint asymmetry persisted, but RPS did not reproduce its broad RetinaMNIST risk-quality advantage. No method is frozen.
 
 ## Research question
 
-Existing ordinal and imbalance-aware methods can provide useful decision-risk information, but rare upper-extreme samples can still be systematically pulled toward central classes. Current evidence shows that this occurs at both the learned-representation and probabilistic-head levels.
+Existing ordinal and imbalance-aware methods can provide useful decision-risk information, but rare upper-extreme samples can still be systematically pulled toward central classes. The emerging cross-dataset focus is **rare upper-extreme inward localization bias under ordinal imbalance**; the RetinaMNIST representation/head decomposition remains dataset-specific evidence.
 
 The next research question is:
 
-> Can ordinal decision risk guide representation learning so that rare, high-risk extreme samples become better localized without destroying probabilistic risk quality?
+> Does rare upper-extreme inward localization bias observed on RetinaMNIST and UTKFace also appear in ordinal solar-flare classification?
 
 ## Canonical setup
 
@@ -19,7 +19,7 @@ The next research question is:
 - Unpretrained small-image ResNet18
 - Primary seeds: 0–4
 
-RetinaMNIST is now treated as a **development benchmark**; a promising next seed-0 method should be frozen before multi-seed and multi-dataset confirmation.
+RetinaMNIST is now treated as a **development benchmark**. Phase 3.8 is a matched CE/RPS solar confirmation study; its primary target is the localization-bias pattern, not RPS superiority. New-method development and multi-seed expansion remain paused.
 
 ## Repository structure
 
@@ -50,3 +50,4 @@ pytest -q
 - [Phase 3.4 head-intervention audit](docs/research/phase3_4_frozen_head_intervention_audit.md)
 - [Phase 3.5 risk-conditioned representation design audit](docs/research/phase3_5_risk_conditioned_representation_design.md)
 - [Phase 3.6 RG-ACR seed-0 falsification](docs/research/phase3_6_rg_acr_seed0.md)
+- [Phase 3.7A UTKFace failure replication](docs/research/phase3_7a_utkface_failure_replication.md)
