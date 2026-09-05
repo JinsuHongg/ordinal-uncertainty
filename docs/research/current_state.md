@@ -2,8 +2,7 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Phase 3.7A-UTKFace complete — PARTIAL REPLICATION. Next:
-**Phase 3.8 Solar Rare-Extreme Shrinkage Confirmation**.
+**Current stage:** Phase 3.9 Solar Rare-Extreme Mechanism Audit complete — **MIXED BUT DECOMPOSABLE FAILURE**.
 
 The project now has a decomposed diagnosis of the rare upper-extreme failure on RetinaMNIST. Output-only corrections are stopped. Phase 3.3 and 3.4 show that the remaining failure has both representation-level and classifier/head-level components.
 
@@ -174,8 +173,7 @@ independent replication was **PARTIAL**.
 Decision: no automatic UTKFace representation/head audit. See
 [the detailed replication record](phase3_7a_utkface_failure_replication.md).
 
-**Phase 3.7A-Solar remains recorded as PAUSED BEFORE TRAINING.** No solar
-CE/RPS full run or scientific conclusion exists; Phase 3.8 has not yet started.
+**Phase 3.8 Solar — STRONG CONFIRMATION.** On 28,006 aligned future-period test examples, including 921 X-class examples, matched CE/RPS seed-0 models made zero exact X decisions under mode/L1/L2. Their X predictive means were 2.864/2.772 (inward shrinkage 1.136/1.228) while class-0 MAE was .104/.082 versus X MAE 1.115/1.197. RPS did not improve solar risk-quality metrics. See [the Phase 3.8 record](phase3_8_solar_rare_extreme_shrinkage_confirmation.md).
 
 ## Updated Cross-Dataset Diagnosis
 
@@ -200,8 +198,7 @@ The current research question is:
 ## Development-Benchmark Guardrail
 RetinaMNIST has been inspected extensively during method development and remains
 a **development benchmark**. Do not use either RetinaMNIST or UTKFace test
-diagnostics for iterative method redesign while Phase 3.8 confirms the
-cross-dataset failure pattern.
+diagnostics for iterative method redesign. Phase 3.8 is complete; any new action requires separate authorization.
 
 ## Guardrails
 Do not currently:
@@ -215,11 +212,6 @@ Do not currently:
 - tune a new method on RetinaMNIST test outcomes repeatedly.
 
 ## Next Authorized Work
-**Phase 3.8 — Solar Rare-Extreme Shrinkage Confirmation** is authorized. Its
-primary replication target is upper-extreme elevated risk, inward shrinkage,
-endpoint asymmetry, and the insufficiency of L1/L2 decision correction under
-matched CE/RPS controls. RPS superiority is secondary, not required.
+**Phase 3.9 is complete — MIXED BUT DECOMPOSABLE FAILURE.** Solar has a 17–24% X centroid-collapsed subset and a 76–83% X-like subset whose original head fails inward 100% of the time; frozen linear controls recover X outputs only with global/risk trade-offs. See [the Phase 3.9 record](phase3_9_solar_mechanism_audit.md).
 
-Do not restart method development, revive RG-ACR, create UTKFace-specific
-objectives, perform automatic representation/head audits, or launch multi-seed
-expansions before the third-dataset evidence is reviewed.
+Do not restart method development, revive RG-ACR, create dataset-specific objectives, perform automatic representation/head audits, launch multi-seed expansions, or add datasets/channels. Any next action requires separate authorization.

@@ -13,8 +13,7 @@ repository is a separate research archive.
 
 ## Current Stage
 
-**Phase 3.7A-UTKFace complete — PARTIAL REPLICATION. Phase 3.8 Solar
-Rare-Extreme Shrinkage Confirmation is next.**
+**Phase 3.9 Solar Rare-Extreme Mechanism Audit complete — MIXED BUT DECOMPOSABLE FAILURE.**
 
 Completed:
 
@@ -70,9 +69,7 @@ RetinaMNIST matched-L1 risk-quality advantage: it improved severe AUROC only,
 while CE had stronger L1 Spearman, AUPRC, selective MAE, and global/
 lower-endpoint quality. Do not infer a universal RPS advantage.
 
-**Phase 3.7A-Solar was PAUSED BEFORE TRAINING.** It is now the authorized
-Phase 3.8 confirmation task; do not perform implementation changes, tuning, or
-method development as part of it.
+**Phase 3.8 Solar is complete — STRONG CONFIRMATION.** Matched CE/RPS seed-0 controls showed zero exact X-class decisions under mode/L1/L2, pronounced inward shrinkage, and severe endpoint asymmetry. No automatic follow-up experiment is authorized.
 
 ---
 
@@ -131,9 +128,7 @@ project-level cross-dataset claim.
 > risk quality, and exact-class performance differ across datasets and
 > objectives?**
 
-Phase 3.8 asks whether this common signal also appears in ordinal solar-flare
-classification. CE and RPS are matched controls; RPS superiority is secondary,
-not a replication requirement.
+Phase 3.8 strongly confirmed this signal in ordinal solar-flare classification. CE and RPS were matched controls; neither result establishes universal RPS superiority.
 
 ---
 
@@ -332,11 +327,7 @@ Do not currently:
 
 ## Next Authorized Work
 
-**Phase 3.8 — Solar Rare-Extreme Shrinkage Confirmation** is authorized.
-Evaluate matched CE and RPS controls for upper-extreme risk, inward shrinkage,
-endpoint asymmetry, and the limits of L1/L2 correction. Do not require RPS to
-win for replication, and do not restart method development, revive RG-ACR,
-create UTKFace-specific objectives, or launch multi-seed expansions.
+**No additional experiment is automatically authorized.** Phase 3.9 found a mixed/decomposable solar mechanism; see `docs/research/phase3_9_solar_mechanism_audit.md`. Any method design, seed expansion, channel variant, or additional dataset requires separate authorization.
 
 ---
 

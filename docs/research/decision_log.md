@@ -24,16 +24,17 @@
 | Phase 3.5 execution gate | One final RetinaMNIST seed-0 falsification experiment executed as Phase 3.6 | Complete | Validation-only selection was used; the result was NO-GO rather than method freeze. |
 | Phase 3.6 RG-ACR | NO-GO — branch stopped | Complete | Validation-selected λ=.05 lacked clear class-4 representation improvement across raw/normalized geometry and violated class-0 MAE and risk-Spearman tolerances. Downstream gains cannot rescue the mechanism failure. No RG-ACR-v2. |
 | Phase 3.7A-UTKFace | PARTIAL REPLICATION | Complete | Rare upper-extreme inward displacement and elevated risk reproduced, but the broad RetinaMNIST RPS matched-L1 risk-quality advantage did not; RPS partly improved class-4 recovery with global/lower-endpoint trade-offs. No automatic representation/head audit. |
-| Phase 3.7A-Solar | Paused before training | Active pause | Three-channel setup and normalization retry exist, but no CE/RPS full training or scientific conclusion occurred. |
+| Phase 3.7A-Solar | Paused before training | Historical | Three-channel setup and normalization retry were preserved; no Phase 3.7A scientific conclusion was made. |
+| Phase 3.8 Solar | STRONG CONFIRMATION | Complete | Matched CE/RPS solar controls both showed zero exact X decisions under mode/L1/L2, >1-class inward predictive shrinkage, and a much harder upper than lower endpoint. RPS did not improve solar risk-quality metrics. |
 | Rare upper-extreme inward shrinkage | Replicated across RetinaMNIST and UTKFace | Complete | Both datasets show elevated upper-endpoint risk, predictive means pulled inward, and a lower endpoint that is materially easier. |
 | Broad RPS matched-L1 risk-quality advantage | Not replicated on UTKFace | Complete | RPS improved UTKFace severe AUROC only; CE had stronger Spearman, severe AUPRC, selective MAE, global prediction, and probability quality. |
 | UTKFace representation/head audit | Not automatically justified | Complete | UTKFace has only a partial baseline replication; no test-informed follow-up is authorized. |
-| Phase 3.8 direction | Solar rare-extreme shrinkage confirmation | Next | Confirm cross-dataset inward localization bias with matched CE/RPS controls; RPS superiority is secondary. |
+| Phase 3.8 direction | Solar rare-extreme shrinkage confirmation | Complete | The predeclared third-dataset gate was executed under frozen CE/RPS controls; no automatic follow-up is authorized. |
+| Phase 3.9 Solar | MIXED BUT DECOMPOSABLE FAILURE | Complete | Both X representation collapse (17–24%) and complete original-head failure among X-like features were observed; fixed frozen-head controls recover X only with global/risk trade-offs. |
 
 ## SLACE infrastructure correction
 The prior SLACE persistence issue was a **false diagnosis** caused by premature artifact inspection / delayed workspace visibility. The scientific artifacts are valid; evaluation-only reproduction completed successfully. This is an infrastructure correction, not a revision of the negative SLACE scientific result.
 
 ## Development-benchmark guardrail
 RetinaMNIST is now a development benchmark. No additional
-RetinaMNIST-test-informed method experiment is authorized while Phase 3.8
-confirms the cross-dataset failure pattern.
+RetinaMNIST-test-informed method experiment is authorized. Phase 3.8 is complete and any next action requires separate authorization.

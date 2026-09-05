@@ -1,13 +1,12 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.7A-UTKFace CE/RPS seed-0 replication**. Active
-stage: **Phase 3.8 Solar Rare-Extreme Shrinkage Confirmation**.
+Completed through **Phase 3.9 Solar mechanism audit**. Current status: **MIXED BUT DECOMPOSABLE FAILURE**.
 
 Current gate:
 
 \[
-\boxed{\text{Solar confirmation — next authorized cross-dataset gate}}
+\boxed{\text{Solar confirmation complete — STRONG CONFIRMATION}}
 \]
 
 RG-ACR was implemented and tested only under its predeclared seed-0 protocol,
@@ -180,8 +179,7 @@ Do not iterate repeatedly on RetinaMNIST test results.
 ## Development-Benchmark Guardrail
 RetinaMNIST is now a **development benchmark** because the test set has been
 inspected extensively during method development. No additional
-RetinaMNIST-test-informed method experiment is authorized while Phase 3.8
-confirms the cross-dataset failure pattern.
+RetinaMNIST-test-informed method experiment is authorized. Phase 3.8 is complete and any next action requires separate authorization.
 
 ## Phase 3.7A — Independent Replication Gate
 
@@ -203,9 +201,7 @@ Therefore no UTKFace representation/head audit, bin redesign, multi-seed run,
 or method iteration is authorized automatically. See
 [the Phase 3.7A record](phase3_7a_utkface_failure_replication.md).
 
-**Phase 3.7A-Solar remains recorded as paused before training.** Its
-implementation artifacts must be preserved, and no scientific solar outcome
-may be assigned. Phase 3.8 has not yet started.
+**Phase 3.8 Solar is complete.** Its valid Phase 3.7A preparation artifacts were preserved; the resumed Phase 3.8 CE/RPS jobs used the frozen three-channel contract and yielded a STRONG CONFIRMATION, not a method-development signal.
 
 ## Phase 3.8 — Solar Rare-Extreme Shrinkage Confirmation
 
@@ -222,10 +218,7 @@ Use matched CE and RPS controls. The primary cross-dataset phenomena are:
 4. L1/L2 decision correction is insufficient to remove the bias; and
 5. localization bias persists across CE/RPS objectives.
 
-Whether RPS improves risk quality or extreme-class localization is secondary;
-it is not required for replication. Do not restart method development or tune a
-new method from the solar result. Review third-dataset evidence before any new
-objective, representation/head audit, or multi-seed expansion is authorized.
+Solar produced a STRONG CONFIRMATION: both CE and RPS had zero exact X decisions under mode/L1/L2, X predictive means 2.864/2.772, and much worse X than class-0 MAE/severe burden. RPS did not improve solar risk quality. The third-dataset gate is complete; no new objective, representation/head audit, seed expansion, or dataset is authorized without a separate decision.
 
 ## Future Expansion
 After Phase 3.8 evidence is reviewed and only with separate authorization:
@@ -238,7 +231,4 @@ After Phase 3.8 evidence is reviewed and only with separate authorization:
 Not active. MC Dropout / Deep Ensemble should be considered only after the single-model method is established.
 
 ## Immediate Next Action
-Run only the predeclared Phase 3.8 solar CE/RPS confirmation protocol. Do not
-create RG-ACR-v2, run seeds 1–4, perform an automated UTKFace follow-up, or
-restart method development. Any new method family or expansion requires a
-separate authorization after the solar evidence is reviewed.
+No automatic experimental action. Preserve the Phase 3.8/3.9 artifacts; any method design, seed expansion, channel variant, or additional dataset requires separate authorization.
