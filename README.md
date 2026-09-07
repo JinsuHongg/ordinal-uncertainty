@@ -2,7 +2,7 @@
 
 ## Project status
 
-Completed through **Phase 3.15 Solar direction/scale mechanism confirmation**. Solar partially confirms the mechanism: direction-only frozen-head adaptation strongly recovers rare X localization, while fixed `.50` controlled scale does not improve on direction-only. Direction is cross-dataset supported; scale, global, opposite-endpoint, and bias behavior are dataset-dependent. This is mechanism evidence, not a freeze-ready universal method.
+Completed through **Phase 3.16 three-dataset mechanism consolidation**. The next stage is **paper framing from existing evidence**. Across the tested frozen RPS representations on RetinaMNIST, UTKFace, and Solar, classifier direction adaptation improves rare upper-end localization. Scale benefits, bias behavior, and global/opposite-endpoint effects are dataset-dependent. Controlled scale remains a diagnostic probe; the combined candidate is not freeze-ready. No new experiments are authorized.
 
 ## Research question
 
@@ -62,3 +62,4 @@ pytest -q
 - [Phase 3.13 UTKFace direction/scale mechanism confirmation](docs/research/phase3_13_utkface_direction_scale_mechanism_confirmation.md)
 - [Phase 3.14 cross-dataset mechanism consolidation](docs/research/phase3_14_cross_dataset_mechanism_consolidation.md)
 - [Phase 3.15 Solar direction/scale mechanism confirmation](docs/research/phase3_15_solar_direction_scale_mechanism_confirmation.md)
+- [Phase 3.16 three-dataset mechanism consolidation](docs/research/phase3_16_three_dataset_mechanism_consolidation.md)

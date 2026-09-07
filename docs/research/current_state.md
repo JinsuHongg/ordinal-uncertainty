@@ -2,7 +2,7 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Phase 3.15 Solar Direction/Scale Mechanism Confirmation complete — **PARTIAL CONFIRMATION**.
+**Current stage:** Phase 3.16 Three-Dataset Mechanism Consolidation complete — **MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING**.
 
 The project now has a decomposed diagnosis of the rare upper-extreme failure on RetinaMNIST. Output-only corrections are stopped. Phase 3.3 and 3.4 show that the remaining failure has both representation-level and classifier/head-level components.
 
@@ -323,7 +323,25 @@ demotes ROP to a diagnostic/secondary idea; and holds α=.50/λ=1.0 as not
 freeze-ready. Decision: **CROSS-DATASET MECHANISM CONFIRMATION JUSTIFIED**.
 See [the Phase 3.12 record](phase3_12_evidence_consolidation_and_candidate_disposition.md).
 
+## Phase 3.16 — Three-Dataset Mechanism Consolidation
+
+**A — MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING.** Direction
+adaptation improves rare-end localization across the three tested frozen RPS
+representations. Solar C beats D, superseding any general beneficial-scale
+interpretation of Phase 3.14. Scale benefits, bias behavior, and opposite-endpoint
+effects are dataset-dependent. Higher global L1 MAE occurs under all tested
+adapted heads, but QWK and individual risk/probability measures vary.
+Localization does not imply global/UQ improvement.
+
+Controlled scale remains a mechanistic/diagnostic probe, bias-only correction
+stays stopped, ROP stays secondary, and the combined candidate stays HOLD —
+NOT FREEZE-READY. Historical phase conclusions remain preserved. See
+[Phase 3.16](phase3_16_three_dataset_mechanism_consolidation.md).
+
 ## Next Authorized Work
-**Phase 3.15 is complete — PARTIAL CONFIRMATION.** Direction adaptation transports to Solar, but the fixed `.50` scale increment does not add to direction-only recovery. No tuning, method development, seed expansion, or additional dataset is authorized; any next action requires separate authorization.
+
+Paper framing from existing evidence is the next stage. No new method design,
+training, evaluation, tuning, test access, ROP/bias revival, seeds, or datasets
+are authorized by this consolidation.
 
 Do not restart method development, revive RG-ACR, create dataset-specific objectives, perform automatic representation/head audits, launch multi-seed expansions, or add datasets/channels. Any next action requires separate authorization.

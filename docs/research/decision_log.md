@@ -42,6 +42,22 @@
 | Phase 3.14 cross-dataset mechanism consolidation | SOLAR DIRECTION/SCALE CONFIRMATION JUSTIFIED | Complete | Direction adaptation transports across RetinaMNIST/UTKFace and added scale can strengthen outward rare-end movement. Opposite-endpoint/global trade-offs and bias behavior are dataset-dependent; controlled scale is a mechanism probe, not a universal method, and ROP remains secondary. A minimal frozen Solar A/B/C/D decomposition is justified. |
 | Phase 3.15 Solar direction/scale confirmation | PARTIAL CONFIRMATION | Complete | Original RPS X recovery was 0/921; balanced B recovered 334 and direction-only C recovered 496 while lowering X MAE `1.197 -> .675`. Fixed `.50` scale D recovered only 262 and was worse than C. Direction transports; fixed scale is not a universal increment. No tuning or method development is authorized. |
 
+## Phase 3.16 — Current disposition
+
+**A — MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING.** Direction-only
+adaptation improves rare-end localization across the three tested frozen RPS
+representations. Solar rejects universal benefit of the .50 scale increment.
+Scale benefits, bias behavior, and collateral effects are dataset-dependent.
+Controlled scale is diagnostic, ROP secondary, bias-only correction stopped,
+and the combined candidate HOLD — NOT FREEZE-READY. No method-design or
+experimental work is authorized. See
+[Phase 3.16](phase3_16_three_dataset_mechanism_consolidation.md).
+
+This interpretation supersedes the historical Phase 3.14 scale claim, while
+preserving that phase's conclusion at the time. Localization gains do not
+establish global probabilistic or risk-quality gains; nonzero bias shifts do
+not establish a causal bias-only intervention.
+
 ## SLACE infrastructure correction
 The prior SLACE persistence issue was a **false diagnosis** caused by premature artifact inspection / delayed workspace visibility. The scientific artifacts are valid; evaluation-only reproduction completed successfully. This is an infrastructure correction, not a revision of the negative SLACE scientific result.
 

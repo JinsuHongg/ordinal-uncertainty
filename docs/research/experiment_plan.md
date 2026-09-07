@@ -1,7 +1,7 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.15 Solar direction/scale mechanism confirmation**. Current status: **PARTIAL CONFIRMATION**.
+Completed through **Phase 3.16 three-dataset mechanism consolidation**. Current status: **MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING**.
 
 Solar confirms frozen-head actionability and strong direction-only rare-X recovery, but fixed `alpha=.50` controlled scale is worse than direction-only C. Thus direction is transported across all three domains; scale is not a universal increment. No method is frozen and no follow-up is authorized automatically. See [Phase 3.15](phase3_15_solar_direction_scale_mechanism_confirmation.md).
 
@@ -315,9 +315,28 @@ effects are dataset-dependent. Decision: **A — SOLAR DIRECTION/SCALE
 CONFIRMATION JUSTIFIED**. See
 [the Phase 3.14 record](phase3_14_cross_dataset_mechanism_consolidation.md).
 
+## Phase 3.15 — Solar Confirmation (complete)
+
+PARTIAL CONFIRMATION: direction-only C recovers 496/921 X decisions versus
+A's zero; fixed .50 D recovers 262 and worsens rare MAE relative to C.
+Global MAE rises under every adapted head. The direction effect transports;
+the beneficial-scale ordering does not. See
+[Phase 3.15](phase3_15_solar_direction_scale_mechanism_confirmation.md).
+
+## Phase 3.16 — Three-Dataset Consolidation (complete)
+
+**A — MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING.** The current
+claim is direction responsiveness in tested frozen RPS representations, with
+dataset-dependent scale benefits, bias behavior, and collateral effects.
+Earlier two-dataset scale claims are historical, superseded by this synthesis.
+Controlled scale is diagnostic; ROP is secondary; bias correction stays stopped;
+the combined candidate is not freeze-ready. See
+[Phase 3.16](phase3_16_three_dataset_mechanism_consolidation.md).
+
 ## Immediate Next Action
 
-A separately authorized frozen Solar A/B/C/D mechanism confirmation may be
-specified. It must use original RPS, balanced, direction-only, and fixed
-`alpha=.50` controlled-scale heads only; no ROP, alpha grid, new loss,
-representation training, or automatic test execution.
+Move to paper framing using the completed evidence. Solar Phase 3.15 is complete;
+do not rerun its confirmation. No method design, training/evaluation, tuning,
+new dataset, seed expansion, or test access is authorized. The paper should
+separate the transported direction effect from dataset-specific scale, bias,
+global, and opposite-endpoint outcomes. No candidate is method-frozen.

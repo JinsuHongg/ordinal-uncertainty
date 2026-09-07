@@ -13,7 +13,7 @@ repository is a separate research archive.
 
 ## Current Stage
 
-**Phase 3.15 Solar Direction/Scale Mechanism Confirmation complete — PARTIAL CONFIRMATION.**
+**Phase 3.16 Three-Dataset Mechanism Consolidation complete — MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING.**
 
 Completed:
 
@@ -41,6 +41,7 @@ Completed:
 - Phase 3.13 UTKFace direction/scale mechanism confirmation
 - Phase 3.14 cross-dataset mechanism consolidation
 - Phase 3.15 Solar direction/scale mechanism confirmation
+- Phase 3.16 three-dataset mechanism consolidation
 
 Canonical RetinaMNIST uses:
 
@@ -352,19 +353,27 @@ Do not currently:
 
 ---
 
-## Phase 3.15 Decision
+## Phase 3.16 Decision
 
-Solar yields **PARTIAL CONFIRMATION** of the frozen direction/scale mechanism:
-head actionability and direction-only rare-X recovery transport strongly, but
-the predeclared fixed `alpha=.50` controlled scale is worse than direction-only
-adaptation. Direction is cross-dataset supported; scale is a dataset-dependent
-correction-strength effect, not a universal increment or a novel method.
+**A — MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING.**
+
+Phenomenon: rare upper-extreme inward localization bias under ordinal imbalance.
+Across the tested frozen RPS representations, direction-only adaptation improves
+rare-end localization on RetinaMNIST, UTKFace, and Solar. Scale benefits, bias
+behavior, and global/opposite-endpoint effects depend on the dataset. Solar C
+outperforms D, superseding any universal scale-benefit interpretation.
+
+Controlled scale remains a diagnostic/mechanistic probe only. Bias-only
+correction stays stopped; ROP is diagnostic/secondary; the combined candidate
+is HOLD — NOT FREEZE-READY. Localization does not imply global or UQ gains.
+See docs/research/phase3_16_three_dataset_mechanism_consolidation.md.
 
 ## Next Authorized Work
 
-**No follow-up is automatically authorized.** Do not tune alpha, add ROP,
-change biases, retrain representations, run seeds 1–4, or add a dataset. Any
-next scientific action requires separate authorization.
+The next stage is paper framing from existing evidence. No method design,
+training, evaluation, tuning, ROP/bias revival, extra seed, or dataset run is
+authorized. The mechanism evidence is sufficient for a bounded paper narrative;
+it does not authorize method freeze or final test evaluation.
 
 All common RetinaMNIST development rules are inherited from:
 
@@ -372,7 +381,7 @@ All common RetinaMNIST development rules are inherited from:
 
 unless a phase-specific task explicitly overrides them.
 
-Phase 3.14 does **not** authorize:
+Phase 3.16 does **not** authorize:
 
 - ROP, alpha/lambda tuning, ROP-v2, adaptive/joint objectives, or test evaluation;
 - adaptive or class-specific norm scaling;
