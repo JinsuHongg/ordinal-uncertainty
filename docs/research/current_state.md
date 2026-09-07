@@ -2,9 +2,20 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Phase 3.9 Solar Rare-Extreme Mechanism Audit complete — **MIXED BUT DECOMPOSABLE FAILURE**.
+**Current stage:** Phase 3.14 Cross-Dataset Mechanism Consolidation complete — **SOLAR DIRECTION/SCALE CONFIRMATION JUSTIFIED**.
 
 The project now has a decomposed diagnosis of the rare upper-extreme failure on RetinaMNIST. Output-only corrections are stopped. Phase 3.3 and 3.4 show that the remaining failure has both representation-level and classifier/head-level components.
+
+Phase 3.13 confirms that balanced direction adaptation and scale amplification
+can move the rare UTKFace upper endpoint outward, but the RetinaMNIST
+opposite-endpoint/global safety ordering does not transport cleanly. This is a
+cross-dataset mechanism signal, not a validated universal controlled-scale
+method.
+
+Phase 3.14 consolidates the result: direction adaptation is transportable and
+additional scale can strengthen rare-end outward movement, but opposite-endpoint,
+global, and bias effects are dataset-dependent. A minimal frozen Solar
+direction/scale confirmation is now justified; ROP remains excluded.
 
 ## Canonical RetinaMNIST Setup
 - Native 28×28 RGB
@@ -200,6 +211,20 @@ RetinaMNIST has been inspected extensively during method development and remains
 a **development benchmark**. Do not use either RetinaMNIST or UTKFace test
 diagnostics for iterative method redesign. Phase 3.8 is complete; any new action requires separate authorization.
 
+## Phase 3.10A — Training-Only ROP Falsification
+
+The authorized 5-fold OOF frozen-RPS-head experiment used only the 1,080
+canonical training samples and replay-verified 512-D RPS features. ROP was
+active and modestly improved pair concordance and portions of the risk-quality
+trade-off versus balanced head, especially around λ=.5. It retained the
+balanced-head class-4 localization gain versus original RPS but did not improve
+localization over balanced head. Every λ violated the predeclared class-0 MAE
+safety tolerance versus original RPS.
+
+Decision: **TRADE-OFF**. No lambda is frozen. Do not run historical test,
+ROP-v2, multi-seed work, UTKFace, Solar, or another method automatically. See
+[the Phase 3.10A record](phase3_10a_retinamnist_rop_objective_falsification.md).
+
 ## Guardrails
 Do not currently:
 - create Candidate 1c;
@@ -211,7 +236,100 @@ Do not currently:
 - add ensemble, Bayesian, or conformal extensions;
 - tune a new method on RetinaMNIST test outcomes repeatedly.
 
+## Phase 3.10B — Head-Bias Localization Audit
+
+The training-only OOF B-versus-original audit found that balanced-head class-4
+recovery and class-0 damage are explained by large classifier direction
+rotations and norm inflation, not meaningful bias shifts. Original weights plus
+balanced biases are effectively original behavior; balanced weights plus
+original biases retain the trade-off. A norm diagnostic moderates both effects
+but removes most exact class-4 recovery.
+
+Decision: **MIXED PARAMETER MECHANISM**. This does not authorize a bias-only,
+norm-only, direction-only, or mixed correction. See
+[the Phase 3.10B record](phase3_10b_head_bias_localization_audit.md).
+
+## Phase 3.13 — UTKFace Direction/Scale Confirmation
+
+The frozen seed-0 train/validation protocol produced **PARTIAL CONFIRMATION**.
+B/C/D all improved class-4 localization relative to original RPS; controlled
+scale D was strongest (`C4 MAE .493` versus A `.612`) and its learned
+directions were close to B. Large norm inflation and direction rotation
+replicated. However, B did not produce RetinaMNIST-like class-0 MAE damage, D
+was globally worse than B/A, and balanced bias shifts were not negligible.
+Therefore rare-end direction/scale localization transports, while the safety
+trade-off and bias contribution are dataset-dependent. The archived UTKFace
+test split was not loaded. See [the Phase 3.13 record](phase3_13_utkface_direction_scale_mechanism_confirmation.md).
+
+That Phase 3.13 conclusion was superseded as a next-step decision by Phase
+3.14; it did not itself authorize execution of a follow-up experiment.
+
+## Phase 3.14 — Cross-Dataset Mechanism Consolidation
+
+The evidence-only synthesis concludes that rare upper-end localization responds
+consistently to direction adaptation on RetinaMNIST and UTKFace, with added
+scale strengthening recovery. Controlled scale is retained as a correction-
+strength mechanism probe, not a universal classifier or novelty claim.
+Opposite-endpoint/global effects and bias behavior differ by dataset; ROP stays
+diagnostic/secondary and the combined Retina candidate is not freeze-ready.
+
+Decision: **A — SOLAR DIRECTION/SCALE CONFIRMATION JUSTIFIED**. The only
+authorized next scientific question is whether frozen Solar A/B/C/D controls
+reproduce the direction/scale decomposition. See
+[the Phase 3.14 record](phase3_14_cross_dataset_mechanism_consolidation.md).
+
+## Phase 3.10C — Direction-Only Causal Falsification
+
+With original class-specific norms and biases fixed, balanced direction-only
+training retained partial class-4 localization improvement over original RPS
+and improved global/class-0 behavior relative to full balanced head. It lost
+most exact class-4 recovery. Decision: **PARTIAL SUPPORT**—direction is useful,
+but controlled scale is also implicated. No controlled-scale design, test
+evaluation, seed expansion, or dataset follow-up is authorized. See
+[the Phase 3.10C record](phase3_10c_direction_only_head_falsification.md).
+
+## Phase 3.10D — Controlled-Scale Causal Falsification
+
+The predeclared `.25/.50/.75` fixed interpolated-scale heads provide a useful
+training-only OOF region. α=.50 retains 8 exact C4 decisions versus B's 11 and
+improves B's C0/global MAE; α=.50/.75 retain six B-exact cases. Decision:
+**GO — CONTROLLED SCALE SUPPORTED**. This is mechanism evidence only, with no
+authorization for a final/adaptive scale method, test evaluation, seed
+expansion, or new datasets. See
+[the Phase 3.10D record](phase3_10d_controlled_scale_head_falsification.md).
+
+## Phase 3.10E — Controlled Scale × ROP Interaction
+
+At the fixed D α=.50 point, the pre-existing λ=1.0 ROP hinge improves
+teacher/student pair preservation, L1-risk Spearman, and selective MAE while
+retaining controlled-scale localization and class-0 safety. AUROC/AUPRC and
+probability quality are mixed but not materially degraded. Decision: **GO —
+COMPLEMENTARY MECHANISMS SUPPORTED**. This is a training-only interaction
+result, not a final method freeze or authorization for tuning, adaptive
+mechanisms, historical-test evaluation, seeds, or new datasets. See
+[the Phase 3.10E record](phase3_10e_controlled_scale_rop_interaction.md).
+
+## Phase 3.11 — Frozen Candidate One-Shot Validation
+
+The fixed α=.50 / λ=1.0 candidate was fitted on all training data before a
+single historical-validation evaluation. Class-4 outward localization
+replicated, but class-0/global safety and the D→E Spearman/selective-MAE
+effects reversed relative to OOF. Decision: **MIXED — HOLD FROZEN, NO
+REDESIGN**. The candidate is not method-frozen; no test evaluation, tuning, or
+follow-up is authorized. See [the Phase 3.11 record](phase3_11_frozen_candidate_validation.md).
+
+## Phase 3.12 — Evidence Consolidation and Candidate Disposition
+
+The completed evidence retains direction adaptation, scale amplification, and
+controlled scale as RetinaMNIST mechanism findings; stops bias correction;
+demotes ROP to a diagnostic/secondary idea; and holds α=.50/λ=1.0 as not
+freeze-ready. Decision: **CROSS-DATASET MECHANISM CONFIRMATION JUSTIFIED**.
+See [the Phase 3.12 record](phase3_12_evidence_consolidation_and_candidate_disposition.md).
+
 ## Next Authorized Work
-**Phase 3.9 is complete — MIXED BUT DECOMPOSABLE FAILURE.** Solar has a 17–24% X centroid-collapsed subset and a 76–83% X-like subset whose original head fails inward 100% of the time; frozen linear controls recover X outputs only with global/risk trade-offs. See [the Phase 3.9 record](phase3_9_solar_mechanism_audit.md).
+**Phase 3.14 is complete — SOLAR DIRECTION/SCALE CONFIRMATION JUSTIFIED.** A
+separately authorized frozen Solar A/B/C/D phase may now be specified; no ROP,
+alpha grid, new loss, representation training, or test-driven adaptation is
+authorized.
 
 Do not restart method development, revive RG-ACR, create dataset-specific objectives, perform automatic representation/head audits, launch multi-seed expansions, or add datasets/channels. Any next action requires separate authorization.

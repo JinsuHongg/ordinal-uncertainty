@@ -2,7 +2,7 @@
 
 ## Project status
 
-Completed through **Phase 3.9 Solar mechanism audit**. Phase 3.9 found a **mixed but decomposable** solar failure: a centroid-collapsed X subset coexists with a larger X-like subset that the original head routes inward. Phase 3.8 provided **STRONG CONFIRMATION** of rare upper-extreme inward localization bias: both matched CE/RPS solar controls made zero exact X-class decisions under mode/L1/L2 and strongly inward-shrunk the upper endpoint. RetinaMNIST established a dataset-specific **dual-component rare-extreme failure** involving representation collapse and head-level inward bias; the predeclared RG-ACR seed-0 falsification was **NO-GO**. UTKFace provided a **PARTIAL REPLICATION**: rare upper-endpoint inward shrinkage and endpoint asymmetry persisted, but RPS did not reproduce its broad RetinaMNIST risk-quality advantage. No method is frozen.
+Completed through **Phase 3.14 cross-dataset mechanism consolidation**. RetinaMNIST and UTKFace support direction adaptation, with added scale strengthening rare upper-end localization; opposite-endpoint, global, and bias effects are dataset-dependent. This is mechanism evidence, not a freeze-ready universal method. A frozen Solar A/B/C/D confirmation is scientifically justified but requires separate execution authorization.
 
 ## Research question
 
@@ -52,3 +52,12 @@ pytest -q
 - [Phase 3.6 RG-ACR seed-0 falsification](docs/research/phase3_6_rg_acr_seed0.md)
 - [Phase 3.7A UTKFace failure replication](docs/research/phase3_7a_utkface_failure_replication.md)
 - [Phase 3.8 Solar rare-extreme shrinkage confirmation](docs/research/phase3_8_solar_rare_extreme_shrinkage_confirmation.md)
+- [Phase 3.10A RetinaMNIST ROP objective falsification](docs/research/phase3_10a_retinamnist_rop_objective_falsification.md)
+- [Phase 3.10B RetinaMNIST head-bias localization audit](docs/research/phase3_10b_head_bias_localization_audit.md)
+- [Phase 3.10C RetinaMNIST direction-only head falsification](docs/research/phase3_10c_direction_only_head_falsification.md)
+- [Phase 3.10D RetinaMNIST controlled-scale head falsification](docs/research/phase3_10d_controlled_scale_head_falsification.md)
+- [Phase 3.10E RetinaMNIST controlled scale × ROP interaction](docs/research/phase3_10e_controlled_scale_rop_interaction.md)
+- [Phase 3.11 RetinaMNIST frozen candidate validation](docs/research/phase3_11_frozen_candidate_validation.md)
+- [Phase 3.12 evidence consolidation and candidate disposition](docs/research/phase3_12_evidence_consolidation_and_candidate_disposition.md)
+- [Phase 3.13 UTKFace direction/scale mechanism confirmation](docs/research/phase3_13_utkface_direction_scale_mechanism_confirmation.md)
+- [Phase 3.14 cross-dataset mechanism consolidation](docs/research/phase3_14_cross_dataset_mechanism_consolidation.md)

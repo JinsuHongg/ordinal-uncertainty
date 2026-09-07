@@ -1,17 +1,95 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.9 Solar mechanism audit**. Current status: **MIXED BUT DECOMPOSABLE FAILURE**.
+Completed through **Phase 3.14 cross-dataset mechanism consolidation**. Current status: **SOLAR DIRECTION/SCALE CONFIRMATION JUSTIFIED**.
 
 Current gate:
 
 \[
-\boxed{\text{Solar confirmation complete — STRONG CONFIRMATION}}
+\boxed{\text{Solar direction/scale confirmation justified}}
 \]
 
 RG-ACR was implemented and tested only under its predeclared seed-0 protocol,
-then stopped. The independent UTKFace CE/RPS seed-0 gate found a partial, not
-strong, replication. No method is frozen.
+then stopped. The frozen UTKFace A/B/C/D gate partially confirmed localization.
+Phase 3.14 justifies a separately authorized minimal frozen Solar A/B/C/D
+decomposition to test the cross-domain direction/scale mechanism; no method is
+frozen.
+
+## Phase 3.10A — Completed Training-Only OOF Gate
+
+The authorized frozen-feature head experiment used canonical seed-0 RPS
+features, original RPS-head initialization, deterministic training-only
+five-fold OOF, balanced CE batches, and independent natural-population ROP
+batches at λ `.1/.5/1.0`. No validation/test labels, backbone update,
+representation loss, class-4 weighting, or new dataset was used.
+
+Decision: **TRADE-OFF**. ROP was active and modestly improved several
+risk/pair-order measures relative to balanced head, but did not improve
+class-4 localization over it and violated the predeclared class-0 MAE safety
+tolerance relative to original RPS. No lambda is selected and no objective
+freeze, historical-test evaluation, ROP-v2, seed expansion, or cross-dataset
+run is authorized. See [Phase 3.10A](phase3_10a_retinamnist_rop_objective_falsification.md).
+
+## Phase 3.10B — Completed Mechanism Audit
+
+The exact same training-only OOF folds and frozen features were used to audit
+original RPS versus balanced heads. The parameter/logit and diagnostic-swap
+evidence identifies a **MIXED PARAMETER MECHANISM**: class-4 recovery and
+class-0 damage come primarily from classifier direction and norm changes, not
+bias shifts. This is explanatory evidence only. No correction, objective,
+lambda, seed expansion, historical-test evaluation, or dataset follow-up is
+authorized. See [Phase 3.10B](phase3_10b_head_bias_localization_audit.md).
+
+## Phase 3.10C — Completed Direction-Only Causal Gate
+
+The fixed-original-norm/bias direction-only head used the same frozen training
+features and OOF folds. It retains partial C4 gain versus original RPS and
+partly restores B's global/class-0 cost, but loses most exact C4 recovery.
+Decision: **PARTIAL SUPPORT**. Direction is useful but scale is implicated; do
+not automatically implement controlled-scale adaptation or any other follow-up.
+See [Phase 3.10C](phase3_10c_direction_only_head_falsification.md).
+
+## Phase 3.10D — Completed Controlled-Scale Causal Gate
+
+The predeclared `.25/.50/.75` fixed interpolated-scale direction heads used
+the same frozen OOF protocol. α=.50/.75 retain substantial B C4 recovery while
+improving B class-0/global MAE; α=.50 is the stronger recovery/safety point.
+Decision: **GO — CONTROLLED SCALE SUPPORTED**, limited to the training-only
+mechanism. No final method, adaptive scale, test evaluation, seed expansion,
+or cross-dataset run is authorized. See
+[Phase 3.10D](phase3_10d_controlled_scale_head_falsification.md).
+
+## Phase 3.10E — Completed Controlled Scale × ROP Interaction
+
+At the single fixed α=.50 / λ=1.0 interaction point, the exact Phase 3.10A
+ROP loss was added to the Phase 3.10D controlled-scale direction-only head,
+using separate balanced CE and natural ROP batches. ROP improves direct pair
+preservation, Spearman, and selective MAE while retaining class-4 localization
+and class-0/global safety; AUROC/AUPRC and probability metrics remain mixed.
+Decision: **GO — COMPLEMENTARY MECHANISMS SUPPORTED** as training-only
+mechanism evidence. No alpha/lambda tuning, adaptive/joint objective, ROP-v2,
+test evaluation, seed expansion, or cross-dataset work is authorized. See
+[Phase 3.10E](phase3_10e_controlled_scale_rop_interaction.md).
+
+## Phase 3.11 — Completed Frozen Candidate One-Shot Validation
+
+The frozen α=.50 / λ=1.0 candidate was fit on all 1,080 training samples and
+all B/D/E states were saved before its one historical-validation evaluation.
+Class-4 localization relative to A replicated, but B→E class-0/global safety
+and D→E Spearman/selective-MAE directions reversed. Decision: **MIXED — HOLD
+FROZEN, NO REDESIGN**. No method freeze, test evaluation, tuning, seed
+expansion, or cross-dataset work is authorized. See
+[Phase 3.11](phase3_11_frozen_candidate_validation.md).
+
+## Phase 3.12 — Completed Evidence Consolidation
+
+Direction adaptation, scale amplification, and controlled scale are retained as
+RetinaMNIST mechanisms; bias correction is stopped; ROP is diagnostic/secondary
+only; and α=.50/λ=1.0 is not freeze-ready. Decision: **CROSS-DATASET
+MECHANISM CONFIRMATION JUSTIFIED**. The next frozen question is UTKFace
+original/balanced/direction-only/controlled-scale confirmation, excluding ROP,
+with no grid, test evaluation, or new method. See
+[Phase 3.12](phase3_12_evidence_consolidation_and_candidate_disposition.md).
 
 ## Canonical Development Setup
 Primary development dataset: **RetinaMNIST**
@@ -230,5 +308,26 @@ After Phase 3.8 evidence is reviewed and only with separate authorization:
 ## Phase 4 — Epistemic UQ
 Not active. MC Dropout / Deep Ensemble should be considered only after the single-model method is established.
 
+## Phase 3.13 — UTKFace Direction/Scale Confirmation (complete)
+
+The frozen seed-0 A/B/C/D training/validation experiment concluded **PARTIAL
+CONFIRMATION**. Direction adaptation and scale amplification improved rare
+class-4 localization across datasets, with α=.50 D strongest on UTKFace, but
+the RetinaMNIST lower-endpoint/global safety ordering did not replicate. No ROP,
+alpha search, backbone retraining, or test access occurred. See
+[the Phase 3.13 record](phase3_13_utkface_direction_scale_mechanism_confirmation.md).
+
+## Phase 3.14 — Cross-Dataset Mechanism Consolidation (complete)
+
+Direction adaptation is cross-dataset supported and additional scale can
+strengthen rare-end outward movement; global/opposite-endpoint safety and bias
+effects are dataset-dependent. Decision: **A — SOLAR DIRECTION/SCALE
+CONFIRMATION JUSTIFIED**. See
+[the Phase 3.14 record](phase3_14_cross_dataset_mechanism_consolidation.md).
+
 ## Immediate Next Action
-No automatic experimental action. Preserve the Phase 3.8/3.9 artifacts; any method design, seed expansion, channel variant, or additional dataset requires separate authorization.
+
+A separately authorized frozen Solar A/B/C/D mechanism confirmation may be
+specified. It must use original RPS, balanced, direction-only, and fixed
+`alpha=.50` controlled-scale heads only; no ROP, alpha grid, new loss,
+representation training, or automatic test execution.

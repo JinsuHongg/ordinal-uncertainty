@@ -13,7 +13,7 @@ repository is a separate research archive.
 
 ## Current Stage
 
-**Phase 3.9 Solar Rare-Extreme Mechanism Audit complete — MIXED BUT DECOMPOSABLE FAILURE.**
+**Phase 3.14 Cross-Dataset Mechanism Consolidation complete — SOLAR DIRECTION/SCALE CONFIRMATION JUSTIFIED.**
 
 Completed:
 
@@ -31,6 +31,15 @@ Completed:
 - Phase 3.5 risk-conditioned representation method-design audit
 - Phase 3.6 RG-ACR seed-0 falsification
 - Phase 3.7A-UTKFace ordinal-failure replication
+- Phase 3.10A RetinaMNIST training-only ROP objective falsification
+- Phase 3.10B RetinaMNIST training-only head-bias localization audit
+- Phase 3.10C RetinaMNIST direction-only head falsification
+- Phase 3.10D RetinaMNIST controlled-scale head falsification
+- Phase 3.10E RetinaMNIST controlled-scale × ROP interaction
+- Phase 3.11 RetinaMNIST frozen candidate one-shot validation
+- Phase 3.12 evidence consolidation and candidate disposition
+- Phase 3.13 UTKFace direction/scale mechanism confirmation
+- Phase 3.14 cross-dataset mechanism consolidation
 
 Canonical RetinaMNIST uses:
 
@@ -154,37 +163,54 @@ does not authorize a variant.
 
 ## Development-Benchmark Guardrail
 
-RetinaMNIST has been inspected extensively during method development.
+RetinaMNIST is the current **method-development benchmark** and has been
+inspected extensively.
 
-Treat RetinaMNIST as a **development benchmark** from now on. Method
-development remains paused while the cross-dataset confirmation question is
-resolved.
+Detailed RetinaMNIST development rules are centralized in:
 
-RetinaMNIST test results may be used for:
+`docs/research/retinamnist_method_development_policy.md`
 
-- retrospective diagnosis;
-- the one predeclared final seed-0 falsification experiment.
+That policy is authoritative for:
 
-They must not be used to:
+- frozen canonical RetinaMNIST/RPS setup;
+- training-only OOF development;
+- historical validation/test restrictions;
+- common evaluation metrics;
+- artifact requirements;
+- method-freeze rules;
+- confirmatory-dataset progression.
 
-- tune new hyperparameters after observing test outcomes;
-- repeatedly redesign objectives;
-- create Candidate A1/A2/A3-style iterative test-informed variants;
-- select among many post-hoc methods.
+Do not duplicate those rules in phase prompts unless a phase explicitly
+overrides them.
 
-If the final seed-0 candidate is promising:
-
-\[
-\boxed{\text{METHOD FREEZE}}
-\]
-
-Then move to:
-
-- RetinaMNIST seeds 1–4;
-- additional ordinal datasets;
-- confirmatory evidence.
+The historical RetinaMNIST test set must not be used for iterative method
+selection. Test access requires an explicit method-freeze/final-evaluation
+authorization.
 
 ---
+
+## Shared Development Policies
+
+Phase-specific prompts should contain only the scientific delta whenever a
+shared policy already defines the common protocol.
+
+Current shared policy:
+
+- `docs/research/retinamnist_method_development_policy.md`
+
+A phase prompt should normally specify only:
+
+1. scientific question;
+2. prior evidence;
+3. new intervention;
+4. comparison conditions;
+5. phase-specific diagnostics;
+6. decision gate;
+7. stop condition.
+
+Dataset setup, OOF rules, common metrics, repository safety, verification, and
+documentation synchronization should be inherited from the shared policy unless
+explicitly overridden.
 
 ## Core Evaluation Decomposition
 
@@ -316,7 +342,7 @@ Do not currently:
 - return to 64×64 RetinaMNIST as the canonical setup;
 - add a generic contrastive/prototype method and call it novel;
 - treat logit adjustment as the primary novelty;
-- tune on test data;
+- use historical RetinaMNIST test data for iterative method development;
 - launch all datasets before method freeze;
 - add ensembles, Bayesian methods, or conformal prediction as a substitute for
   the current single-model question;
@@ -325,9 +351,41 @@ Do not currently:
 
 ---
 
+## Phase 3.14 Decision
+
+Direction adaptation transports across RetinaMNIST and UTKFace, and additional
+scale can strengthen rare-upper-end movement. The RetinaMNIST class-0/global
+safety ordering and negligible-bias pattern do not transport; they are
+dataset-dependent. Controlled scale is a mechanism probe, not a universal or
+novel standalone method. ROP remains diagnostic/secondary and the combined
+candidate is not freeze-ready.
+
 ## Next Authorized Work
 
-**No additional experiment is automatically authorized.** Phase 3.9 found a mixed/decomposable solar mechanism; see `docs/research/phase3_9_solar_mechanism_audit.md`. Any method design, seed expansion, channel variant, or additional dataset requires separate authorization.
+**A frozen Solar direction/scale mechanism confirmation is scientifically
+justified, but its execution requires a separate authorization.** Its minimal
+A/B/C/D comparison should be original RPS, balanced head, direction-only
+fixed-original-scale head, and fixed `alpha=.50` controlled-scale head. It
+must not include ROP, an alpha grid, a new loss, representation training, or
+automatic test execution.
+
+All common RetinaMNIST development rules are inherited from:
+
+`docs/research/retinamnist_method_development_policy.md`
+
+unless a phase-specific task explicitly overrides them.
+
+Phase 3.14 does **not** authorize:
+
+- ROP, alpha/lambda tuning, ROP-v2, adaptive/joint objectives, or test evaluation;
+- adaptive or class-specific norm scaling;
+- representation retraining;
+- historical validation/test evaluation;
+- seeds 1–4;
+- UTKFace follow-up, Solar execution, or other datasets;
+- commit or push.
+
+Do not proceed from this mechanism result without separate authorization.
 
 ---
 
