@@ -13,7 +13,7 @@ repository is a separate research archive.
 
 ## Current Stage
 
-**Phase 3.14 Cross-Dataset Mechanism Consolidation complete — SOLAR DIRECTION/SCALE CONFIRMATION JUSTIFIED.**
+**Phase 3.15 Solar Direction/Scale Mechanism Confirmation complete — PARTIAL CONFIRMATION.**
 
 Completed:
 
@@ -40,6 +40,7 @@ Completed:
 - Phase 3.12 evidence consolidation and candidate disposition
 - Phase 3.13 UTKFace direction/scale mechanism confirmation
 - Phase 3.14 cross-dataset mechanism consolidation
+- Phase 3.15 Solar direction/scale mechanism confirmation
 
 Canonical RetinaMNIST uses:
 
@@ -78,7 +79,7 @@ RetinaMNIST matched-L1 risk-quality advantage: it improved severe AUROC only,
 while CE had stronger L1 Spearman, AUPRC, selective MAE, and global/
 lower-endpoint quality. Do not infer a universal RPS advantage.
 
-**Phase 3.8 Solar is complete — STRONG CONFIRMATION.** Matched CE/RPS seed-0 controls showed zero exact X-class decisions under mode/L1/L2, pronounced inward shrinkage, and severe endpoint asymmetry. No automatic follow-up experiment is authorized.
+**Phase 3.8 Solar is complete — STRONG CONFIRMATION.** Matched CE/RPS seed-0 controls showed zero exact X-class decisions under mode/L1/L2, pronounced inward shrinkage, and severe endpoint asymmetry. **Phase 3.15 then partially confirmed the frozen head mechanism:** direction-only adaptation recovered rare X strongly, but fixed `.50` controlled scale did not improve on direction-only. No automatic follow-up experiment is authorized.
 
 ---
 
@@ -351,23 +352,19 @@ Do not currently:
 
 ---
 
-## Phase 3.14 Decision
+## Phase 3.15 Decision
 
-Direction adaptation transports across RetinaMNIST and UTKFace, and additional
-scale can strengthen rare-upper-end movement. The RetinaMNIST class-0/global
-safety ordering and negligible-bias pattern do not transport; they are
-dataset-dependent. Controlled scale is a mechanism probe, not a universal or
-novel standalone method. ROP remains diagnostic/secondary and the combined
-candidate is not freeze-ready.
+Solar yields **PARTIAL CONFIRMATION** of the frozen direction/scale mechanism:
+head actionability and direction-only rare-X recovery transport strongly, but
+the predeclared fixed `alpha=.50` controlled scale is worse than direction-only
+adaptation. Direction is cross-dataset supported; scale is a dataset-dependent
+correction-strength effect, not a universal increment or a novel method.
 
 ## Next Authorized Work
 
-**A frozen Solar direction/scale mechanism confirmation is scientifically
-justified, but its execution requires a separate authorization.** Its minimal
-A/B/C/D comparison should be original RPS, balanced head, direction-only
-fixed-original-scale head, and fixed `alpha=.50` controlled-scale head. It
-must not include ROP, an alpha grid, a new loss, representation training, or
-automatic test execution.
+**No follow-up is automatically authorized.** Do not tune alpha, add ROP,
+change biases, retrain representations, run seeds 1–4, or add a dataset. Any
+next scientific action requires separate authorization.
 
 All common RetinaMNIST development rules are inherited from:
 

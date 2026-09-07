@@ -1,19 +1,9 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.14 cross-dataset mechanism consolidation**. Current status: **SOLAR DIRECTION/SCALE CONFIRMATION JUSTIFIED**.
+Completed through **Phase 3.15 Solar direction/scale mechanism confirmation**. Current status: **PARTIAL CONFIRMATION**.
 
-Current gate:
-
-\[
-\boxed{\text{Solar direction/scale confirmation justified}}
-\]
-
-RG-ACR was implemented and tested only under its predeclared seed-0 protocol,
-then stopped. The frozen UTKFace A/B/C/D gate partially confirmed localization.
-Phase 3.14 justifies a separately authorized minimal frozen Solar A/B/C/D
-decomposition to test the cross-domain direction/scale mechanism; no method is
-frozen.
+Solar confirms frozen-head actionability and strong direction-only rare-X recovery, but fixed `alpha=.50` controlled scale is worse than direction-only C. Thus direction is transported across all three domains; scale is not a universal increment. No method is frozen and no follow-up is authorized automatically. See [Phase 3.15](phase3_15_solar_direction_scale_mechanism_confirmation.md).
 
 ## Phase 3.10A — Completed Training-Only OOF Gate
 

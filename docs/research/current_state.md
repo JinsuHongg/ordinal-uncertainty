@@ -2,7 +2,7 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Phase 3.14 Cross-Dataset Mechanism Consolidation complete — **SOLAR DIRECTION/SCALE CONFIRMATION JUSTIFIED**.
+**Current stage:** Phase 3.15 Solar Direction/Scale Mechanism Confirmation complete — **PARTIAL CONFIRMATION**.
 
 The project now has a decomposed diagnosis of the rare upper-extreme failure on RetinaMNIST. Output-only corrections are stopped. Phase 3.3 and 3.4 show that the remaining failure has both representation-level and classifier/head-level components.
 
@@ -12,10 +12,7 @@ opposite-endpoint/global safety ordering does not transport cleanly. This is a
 cross-dataset mechanism signal, not a validated universal controlled-scale
 method.
 
-Phase 3.14 consolidates the result: direction adaptation is transportable and
-additional scale can strengthen rare-end outward movement, but opposite-endpoint,
-global, and bias effects are dataset-dependent. A minimal frozen Solar
-direction/scale confirmation is now justified; ROP remains excluded.
+Phase 3.15 confirms Solar head actionability and a strong independent direction contribution: direction-only C recovered 496/921 X decisions versus 0 for original RPS. The frozen `.50` controlled-scale D was worse than C on rare-X localization, so scale is not a universal improvement. See [the Phase 3.15 record](phase3_15_solar_direction_scale_mechanism_confirmation.md).
 
 ## Canonical RetinaMNIST Setup
 - Native 28×28 RGB
@@ -327,9 +324,6 @@ freeze-ready. Decision: **CROSS-DATASET MECHANISM CONFIRMATION JUSTIFIED**.
 See [the Phase 3.12 record](phase3_12_evidence_consolidation_and_candidate_disposition.md).
 
 ## Next Authorized Work
-**Phase 3.14 is complete — SOLAR DIRECTION/SCALE CONFIRMATION JUSTIFIED.** A
-separately authorized frozen Solar A/B/C/D phase may now be specified; no ROP,
-alpha grid, new loss, representation training, or test-driven adaptation is
-authorized.
+**Phase 3.15 is complete — PARTIAL CONFIRMATION.** Direction adaptation transports to Solar, but the fixed `.50` scale increment does not add to direction-only recovery. No tuning, method development, seed expansion, or additional dataset is authorized; any next action requires separate authorization.
 
 Do not restart method development, revive RG-ACR, create dataset-specific objectives, perform automatic representation/head audits, launch multi-seed expansions, or add datasets/channels. Any next action requires separate authorization.
