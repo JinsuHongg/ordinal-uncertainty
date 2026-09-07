@@ -2,7 +2,8 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Phase 3.16 Three-Dataset Mechanism Consolidation complete — **MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING**.
+**Current stage:** Phase 3.17 Paper Framing and Novelty Boundary complete —
+**A — PROCEED AS MECHANISM PAPER**.
 
 The project now has a decomposed diagnosis of the rare upper-extreme failure on RetinaMNIST. Output-only corrections are stopped. Phase 3.3 and 3.4 show that the remaining failure has both representation-level and classifier/head-level components.
 
@@ -338,10 +339,20 @@ stays stopped, ROP stays secondary, and the combined candidate stays HOLD —
 NOT FREEZE-READY. Historical phase conclusions remain preserved. See
 [Phase 3.16](phase3_16_three_dataset_mechanism_consolidation.md).
 
+## Phase 3.17 — Paper Framing and Novelty Boundary
+
+**A — PROCEED AS MECHANISM PAPER.** The paper contribution is a bounded
+phenomenon-and-mechanism analysis: rare upper-extreme inward localization bias,
+frozen-head actionability, and the transportable role of classifier direction.
+It is not a new balanced-head, scale-control, bias-correction, ROP, or
+conformal method. Scale, bias, lower-endpoint, global, and risk/UQ effects must
+be written as dataset-dependent or unsupported where appropriate. See
+[Phase 3.17](phase3_17_paper_framing_and_novelty_boundary.md).
+
 ## Next Authorized Work
 
-Paper framing from existing evidence is the next stage. No new method design,
-training, evaluation, tuning, test access, ROP/bias revival, seeds, or datasets
-are authorized by this consolidation.
+Manuscript planning and writing from completed evidence are authorized. No new
+method design, training, evaluation, tuning, test access, ROP/bias revival,
+seeds, or datasets are authorized by this framing decision.
 
 Do not restart method development, revive RG-ACR, create dataset-specific objectives, perform automatic representation/head audits, launch multi-seed expansions, or add datasets/channels. Any next action requires separate authorization.

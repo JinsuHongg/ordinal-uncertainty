@@ -58,6 +58,13 @@ preserving that phase's conclusion at the time. Localization gains do not
 establish global probabilistic or risk-quality gains; nonzero bias shifts do
 not establish a causal bias-only intervention.
 
+## Phase 3.17 — Paper framing
+
+**A — PROCEED AS MECHANISM PAPER.** The bounded contribution is the
+three-dataset rare-upper-end localization phenomenon and frozen-head direction
+mechanism. Generic head rebalancing, scale control, bias correction, ROP, and
+conformal prediction are excluded as claimed novel methods.
+
 ## SLACE infrastructure correction
 The prior SLACE persistence issue was a **false diagnosis** caused by premature artifact inspection / delayed workspace visibility. The scientific artifacts are valid; evaluation-only reproduction completed successfully. This is an infrastructure correction, not a revision of the negative SLACE scientific result.
 

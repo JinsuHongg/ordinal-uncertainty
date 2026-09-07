@@ -13,7 +13,8 @@ repository is a separate research archive.
 
 ## Current Stage
 
-**Phase 3.16 Three-Dataset Mechanism Consolidation complete — MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING.**
+**Phase 3.17 Paper Framing and Novelty Boundary complete — A — PROCEED AS
+MECHANISM PAPER.**
 
 Completed:
 
@@ -42,6 +43,7 @@ Completed:
 - Phase 3.14 cross-dataset mechanism consolidation
 - Phase 3.15 Solar direction/scale mechanism confirmation
 - Phase 3.16 three-dataset mechanism consolidation
+- Phase 3.17 paper framing and novelty boundary
 
 Canonical RetinaMNIST uses:
 
@@ -353,9 +355,9 @@ Do not currently:
 
 ---
 
-## Phase 3.16 Decision
+## Phase 3.17 Decision
 
-**A — MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING.**
+**A — PROCEED AS MECHANISM PAPER.**
 
 Phenomenon: rare upper-extreme inward localization bias under ordinal imbalance.
 Across the tested frozen RPS representations, direction-only adaptation improves
@@ -363,17 +365,19 @@ rare-end localization on RetinaMNIST, UTKFace, and Solar. Scale benefits, bias
 behavior, and global/opposite-endpoint effects depend on the dataset. Solar C
 outperforms D, superseding any universal scale-benefit interpretation.
 
-Controlled scale remains a diagnostic/mechanistic probe only. Bias-only
-correction stays stopped; ROP is diagnostic/secondary; the combined candidate
-is HOLD — NOT FREEZE-READY. Localization does not imply global or UQ gains.
-See docs/research/phase3_16_three_dataset_mechanism_consolidation.md.
+The paper's bounded contribution is the phenomenon and frozen-head mechanism,
+not a universal classifier correction. Controlled scale remains a
+diagnostic/mechanistic probe only. Bias-only correction stays stopped; ROP is
+diagnostic/secondary; the combined candidate is HOLD — NOT FREEZE-READY.
+Localization does not imply global or UQ gains. See
+docs/research/phase3_17_paper_framing_and_novelty_boundary.md.
 
 ## Next Authorized Work
 
-The next stage is paper framing from existing evidence. No method design,
-training, evaluation, tuning, ROP/bias revival, extra seed, or dataset run is
-authorized. The mechanism evidence is sufficient for a bounded paper narrative;
-it does not authorize method freeze or final test evaluation.
+The next stage is manuscript planning and writing from completed evidence. No
+method design, training, evaluation, tuning, ROP/bias revival, extra seed, or
+dataset run is authorized. The framing does not authorize method freeze or
+final test evaluation.
 
 All common RetinaMNIST development rules are inherited from:
 
@@ -381,7 +385,7 @@ All common RetinaMNIST development rules are inherited from:
 
 unless a phase-specific task explicitly overrides them.
 
-Phase 3.16 does **not** authorize:
+Phase 3.17 does **not** authorize:
 
 - ROP, alpha/lambda tuning, ROP-v2, adaptive/joint objectives, or test evaluation;
 - adaptive or class-specific norm scaling;

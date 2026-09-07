@@ -1,7 +1,8 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.16 three-dataset mechanism consolidation**. Current status: **MECHANISM EVIDENCE SUFFICIENT; MOVE TO PAPER FRAMING**.
+Completed through **Phase 3.17 paper framing and novelty boundary**. Current
+status: **A — PROCEED AS MECHANISM PAPER**.
 
 Solar confirms frozen-head actionability and strong direction-only rare-X recovery, but fixed `alpha=.50` controlled scale is worse than direction-only C. Thus direction is transported across all three domains; scale is not a universal increment. No method is frozen and no follow-up is authorized automatically. See [Phase 3.15](phase3_15_solar_direction_scale_mechanism_confirmation.md).
 
@@ -333,10 +334,18 @@ Controlled scale is diagnostic; ROP is secondary; bias correction stays stopped;
 the combined candidate is not freeze-ready. See
 [Phase 3.16](phase3_16_three_dataset_mechanism_consolidation.md).
 
+## Phase 3.17 — Paper Framing and Novelty Boundary (complete)
+
+**A — PROCEED AS MECHANISM PAPER.** The final framing is rare upper-extreme
+inward localization bias under ordinal imbalance and its bounded frozen-head
+direction mechanism. The paper is an empirical mechanism analysis, not a new
+generic balancing, scale, bias, ROP, or conformal method. See
+[Phase 3.17](phase3_17_paper_framing_and_novelty_boundary.md).
+
 ## Immediate Next Action
 
-Move to paper framing using the completed evidence. Solar Phase 3.15 is complete;
-do not rerun its confirmation. No method design, training/evaluation, tuning,
-new dataset, seed expansion, or test access is authorized. The paper should
-separate the transported direction effect from dataset-specific scale, bias,
-global, and opposite-endpoint outcomes. No candidate is method-frozen.
+Plan and draft the mechanism paper from completed evidence. No method design,
+training/evaluation, tuning, new dataset, seed expansion, or test access is
+authorized. The manuscript must separate the transported direction effect from
+dataset-specific scale, bias, global, and opposite-endpoint outcomes. No
+candidate is method-frozen.
