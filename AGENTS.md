@@ -86,13 +86,22 @@ lower-endpoint quality. Do not infer a universal RPS advantage.
 
 ---
 
-## Current Failure Diagnosis
+## Current Project-Level Evidence
 
-The cross-dataset common signal is:
+The project-level observed phenomenon is:
 
 \[
 \boxed{\text{Rare upper-extreme inward localization bias under ordinal imbalance}}
 \]
+
+In the studied imbalanced ordinal settings, rare upper extremes are
+systematically localized inward. This is an observed pattern, not a controlled
+causal isolation of class imbalance from dataset structure, class difficulty,
+representation quality, or label ambiguity.
+
+Across the tested frozen RPS representations on RetinaMNIST, UTKFace, and
+Solar, direction adaptation consistently improves rare-end localization.
+Scale, bias, global, and opposite-endpoint effects are dataset-dependent.
 
 RetinaMNIST additionally supports the following dataset-specific diagnosis:
 
@@ -136,10 +145,12 @@ project-level cross-dataset claim.
 
 ## Core Research Question
 
-> **Why do imbalanced ordinal classifiers exhibit systematic inward
-> localization bias for rare upper-extreme classes, even when uncertainty,
-> risk quality, and exact-class performance differ across datasets and
-> objectives?**
+> **How do rare upper extremes localize in the studied imbalanced ordinal
+> settings, and what frozen classifier-head mechanisms explain the recoverable
+> portion of that failure?**
+
+This wording describes the studied imbalanced ordinal settings; it does not
+claim that imbalance was independently isolated as the cause.
 
 Phase 3.8 strongly confirmed this signal in ordinal solar-flare classification. CE and RPS were matched controls; neither result establishes universal RPS superiority.
 

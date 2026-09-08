@@ -4,7 +4,12 @@
 Completed through **Phase 3.17 paper framing and novelty boundary**. Current
 status: **A — PROCEED AS MECHANISM PAPER**.
 
-Solar confirms frozen-head actionability and strong direction-only rare-X recovery, but fixed `alpha=.50` controlled scale is worse than direction-only C. Thus direction is transported across all three domains; scale is not a universal increment. No method is frozen and no follow-up is authorized automatically. See [Phase 3.15](phase3_15_solar_direction_scale_mechanism_confirmation.md).
+Experiment development is paused. Plan and draft the mechanism paper from
+completed evidence only. In the three evaluated frozen-RPS settings,
+direction-only head adaptation improved rare-end localization; scale, bias,
+global, and opposite-endpoint effects varied by dataset. No method is frozen
+and no follow-up is authorized automatically. See
+[Phase 3.17](phase3_17_paper_framing_and_novelty_boundary.md).
 
 ## Phase 3.10A — Completed Training-Only OOF Gate
 
@@ -102,8 +107,8 @@ Class counts:
 
 Class 4 is the rare upper extreme.
 
-## Current Evaluation Decomposition
-Future experiments must separate:
+## Historical Experiment Evaluation Decomposition
+Completed mechanism experiments separated:
 
 \[
 \text{Representation}
@@ -170,7 +175,7 @@ Decision:
 \boxed{\text{MIXED BUT DECOMPOSABLE FAILURE}}
 \]
 
-## Current Diagnosis
+## Historical RetinaMNIST Diagnosis (Phases 3.3–3.4; dataset-specific)
 
 \[
 \boxed{\text{Dual-component rare-extreme failure}}
@@ -180,8 +185,8 @@ Decision:
 - head/prior bias affects a recoverable subset;
 - neither head-only nor representation-only explanations are sufficient.
 
-## Phase 3.5 — Design Audit (complete)
-### Research Question
+## Phase 3.5 — Historical Design Audit (complete; branch closed)
+### Historical Research Question
 > Can ordinal decision risk guide representation learning so that rare, high-risk extreme samples become better localized without destroying probabilistic risk quality?
 
 The literature audit compared exactly three mechanisms. It selected risk-gated adjacent-centroid ranking (RG-ACR) as one empirically unvalidated primary candidate, retained collapse-aware adaptive adjacent margin as backup, and deferred risk-weighted prototype compactness because of high overlap/risk. RG-ACR uses RPS plus detached L1 Bayes-risk-weighted local adjacent-centroid ranking. Full mathematical specification, literature overlap, and safeguards are in [the Phase 3.5 note](phase3_5_risk_conditioned_representation_design.md).
@@ -202,7 +207,7 @@ Reject/high-risk any design that reduces to standard SupCon, balanced SupCon, ge
 
 No implementation/training occurred during the design audit.
 
-## Final RetinaMNIST Seed-0 Gate
+## Historical Final RetinaMNIST Seed-0 Gate (closed)
 The one authorized final major RetinaMNIST seed-0 method-selection experiment was RG-ACR. The validation-selected λ=.05 condition failed the representation gate and violated predeclared class-0/risk tolerances. Decision: **NO-GO**. See [Phase 3.6](phase3_6_rg_acr_seed0.md).
 
 A promising method must improve representation-specific quantities such as:
@@ -224,7 +229,7 @@ while preserving acceptable:
 - selective MAE;
 - class-0 behavior.
 
-## Method Freeze Rule
+## Historical Method Freeze Rule (closed)
 If the final seed-0 candidate is promising:
 
 \[
@@ -289,15 +294,15 @@ Use matched CE and RPS controls. The primary cross-dataset phenomena are:
 
 Solar produced a STRONG CONFIRMATION: both CE and RPS had zero exact X decisions under mode/L1/L2, X predictive means 2.864/2.772, and much worse X than class-0 MAE/severe burden. RPS did not improve solar risk quality. The third-dataset gate is complete; no new objective, representation/head audit, seed expansion, or dataset is authorized without a separate decision.
 
-## Future Expansion
-After Phase 3.8 evidence is reviewed and only with separate authorization:
+## Archived Future-Expansion Ideas (not active)
+The following were historical possibilities and are not authorized by Phase 3.17:
 - any multi-seed confirmation on RetinaMNIST or UTKFace;
 - additional ordinal datasets beyond solar;
 - method design, if the cross-dataset phenomenon is sufficiently stable;
 - later epistemic-UQ baselines, if the single-model question warrants them.
 
-## Phase 4 — Epistemic UQ
-Not active. MC Dropout / Deep Ensemble should be considered only after the single-model method is established.
+## Archived Phase 4 — Epistemic UQ Idea (not active)
+MC Dropout / Deep Ensemble is not authorized by Phase 3.17.
 
 ## Phase 3.13 — UTKFace Direction/Scale Confirmation (complete)
 
@@ -346,6 +351,7 @@ generic balancing, scale, bias, ROP, or conformal method. See
 
 Plan and draft the mechanism paper from completed evidence. No method design,
 training/evaluation, tuning, new dataset, seed expansion, or test access is
-authorized. The manuscript must separate the transported direction effect from
+authorized. The manuscript must separate the consistently observed
+cross-dataset direction effect from
 dataset-specific scale, bias, global, and opposite-endpoint outcomes. No
 candidate is method-frozen.

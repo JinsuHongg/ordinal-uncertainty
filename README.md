@@ -12,11 +12,19 @@ No new experiments are authorized.
 
 ## Research question
 
-Existing ordinal and imbalance-aware methods can provide useful decision-risk information, but rare upper-extreme samples can still be systematically pulled toward central classes. The emerging cross-dataset focus is **rare upper-extreme inward localization bias under ordinal imbalance**; the RetinaMNIST representation/head decomposition remains dataset-specific evidence.
+The project studies **rare upper-extreme inward localization observed in
+imbalanced ordinal settings** and the frozen-head mechanisms associated with
+its recoverable component. It does not claim that class imbalance was
+independently isolated as the causal source; class difficulty, representation
+quality, dataset structure, and label ambiguity remain potential contributors.
+The RetinaMNIST representation/head decomposition remains dataset-specific
+evidence.
 
 The confirmed cross-dataset finding is:
 
-> Rare upper-extreme inward localization bias under ordinal imbalance appears on RetinaMNIST, UTKFace, and solar-flare classification; this does not imply universal RPS superiority.
+> Rare upper-extreme inward localization is consistently observed across the
+> evaluated imbalanced ordinal settings: RetinaMNIST, UTKFace, and solar-flare
+> classification. This does not imply universal RPS superiority.
 
 ## Canonical setup
 

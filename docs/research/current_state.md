@@ -5,15 +5,33 @@
 **Current stage:** Phase 3.17 Paper Framing and Novelty Boundary complete —
 **A — PROCEED AS MECHANISM PAPER**.
 
-The project now has a decomposed diagnosis of the rare upper-extreme failure on RetinaMNIST. Output-only corrections are stopped. Phase 3.3 and 3.4 show that the remaining failure has both representation-level and classifier/head-level components.
+### Project-level observed phenomenon
 
-Phase 3.13 confirms that balanced direction adaptation and scale amplification
-can move the rare UTKFace upper endpoint outward, but the RetinaMNIST
-opposite-endpoint/global safety ordering does not transport cleanly. This is a
-cross-dataset mechanism signal, not a validated universal controlled-scale
-method.
+In the studied imbalanced ordinal settings, rare upper extremes exhibit
+systematic inward localization. This is an observed three-dataset pattern, not
+a controlled causal isolation of class imbalance from class difficulty,
+representation quality, dataset structure, or label ambiguity.
 
-Phase 3.15 confirms Solar head actionability and a strong independent direction contribution: direction-only C recovered 496/921 X decisions versus 0 for original RPS. The frozen `.50` controlled-scale D was worse than C on rare-X localization, so scale is not a universal improvement. See [the Phase 3.15 record](phase3_15_solar_direction_scale_mechanism_confirmation.md).
+### Cross-dataset frozen-head mechanism
+
+Across the tested frozen RPS representations on RetinaMNIST, UTKFace, and
+Solar, rare upper-end localization consistently improves under classifier
+direction adaptation. This evidence is limited to the evaluated frozen-RPS,
+one-backbone-seed protocols; it is not architecture-, objective-, or
+population-universal.
+
+### Dataset-specific mechanism findings
+
+Scale, bias, opposite-endpoint, global predictive, and risk/UQ effects vary by
+dataset. Controlled scale is a diagnostic probe, not a transferable correction;
+bias-only correction remains stopped; ROP is diagnostic/secondary; and the
+combined Retina candidate is not freeze-ready.
+
+### RetinaMNIST-specific diagnosis
+
+The historical RetinaMNIST representation/head audits support a mixed,
+dual-component rare-extreme failure. That diagnosis remains valid for the
+audited RetinaMNIST evidence but is not the project-wide current diagnosis.
 
 ## Canonical RetinaMNIST Setup
 - Native 28×28 RGB
@@ -139,8 +157,8 @@ Interpretation:
 - **representation limitation is dominant for the collapsed subset**;
 - neither head-only nor representation-only explanations are sufficient.
 
-## Current Scientific Conclusion
-The strongest current diagnosis is:
+## Historical RetinaMNIST-Specific Synthesis (Phases 3.3–3.4)
+The RetinaMNIST-specific diagnosis was:
 
 \[
 \boxed{\text{Dual-component rare-extreme failure}}
@@ -154,8 +172,8 @@ On RetinaMNIST, RPS remains valuable because its decision-risk signal identifies
 difficult samples better than CE, even though it does not localize the rare
 endpoint well. This is not a universal cross-dataset conclusion.
 
-## Phase 3.5 Research Question
-The design question addressed by the completed audit was:
+## Historical Phase 3.5 Research Question
+The completed design audit asked:
 
 > **Can ordinal decision risk guide representation learning so that rare, high-risk extreme samples become better localized without destroying probabilistic risk quality?**
 
@@ -184,7 +202,7 @@ Decision: no automatic UTKFace representation/head audit. See
 
 **Phase 3.8 Solar — STRONG CONFIRMATION.** On 28,006 aligned future-period test examples, including 921 X-class examples, matched CE/RPS seed-0 models made zero exact X decisions under mode/L1/L2. Their X predictive means were 2.864/2.772 (inward shrinkage 1.136/1.228) while class-0 MAE was .104/.082 versus X MAE 1.115/1.197. RPS did not improve solar risk-quality metrics. See [the Phase 3.8 record](phase3_8_solar_rare_extreme_shrinkage_confirmation.md).
 
-## Updated Cross-Dataset Diagnosis
+## Historical Two-Dataset Synthesis (superseded by Phases 3.16–3.17)
 
 The common evidence across RetinaMNIST and UTKFace is:
 
@@ -197,7 +215,7 @@ advantage. UTKFace showed a milder but clear inward shift, elevated upper-endpoi
 risk, and a lower endpoint that was materially easier; RPS partly improved
 class-4 localization but was not globally or broadly risk-quality superior.
 
-The current research question is:
+Its then-current research question was:
 
 > **Why do imbalanced ordinal classifiers exhibit systematic inward
 > localization bias for rare upper-extreme classes, even when uncertainty,
@@ -343,11 +361,21 @@ NOT FREEZE-READY. Historical phase conclusions remain preserved. See
 
 **A — PROCEED AS MECHANISM PAPER.** The paper contribution is a bounded
 phenomenon-and-mechanism analysis: rare upper-extreme inward localization bias,
-frozen-head actionability, and the transportable role of classifier direction.
+frozen-head actionability, and the consistently observed role of classifier
+direction across the evaluated settings.
 It is not a new balanced-head, scale-control, bias-correction, ROP, or
 conformal method. Scale, bias, lower-endpoint, global, and risk/UQ effects must
 be written as dataset-dependent or unsupported where appropriate. See
 [Phase 3.17](phase3_17_paper_framing_and_novelty_boundary.md).
+
+**Current paper research question:**
+
+> How do rare upper extremes localize in the studied imbalanced ordinal
+> settings, and what frozen classifier-head mechanisms explain the recoverable
+> portion of that failure?
+
+This wording describes the studied settings; it does not claim that imbalance
+was independently manipulated and established as the causal source.
 
 ## Next Authorized Work
 

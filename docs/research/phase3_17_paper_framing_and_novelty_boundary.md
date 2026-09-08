@@ -28,27 +28,27 @@ The completed evidence supports the following bounded mechanism statement:
 
 **Preferred research question:**
 
-> How does ordinal class imbalance manifest as inward localization of rare
-> upper extremes, and what frozen classifier-head mechanisms explain the
-> recoverable portion of that failure?
+> How do rare upper extremes localize in the studied imbalanced ordinal
+> settings, and what frozen classifier-head mechanisms explain the recoverable
+> portion of that failure?
 
 This is specific to ordinal error direction and endpoint localization; it is
 not a generic tail-accuracy, calibration, or classifier-rebalancing question.
 
 **Central thesis:**
 
-> Ordinal class imbalance does not only reduce rare-class accuracy: across
-> three datasets it is associated with systematic inward localization of rare
-> upper extremes, and this recoverable component is consistently responsive to
-> classifier-direction adaptation even though scale, bias, and global
-> predictive effects vary by dataset.
+> Across the studied imbalanced ordinal settings, rare upper extremes are often
+> localized inward rather than only misclassified; across three datasets, this
+> recoverable component is consistently responsive to classifier-direction
+> adaptation even though scale, bias, and global predictive effects vary by
+> dataset.
 
 ## Novelty boundary
 
 ### What the paper claims
 
 1. It identifies and characterizes recurring rare-upper-end inward
-   localization under ordinal imbalance using routing, ordinal distance,
+   localization in imbalanced ordinal settings using routing, ordinal distance,
    predictive mean, shrinkage, endpoint probability, and L1-decision evidence.
 2. It documents the phenomenon across RetinaMNIST, UTKFace, and Solar, while
    preserving the different split roles and avoiding raw cross-dataset metric
@@ -57,7 +57,8 @@ not a generic tail-accuracy, calibration, or classifier-rebalancing question.
    that an original classifier head fails to localize; representation collapse
    remains a separate limitation for part of the failure.
 4. It provides controlled frozen-head evidence that classifier direction is a
-   transportable control axis for rare-end localization, while scale, bias,
+   consistently supported control axis for rare-end localization across the
+   evaluated datasets, while scale, bias,
    lower-endpoint effects, and global behavior are not invariant.
 5. It separates local ordinal localization improvement from global predictive,
    calibration, uncertainty, and decision-risk improvement.
@@ -134,7 +135,8 @@ important evidence and a limitation, not a second method contribution.
    location diagnostics across three domains.
 2. **Mechanism:** Separate representation limitations from frozen-head
    actionability and show that classifier-direction adaptation is the most
-   consistently transported control axis for recoverable rare-end localization.
+   consistently supported control axis for recoverable rare-end localization
+   across the evaluated datasets.
 3. **Controlled evidence:** Compare unrestricted balancing, direction-only,
    and controlled-scale heads while reporting endpoint, global, probability,
    and decision-risk outcomes, establishing that localization gains do not
@@ -192,8 +194,9 @@ Additional candidates:
    predictive mean, and inward shrinkage; state the three-domain observation.
 4. **Mechanism question.** Separate representation from head geometry and
    introduce direction, scale, and bias as controlled classifier components.
-5. **Main findings.** Summarize frozen-head actionability, transported
-   direction evidence, and dataset-dependent scale/bias/global consequences.
+5. **Main findings.** Summarize frozen-head actionability, cross-dataset
+   direction evidence across the evaluated settings, and dataset-dependent
+   scale/bias/global consequences.
 6. **Contributions.** State the three contributions above and the boundary:
    analysis rather than a universal corrective method.
 
