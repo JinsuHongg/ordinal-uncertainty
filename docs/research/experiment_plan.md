@@ -1,8 +1,9 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.17 paper framing and novelty boundary**. Current
-status: **A — PROCEED AS MECHANISM PAPER**.
+Completed through **Phase 3.18A RetinaMNIST CE representation robustness**.
+Current status: **A — RETINAMNIST CROSS-OBJECTIVE DIRECTION ROBUSTNESS
+CONFIRMED**.
 
 Experiment development is paused. Plan and draft the mechanism paper from
 completed evidence only. In the three evaluated frozen-RPS settings,
@@ -10,6 +11,11 @@ direction-only head adaptation improved rare-end localization; scale, bias,
 global, and opposite-endpoint effects varied by dataset. No method is frozen
 and no follow-up is authorized automatically. See
 [Phase 3.17](phase3_17_paper_framing_and_novelty_boundary.md).
+
+Phase 3.18A additionally confirms the A→C direction effect on canonical frozen
+CE features in RetinaMNIST training-only OOF. This is a within-dataset
+cross-objective robustness result; it does not expand the cross-dataset claim
+beyond frozen RPS or authorize Solar CE execution automatically.
 
 ## Phase 3.10A — Completed Training-Only OOF Gate
 
@@ -347,11 +353,22 @@ direction mechanism. The paper is an empirical mechanism analysis, not a new
 generic balancing, scale, bias, ROP, or conformal method. See
 [Phase 3.17](phase3_17_paper_framing_and_novelty_boundary.md).
 
+## Phase 3.18A — RetinaMNIST CE Representation Robustness (complete)
+
+**A — RETINAMNIST CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED.** With
+frozen CE features, direction-only C improves C4 MAE `1.439→1.030`, exact
+routing `0→11`, and shrinkage `1.678→1.244` over A in five-fold training-only
+OOF. The result supports a possible future Solar CE confirmation but does not
+authorize it or broaden the cross-dataset claim beyond frozen RPS. See
+[Phase 3.18A](phase3_18a_retinamnist_ce_direction_robustness.md).
+
 ## Immediate Next Action
 
 Plan and draft the mechanism paper from completed evidence. No method design,
 training/evaluation, tuning, new dataset, seed expansion, or test access is
 authorized. The manuscript must separate the consistently observed
 cross-dataset direction effect from
-dataset-specific scale, bias, global, and opposite-endpoint outcomes. No
-candidate is method-frozen.
+dataset-specific scale, bias, global, and opposite-endpoint outcomes. It may
+state that RetinaMNIST direction evidence now covers frozen CE and RPS, while
+the three-dataset mechanism claim remains frozen-RPS scoped. No candidate is
+method-frozen.
