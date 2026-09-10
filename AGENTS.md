@@ -424,10 +424,12 @@ claim. See `docs/research/phase3_20a_retinamnist_imbalance_severity_dose_respons
 
 ## Next Authorized Work
 
-The next stage is manuscript planning and writing from completed evidence. No
-method design, training, evaluation, tuning, ROP/bias revival, extra seed, or
-dataset run is authorized automatically. The framing does not
-authorize method freeze or final test evaluation.
+The next stage is the Figure 1--4 source-artifact and data-availability audit
+specified in `docs/research/paper_story_architecture.md`, followed by
+reproducible figure-data tables and plotting scripts. Do not generate final
+figures before that audit. No method design, training, evaluation, tuning,
+ROP/bias revival, extra seed, or dataset run is authorized automatically. The
+framing does not authorize method freeze or final test evaluation.
 
 All common RetinaMNIST development rules are inherited from:
 

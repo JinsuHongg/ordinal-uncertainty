@@ -389,9 +389,15 @@ mechanism paper must retain this boundary. See
 
 ## Immediate Next Action
 
-Plan and draft the mechanism paper from completed evidence. No method design,
-training/evaluation, tuning, new dataset, seed expansion, or test access is
-authorized. The manuscript must separate the consistently observed
+Perform the dedicated Figure 1--4 source-artifact and data-availability audit
+specified by the [paper story architecture](paper_story_architecture.md), then
+construct reproducible figure-data tables and plotting scripts. This audit
+must verify source artifacts, populations, split roles, objectives, seeds,
+checkpoints, and cross-phase sample-ID alignment; it must flag unsupported
+panels rather than infer values. Do not generate final figures before it.
+
+No method design, training/evaluation, tuning, new dataset, seed expansion, or
+test access is authorized. The manuscript must separate the consistently observed
 cross-dataset direction effect from
 dataset-specific scale, bias, global, and opposite-endpoint outcomes. It may state that direction responsiveness was reproduced on both CE- and
 RPS-trained frozen representations in RetinaMNIST and Solar. The three-dataset

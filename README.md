@@ -99,3 +99,4 @@ pytest -q
 - [Phase 3.18B Solar CE direction robustness](docs/research/phase3_18b_solar_ce_direction_robustness.md)
 - [Phase 3.19 RetinaMNIST sampling vs objective disentanglement](docs/research/phase3_19_retinamnist_sampling_objective_direction_disentanglement.md)
 - [Phase 3.20A RetinaMNIST imbalance-severity dose response](docs/research/phase3_20a_retinamnist_imbalance_severity_dose_response.md)
+- [Paper story architecture](docs/research/paper_story_architecture.md)
