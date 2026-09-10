@@ -1,8 +1,8 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.18A RetinaMNIST CE representation robustness**.
-Current status: **A — RETINAMNIST CROSS-OBJECTIVE DIRECTION ROBUSTNESS
+Completed through **Phase 3.18B Solar CE representation robustness**.
+Current status: **A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS
 CONFIRMED**.
 
 Experiment development is paused. Plan and draft the mechanism paper from
@@ -12,10 +12,10 @@ global, and opposite-endpoint effects varied by dataset. No method is frozen
 and no follow-up is authorized automatically. See
 [Phase 3.17](phase3_17_paper_framing_and_novelty_boundary.md).
 
-Phase 3.18A additionally confirms the A→C direction effect on canonical frozen
-CE features in RetinaMNIST training-only OOF. This is a within-dataset
-cross-objective robustness result; it does not expand the cross-dataset claim
-beyond frozen RPS or authorize Solar CE execution automatically.
+Phase 3.18A and Phase 3.18B confirm the A→C direction effect on frozen CE
+features in RetinaMNIST and Solar. Direct mechanism evidence now covers the
+tested frozen CE and RPS representations in those two domains; this does not
+claim objective independence or authorize any additional execution.
 
 ## Phase 3.10A — Completed Training-Only OOF Gate
 
@@ -358,9 +358,19 @@ generic balancing, scale, bias, ROP, or conformal method. See
 **A — RETINAMNIST CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED.** With
 frozen CE features, direction-only C improves C4 MAE `1.439→1.030`, exact
 routing `0→11`, and shrinkage `1.678→1.244` over A in five-fold training-only
-OOF. The result supports a possible future Solar CE confirmation but does not
-authorize it or broaden the cross-dataset claim beyond frozen RPS. See
+OOF. At Phase 3.18A completion, it supported a separately authorized Solar CE
+confirmation; Phase 3.18B subsequently completed that confirmation. See
 [Phase 3.18A](phase3_18a_retinamnist_ce_direction_robustness.md).
+
+## Phase 3.18B — Solar CE Representation Robustness (complete)
+
+**A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED.** Under the
+predeclared frozen Solar CE A/B/C protocol, C improves X MAE `1.115→.586`,
+exact routing `0→559/921`, and shrinkage `1.136→.656` versus original CE. The
+Solar CE response agrees with saved Solar RPS; combined with Phase 3.18A,
+direction responsiveness is now directly observed on CE and RPS frozen
+representations in RetinaMNIST and Solar. Global and risk/UQ effects remain
+adverse or mixed. See [Phase 3.18B](phase3_18b_solar_ce_direction_robustness.md).
 
 ## Immediate Next Action
 
@@ -368,7 +378,7 @@ Plan and draft the mechanism paper from completed evidence. No method design,
 training/evaluation, tuning, new dataset, seed expansion, or test access is
 authorized. The manuscript must separate the consistently observed
 cross-dataset direction effect from
-dataset-specific scale, bias, global, and opposite-endpoint outcomes. It may
-state that RetinaMNIST direction evidence now covers frozen CE and RPS, while
-the three-dataset mechanism claim remains frozen-RPS scoped. No candidate is
+dataset-specific scale, bias, global, and opposite-endpoint outcomes. It may state that direction responsiveness was reproduced on both CE- and
+RPS-trained frozen representations in RetinaMNIST and Solar. The three-dataset
+mechanism claim remains frozen-RPS scoped because UTKFace CE was not tested. No candidate is
 method-frozen.

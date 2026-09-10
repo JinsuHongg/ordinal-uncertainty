@@ -2,8 +2,8 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Phase 3.18A RetinaMNIST CE Representation Robustness complete
-— **A — RETINAMNIST CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED**.
+**Current stage:** Phase 3.18B Solar CE Representation Robustness complete
+— **A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED**.
 
 ### Project-level observed phenomenon
 
@@ -16,14 +16,11 @@ representation quality, dataset structure, or label ambiguity.
 
 Across the tested frozen RPS representations on RetinaMNIST, UTKFace, and
 Solar, rare upper-end localization consistently improves under classifier
-direction adaptation. This evidence is limited to the evaluated frozen-RPS,
-one-backbone-seed protocols; it is not architecture-, objective-, or
-population-universal.
-
-Phase 3.18A additionally confirms the same A→C localization direction on the
-canonical frozen CE representation for RetinaMNIST training-only OOF. This
-removes a RetinaMNIST RPS-only limitation, but does not broaden the
-cross-dataset mechanism claim beyond frozen RPS representations.
+direction adaptation. Phase 3.18A and 3.18B additionally reproduce the A→C
+response on frozen CE representations in RetinaMNIST and Solar. Direct
+cross-objective direction evidence therefore covers CE and RPS in those two
+domains, within evaluated one-backbone-seed protocols; it is not architecture-,
+objective-, or population-universal.
 
 ### Dataset-specific mechanism findings
 
@@ -388,17 +385,21 @@ was independently manipulated and established as the causal source.
 same training-only OOF protocol, fixed-norm/fixed-bias CE direction-only C
 improves C4 MAE (`1.439→1.030`), exact decisions (`0→11`), and shrinkage
 (`1.678→1.244`) relative to the original CE head. Exact recovery is
-concentrated among CE feature-nearest-4 cases. This is a RetinaMNIST
-cross-objective robustness result, not an objective-wide or cross-dataset CE
-claim; a Solar CE confirmation would require separate authorization. See
-[Phase 3.18A](phase3_18a_retinamnist_ce_direction_robustness.md).
+concentrated among CE feature-nearest-4 cases. This was a RetinaMNIST cross-objective robustness result. Solar CE has now been
+confirmed separately in Phase 3.18B. See [Phase 3.18A](phase3_18a_retinamnist_ce_direction_robustness.md).
+
+## Phase 3.18B — Solar CE Representation Robustness
+
+**A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED.** Frozen CE
+direction-only C improves Solar X MAE `1.115→.586`, exact routing `0→559/921`,
+and shrinkage `1.136→.656`; the direction agrees with saved Solar RPS. Direct
+direction evidence now covers frozen CE and RPS representations in RetinaMNIST
+and Solar, without an objective-independent claim. See [Phase 3.18B](phase3_18b_solar_ce_direction_robustness.md).
 
 ## Next Authorized Work
 
 Manuscript planning and writing from completed evidence are authorized. No new
 method design, training, evaluation, tuning, test access, ROP/bias revival,
-seeds, or datasets are authorized automatically. A Solar CE robustness
-confirmation is scientifically justified by Phase 3.18A but requires separate
-authorization.
+seeds, or datasets are authorized automatically.
 
 Do not restart method development, revive RG-ACR, create dataset-specific objectives, perform automatic representation/head audits, launch multi-seed expansions, or add datasets/channels. Any next action requires separate authorization.

@@ -13,8 +13,8 @@ repository is a separate research archive.
 
 ## Current Stage
 
-**Phase 3.18A RetinaMNIST CE Representation Robustness complete —
-A — RETINAMNIST CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED.**
+**Phase 3.18B Solar CE Representation Robustness complete —
+A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED.**
 
 Completed:
 
@@ -45,6 +45,7 @@ Completed:
 - Phase 3.16 three-dataset mechanism consolidation
 - Phase 3.17 paper framing and novelty boundary
 - Phase 3.18A RetinaMNIST CE representation robustness
+- Phase 3.18B Solar CE representation robustness
 
 Canonical RetinaMNIST uses:
 
@@ -102,12 +103,11 @@ representation quality, or label ambiguity.
 
 Across the tested frozen RPS representations on RetinaMNIST, UTKFace, and
 Solar, direction adaptation consistently improves rare-end localization.
-Scale, bias, global, and opposite-endpoint effects are dataset-dependent.
-
-Phase 3.18A additionally confirms the A→C direction response on canonical
-frozen CE features in RetinaMNIST training-only OOF. This is a within-dataset
-cross-objective result; the cross-dataset mechanism statement remains scoped
-to the tested frozen RPS representations.
+Phase 3.18A/3.18B additionally reproduce the A→C response on frozen CE
+features in RetinaMNIST and Solar. Thus, in the two directly cross-objective
+domains, direction responsiveness is observed on both CE- and RPS-trained
+frozen representations. Scale, bias, global, and opposite-endpoint effects are
+dataset-dependent.
 
 RetinaMNIST additionally supports the following dataset-specific diagnosis:
 
@@ -398,12 +398,15 @@ robustness check, but does not authorize it, a method redesign, or an
 objective-wide claim. See
 docs/research/phase3_18a_retinamnist_ce_direction_robustness.md.
 
+## Phase 3.18B Decision
+
+**A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED.** Frozen Solar CE direction-only C improves X MAE 1.115→.586, exact X routing 0→559/921, and shrinkage 1.136→.656 on the one predeclared archived readout. Direction responsiveness is therefore directly observed on both CE- and RPS-trained frozen representations in RetinaMNIST and Solar. This is not an objective-independent or universal claim. See docs/research/phase3_18b_solar_ce_direction_robustness.md.
+
 ## Next Authorized Work
 
 The next stage is manuscript planning and writing from completed evidence. No
 method design, training, evaluation, tuning, ROP/bias revival, extra seed, or
-dataset run is authorized automatically. A Solar CE confirmation now has a
-scientific rationale but requires separate authorization. The framing does not
+dataset run is authorized automatically. The framing does not
 authorize method freeze or final test evaluation.
 
 All common RetinaMNIST development rules are inherited from:
@@ -412,14 +415,14 @@ All common RetinaMNIST development rules are inherited from:
 
 unless a phase-specific task explicitly overrides them.
 
-Phase 3.18A does **not** authorize:
+Phase 3.18B does **not** authorize:
 
 - ROP, alpha/lambda tuning, ROP-v2, adaptive/joint objectives, or test evaluation;
 - adaptive or class-specific norm scaling;
 - representation retraining;
 - historical validation/test evaluation;
 - seeds 1–4;
-- UTKFace follow-up, Solar execution, or other datasets;
+- UTKFace CE, other datasets, or any further Solar execution;
 - commit or push.
 
 Do not proceed from this mechanism result without separate authorization.

@@ -45,6 +45,7 @@
 | Cross-dataset frozen-head mechanism | Direction adaptation is the strongest replicated head finding | Active | In the three tested frozen-RPS, one-backbone-seed protocols, direction-only adaptation improved rare-end localization; scope is not architecture-, objective-, or population-universal. |
 | Classifier scale | Dataset-specific correction-strength modulator | Active | C→D helps RetinaMNIST and UTKFace but harms Solar; `.50` is not a transferable prescription. |
 | Phase 3.18A RetinaMNIST CE direction robustness | A — RETINAMNIST CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED | Complete | Frozen CE A→C improves C4 MAE `1.439→1.030`, exact routing `0→11`, and shrinkage `1.678→1.244` in training-only OOF. This extends the Retina mechanism beyond RPS, but does not make an objective-wide or cross-dataset CE claim. |
+| Phase 3.18B Solar CE direction robustness | A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED | Complete | Frozen CE A→C improves X MAE `1.115→.586`, exact routing `0→559/921`, and shrinkage `1.136→.656` on the archived readout. Alongside Phase 3.18A and saved RPS evidence, direct direction responsiveness now covers CE and RPS frozen representations in RetinaMNIST and Solar; it is not objective-independent or universal. |
 
 ## Phase 3.16 — Current disposition
 
