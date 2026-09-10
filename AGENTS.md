@@ -13,8 +13,8 @@ repository is a separate research archive.
 
 ## Current Stage
 
-**Phase 3.18B Solar CE Representation Robustness complete —
-A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED.**
+**Phase 3.20A RetinaMNIST Controlled Imbalance-Severity Dose Response complete
+— B — PARTIAL / NON-MONOTONIC IMBALANCE EFFECT.**
 
 Completed:
 
@@ -46,6 +46,8 @@ Completed:
 - Phase 3.17 paper framing and novelty boundary
 - Phase 3.18A RetinaMNIST CE representation robustness
 - Phase 3.18B Solar CE representation robustness
+- Phase 3.19 RetinaMNIST sampling vs objective disentanglement
+- Phase 3.20A RetinaMNIST controlled imbalance-severity dose response
 
 Canonical RetinaMNIST uses:
 
@@ -402,6 +404,24 @@ docs/research/phase3_18a_retinamnist_ce_direction_robustness.md.
 
 **A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED.** Frozen Solar CE direction-only C improves X MAE 1.115→.586, exact X routing 0→559/921, and shrinkage 1.136→.656 on the one predeclared archived readout. Direction responsiveness is therefore directly observed on both CE- and RPS-trained frozen representations in RetinaMNIST and Solar. This is not an objective-independent or universal claim. See docs/research/phase3_18b_solar_ce_direction_robustness.md.
 
+## Phase 3.19 Decision
+
+**A — BALANCED SAMPLING IS THE PRIMARY DIRECTION-ADAPTATION DRIVER.** On the
+frozen RetinaMNIST RPS representation, balanced C/F cells improve C4 direction
+margins and localization relative to natural E/G under both CE and RPS;
+within-stratum objective differences are small. This is a single-dataset,
+training-only factorial result, not a universal causal statement, selected
+method, or authorization for a follow-up run. See
+`docs/research/phase3_19_retinamnist_sampling_objective_direction_disentanglement.md`.
+
+## Phase 3.20A Decision
+
+**B — PARTIAL / NON-MONOTONIC IMBALANCE EFFECT.** In the fixed 25-run CE
+grid, lower C4 support consistently decreases p4 and the C4-vs-C3 head margin,
+but C4 MAE, shrinkage, severe burden, and centroid routing are seed-variable
+and non-monotonic. This does not justify a general controlled dose-response
+claim. See `docs/research/phase3_20a_retinamnist_imbalance_severity_dose_response.md`.
+
 ## Next Authorized Work
 
 The next stage is manuscript planning and writing from completed evidence. No
@@ -415,9 +435,9 @@ All common RetinaMNIST development rules are inherited from:
 
 unless a phase-specific task explicitly overrides them.
 
-Phase 3.18B does **not** authorize:
+Phase 3.20A does **not** authorize:
 
-- ROP, alpha/lambda tuning, ROP-v2, adaptive/joint objectives, or test evaluation;
+- ROP, alpha/lambda tuning, ROP-v2, adaptive/joint objectives, or further test evaluation;
 - adaptive or class-specific norm scaling;
 - representation retraining;
 - historical validation/test evaluation;

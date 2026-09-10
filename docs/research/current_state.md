@@ -2,8 +2,8 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Phase 3.18B Solar CE Representation Robustness complete
-— **A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS CONFIRMED**.
+**Current stage:** Phase 3.20A RetinaMNIST Controlled Imbalance-Severity Dose
+Response complete — **B — PARTIAL / NON-MONOTONIC IMBALANCE EFFECT**.
 
 ### Project-level observed phenomenon
 
@@ -395,6 +395,24 @@ direction-only C improves Solar X MAE `1.115→.586`, exact routing `0→559/921
 and shrinkage `1.136→.656`; the direction agrees with saved Solar RPS. Direct
 direction evidence now covers frozen CE and RPS representations in RetinaMNIST
 and Solar, without an objective-independent claim. See [Phase 3.18B](phase3_18b_solar_ce_direction_robustness.md).
+
+## Phase 3.19 — RetinaMNIST Sampling vs Objective Disentanglement
+
+**A — BALANCED SAMPLING IS THE PRIMARY DIRECTION-ADAPTATION DRIVER.** On the
+frozen RPS representation and exact five-fold training-only OOF protocol,
+balanced C/F both substantially improved C4 MAE, shrinkage, `z4-z3` margin,
+and outward routing over natural E/G; CE-versus-RPS differences within either
+sampling stratum were small. This is a bounded RetinaMNIST/RPS-representation
+training-signal result, not a universal causal claim or a selected correction.
+See [Phase 3.19](phase3_19_retinamnist_sampling_objective_direction_disentanglement.md).
+
+## Phase 3.20A — RetinaMNIST Controlled Imbalance-Severity Dose Response
+
+**B — PARTIAL / NON-MONOTONIC IMBALANCE EFFECT.** In the predeclared 25-run
+full CE grid, reduced C4 support consistently lowers p4 and the C4-vs-C3
+margin, but C4 MAE, shrinkage, severe burden, and train-centroid routing are
+seed-variable and non-monotonic. This controlled result does not support a
+universal dose-response claim. See [Phase 3.20A](phase3_20a_retinamnist_imbalance_severity_dose_response.md).
 
 ## Next Authorized Work
 

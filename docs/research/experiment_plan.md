@@ -1,9 +1,8 @@
 # Experiment Plan
 
 ## Current Stage
-Completed through **Phase 3.18B Solar CE representation robustness**.
-Current status: **A — TWO-DOMAIN CROSS-OBJECTIVE DIRECTION ROBUSTNESS
-CONFIRMED**.
+Completed through **Phase 3.20A RetinaMNIST controlled imbalance-severity dose
+response**. Current status: **B — PARTIAL / NON-MONOTONIC IMBALANCE EFFECT**.
 
 Experiment development is paused. Plan and draft the mechanism paper from
 completed evidence only. In the three evaluated frozen-RPS settings,
@@ -371,6 +370,22 @@ Solar CE response agrees with saved Solar RPS; combined with Phase 3.18A,
 direction responsiveness is now directly observed on CE and RPS frozen
 representations in RetinaMNIST and Solar. Global and risk/UQ effects remain
 adverse or mixed. See [Phase 3.18B](phase3_18b_solar_ce_direction_robustness.md).
+
+## Phase 3.19 — RetinaMNIST Sampling vs Objective Disentanglement (complete)
+
+**A — BALANCED SAMPLING IS THE PRIMARY DIRECTION-ADAPTATION DRIVER.** In the
+fixed-norm/fixed-bias frozen-RPS 2×2 training-only OOF grid, C/F balanced
+cells improve C4 MAE/shrinkage and flip the mean `z4-z3` margin positive,
+whereas natural E/G cells do not. Objective contrasts are small within either
+sampling stratum. See [Phase 3.19](phase3_19_retinamnist_sampling_objective_direction_disentanglement.md).
+
+## Phase 3.20A — RetinaMNIST Imbalance-Severity Dose Response (complete)
+
+**B — PARTIAL / NON-MONOTONIC IMBALANCE EFFECT.** The 25 predeclared full CE
+runs show consistent p4 and C4-vs-C3 margin deterioration as C4 support falls,
+but no fully seed-consistent monotonic MAE/shrinkage/geometry response. The
+mechanism paper must retain this boundary. See
+[Phase 3.20A](phase3_20a_retinamnist_imbalance_severity_dose_response.md).
 
 ## Immediate Next Action
 

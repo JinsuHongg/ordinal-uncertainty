@@ -2,7 +2,8 @@
 
 ## Project status
 
-Completed through **Phase 3.18B Solar CE representation robustness**. The
+Completed through **Phase 3.20A RetinaMNIST controlled imbalance-severity dose
+response**. The
 project proceeds as a bounded **mechanism / empirical analysis paper**. Across
 the tested frozen RPS representations on RetinaMNIST, UTKFace, and Solar,
 classifier direction adaptation improves rare upper-end localization. Phase
@@ -11,6 +12,16 @@ RetinaMNIST and Solar. Thus direction responsiveness is directly observed on
 both CE- and RPS-trained frozen representations in those two domains. Scale,
 bias, global, and opposite-endpoint effects are dataset-dependent; no new
 experiments are automatically authorized.
+
+On the frozen RetinaMNIST RPS representation, a training-only 2×2 factorial
+found balanced sampling—not CE versus RPS loss—to be the dominant signal
+associated with beneficial direction rotation. This remains a bounded
+single-dataset mechanism result, not a universal causal or method claim.
+
+The controlled CE support-reduction study found consistently lower rare-class
+probability and class-4-vs-class-3 margin at lower support, but a partial,
+non-monotonic response in broader localization and feature geometry. It does
+not establish a universal imbalance-severity dose response.
 
 ## Research question
 
@@ -86,3 +97,5 @@ pytest -q
 - [Phase 3.17 paper framing and novelty boundary](docs/research/phase3_17_paper_framing_and_novelty_boundary.md)
 - [Phase 3.18A RetinaMNIST CE direction robustness](docs/research/phase3_18a_retinamnist_ce_direction_robustness.md)
 - [Phase 3.18B Solar CE direction robustness](docs/research/phase3_18b_solar_ce_direction_robustness.md)
+- [Phase 3.19 RetinaMNIST sampling vs objective disentanglement](docs/research/phase3_19_retinamnist_sampling_objective_direction_disentanglement.md)
+- [Phase 3.20A RetinaMNIST imbalance-severity dose response](docs/research/phase3_20a_retinamnist_imbalance_severity_dose_response.md)
