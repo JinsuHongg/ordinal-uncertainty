@@ -418,7 +418,7 @@ universal dose-response claim. See [Phase 3.20A](phase3_20a_retinamnist_imbalanc
 
 Manuscript planning and writing from completed evidence are authorized. The
 [paper story architecture](paper_story_architecture.md) is the manuscript-level
-planning source of truth. The dedicated [Figure 1--4 source-artifact and data-availability audit](figure_source_artifact_audit.md) is complete with **C — MATERIAL FIGURE-SOURCE GAPS REQUIRE REVIEW**. Solar sources are locally available, but cited RetinaMNIST/UTKFace and Phase 3.19/3.20A artifact trees are absent. Do not build figure-data tables or final figures unless those historical artifacts are restored and a deterministic provenance check is completed.
+planning source of truth. The dedicated [Figure 1--4 source-artifact and data-availability audit](figure_source_artifact_audit.md) is complete with **A — FIGURE SOURCES READY FOR DATA CONSOLIDATION**; its canonical data-table generation then passed all 55 recorded provenance and aggregate checks. Do not generate final figures without separate authorization.
 
 No new method design, training, evaluation, tuning, test access, ROP/bias
 revival, seeds, or datasets are authorized automatically.

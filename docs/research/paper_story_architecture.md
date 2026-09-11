@@ -8,10 +8,11 @@ results ordering, figure design, main-text versus appendix allocation, and
 future figure-data consolidation. It is **not** an experiment log: historical
 phase notes remain authoritative for exact protocols and results.
 
-The next authorized work is a Figure 1--4 source-artifact and data-availability
-audit. Do not start experiments, extend Phase 3.20, run an RPS severity
-replication, add datasets/seeds, design a correction, or generate final figures
-before that audit.
+The Figure 1--4 source-artifact audit and deterministic canonical data-table
+consolidation are complete; see [the source-artifact audit](figure_source_artifact_audit.md).
+Its 55 provenance and aggregate checks passed. Do not start experiments, extend
+Phase 3.20, run an RPS severity replication, add datasets/seeds, design a
+correction, or generate final figures without a separate authorization.
 
 ## Direction and thesis
 

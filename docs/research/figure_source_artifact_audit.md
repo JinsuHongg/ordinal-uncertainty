@@ -2,112 +2,191 @@
 
 ## Scope and verdict
 
-**Audit date:** 2026-09-10. This is a source-artifact availability and provenance audit only: no models were run, no outputs were regenerated, and no figures, plotting scripts, or final figure-data tables were created.
+**Audit date:** 2026-09-10. This is a source-artifact, provenance, and
+availability audit plus deterministic data-consolidation record. No model was
+run, no artifact was regenerated, and no figure was created.
 
-**Verdict: C — MATERIAL FIGURE-SOURCE GAPS REQUIRE REVIEW.**
+**Verdict: A — FIGURE SOURCES READY FOR DATA CONSOLIDATION.** All proposed
+main-figure panels have local, machine-readable sources. Most panels require a
+deterministic extraction (for example, parsing stored probability vectors,
+recomputing exact discrete L1 decisions, or joining by sample ID); this is not
+new evaluation. The Figure 2 strata must be recomputed from their saved
+train-feature centroids and joined by ID before any sample-level table is
+emitted.
 
-Complete machine-readable Solar CE/RPS baseline and direction-head artifacts are present. The expected RetinaMNIST and UTKFace output trees for Figure 1–4 are absent from this checkout. Therefore the cross-dataset panels, Retina direction cells, and both Figure 4 blocks are not reproducible locally from machine-readable artifacts. Phase-note summaries are evidence, not substitute extraction sources.
+## Canonical table outputs and verification
 
-Status: **READY** = all fields present; **READY_WITH_TRANSFORMATION** = an ID-keyed join or documented deterministic derivation is needed; **PARTIALLY_SUPPORTED** = only part of a proposed panel is locally available; **BLOCKED** = no safe local machine-readable source.
+Canonical tables were generated only from the paths and transformations
+specified below by `scripts/build_paper_figure_data.py`. They are intentionally
+ignored experiment/manuscript outputs, stored at
+`outputs/manuscript/figure_data/`:
 
-## Audit method and constraint
+- `figure1_endpoint_samples.csv`, `figure1_endpoint_summary.csv`
+- `figure2_mechanism_samples.csv`, `figure2_mechanism_summary.csv`
+- `figure3_direction_summary.csv`
+- `figure4_factorial_summary.csv`, `figure4_severity_per_seed.csv`,
+  `figure4_severity_summary.csv`
+- `verification.json`
 
-The audit reviewed only the requested phase-note output trees, listed their JSON/CSV/NPZ files, and inspected NPZ member schemas without loading full feature tensors. The supplied Python runtime lacks NumPy, so byte-level NPZ array equality was not independently recomputed. Future Figure 2 extraction must explicitly assert unique IDs, identical ID sets, and label equality across centroid, A, and C sources before emitting a table. No positional alignment is permitted.
+The generation run completed with **PASS**: all 55 aggregate, ID-alignment,
+and Phase 3.20A aggregation checks passed at absolute tolerance `1e-9`.
+`verification.json` records each comparison. This does not authorize plotting,
+new experiments, or an expansion of the manuscript claims.
+
+Status definitions:
+
+- **READY:** the saved table/JSON directly contains the planned aggregate.
+- **READY_WITH_TRANSFORMATION:** the source contains all inputs but needs a
+  documented deterministic derivation or ID-keyed join.
+- **PARTIALLY_SUPPORTED:** a proposed aggregate exists but lacks one required
+  source field or alignment proof.
+- **BLOCKED:** no safe machine-readable source exists. No proposed main panel
+  is blocked in this checkout.
+
+## Audit protocol and non-negotiable provenance checks
+
+Every future extraction must record dataset, objective/representation,
+condition, split role, seed(s), checkpoint lineage, population size, rare-end
+support, and the exact discrete L1 Bayes decision rule. It must build
+`saved raw artifact -> figure-specific table -> plot`; manuscript numbers must
+not be hand-copied from phase notes when a raw artifact exists.
+
+For all Figure 2 joins, first assert: unique IDs in each source; identical
+rare-population ID sets; identical labels; expected objective and split; and
+the stated centroid definition. Join only on `sample_id`; positional alignment
+is prohibited. Figure 2 Retina uses the Phase 3.18A **training-only OOF**
+population (`n=1,080`, C4=`66`), never the Phase 3.3 test C4=`20` population.
+Solar uses the retained aligned future-period test population (`n=28,006`,
+X=`921`).
+
+The audit directly checked that Retina 3.18A A/C prediction CSVs each contain
+1,080 unique IDs, have identical ID sets, and have equal labels. It directly
+checked that Phase 3.20A's aggregate CSV contains all 25 unique
+`(seed, n4)` cells: supports `66,50,33,16,8` crossed with seeds `0--4`.
+The saved completeness manifest reports the same 25 cells. The compressed NPY
+members in the feature/prediction archives expose IDs, labels, logits, and
+probabilities; their cross-archive equality still must be asserted during the
+deterministic extraction run.
 
 ## Source matrix
 
-| Panel | Status | Primary source | Population | Main caveat |
-|---|---|---|---|---|
-| Fig. 1A | PARTIALLY_SUPPORTED | Solar CE Phase 3.8 predictions | CE rare endpoint, seed 0 | Retina/UTK artifact trees absent. |
-| Fig. 1B | PARTIALLY_SUPPORTED | Solar CE Phase 3.8 predictions | CE rare endpoint, seed 0 | Retina/UTK artifact trees absent. |
-| Fig. 1C | PARTIALLY_SUPPORTED | Solar CE Phase 3.8 metrics | CE class 0 and rare endpoint | Retina/UTK artifact trees absent. |
-| Fig. 2A | PARTIALLY_SUPPORTED | Solar CE Phase 3.9 features | Solar X=921; Retina C4=66 OOF | Solar derivation ready; Retina absent. |
-| Fig. 2B | PARTIALLY_SUPPORTED | Solar 3.9 + 3.18B CE | same as Fig. 2A | Requires ID-keyed join; Retina absent. |
-| Fig. 2C | PARTIALLY_SUPPORTED | Solar 3.18B CE subgroup/A/C | same as Fig. 2A | Solar aggregate provenance present; Retina absent. |
-| Fig. 2D | PARTIALLY_SUPPORTED | Solar 3.9 + 3.18B CE | same as Fig. 2A | Derive A/C delta; Retina absent. |
-| Fig. 3A | PARTIALLY_SUPPORTED | Solar 3.15 RPS + 3.18B CE | A/C, four settings | Both Retina cells absent. |
-| Fig. 3B | PARTIALLY_SUPPORTED | same | A/C, four settings | Use fractions; Retina denominator absent. |
-| Fig. 3C | PARTIALLY_SUPPORTED | same | A/C, four settings | Both Retina cells absent. |
-| Fig. 3D | PARTIALLY_SUPPORTED | Solar CE margin CSV/RPS logits | A/C, four settings | Both Retina margins absent. |
-| Fig. 4A | BLOCKED | expected Phase 3.19 outputs absent | Retina RPS OOF C/F/E/G | Note-only values are insufficient. |
-| Fig. 4B | BLOCKED | expected Phase 3.19 outputs absent | Retina RPS OOF C/F/E/G | Note-only values are insufficient. |
-| Fig. 4C | BLOCKED | expected Phase 3.20A outputs absent | 5 supports × 5 seeds | 25 cells cannot be audited. |
-| Fig. 4D | BLOCKED | expected Phase 3.20A outputs absent | 5 supports × 5 seeds | 25 cells cannot be audited. |
-| Fig. 4E | BLOCKED | expected Phase 3.20A outputs absent | 5 supports × 5 seeds | 25 cells cannot be audited. |
+| Panel | Status | Scientific message | Primary artifact(s) | Population / caveat |
+| --- | --- | --- | --- | --- |
+| 1A | READY_WITH_TRANSFORMATION | Original CE rare endpoint routes inward | Retina resolution check, UTK CE predictions, Solar CE Phase 3.8 NPZ | Original seed-0 CE; exact L1 recomputed for Retina. |
+| 1B | READY_WITH_TRANSFORMATION | CE probability location is inward | same prediction sources | Derive predictive mean and shrinkage from probabilities. |
+| 1C | READY_WITH_TRANSFORMATION | Upper endpoint is harder than lower endpoint | same sources plus Solar metrics | Recompute L1 MAE from per-sample IDs/labels/decisions. |
+| 2A | READY_WITH_TRANSFORMATION | Rare examples separate into centroid strata | Retina 3.3 CE features; Solar 3.9 CE train/test features | Recompute raw-Euclidean train centroids and join IDs. |
+| 2B | READY_WITH_TRANSFORMATION | Original CE head maps both strata inward | 3.18A A CSV; Solar 3.18B A NPZ | ID-keyed join to 2A strata. |
+| 2C | READY_WITH_TRANSFORMATION | CE direction recovery is concentrated in rare-end-like stratum | 3.18A A/C CSVs; Solar 3.18B A/C NPZ | Exact fraction/count derived after join; descriptive only. |
+| 2D | READY_WITH_TRANSFORMATION | A→C probability location movement differs by stratum | same as 2B/2C | Derive `mu`, `S`, and per-sample deltas. |
+| 3A | READY_WITH_TRANSFORMATION | A→C lowers rare-end MAE in four settings | Retina 3.10C/3.18A; Solar 3.15/3.18B | Retina OOF; Solar archived confirmatory readout. |
+| 3B | READY_WITH_TRANSFORMATION | A→C exact rare-end fraction changes | same | Plot fraction; annotate raw count only. |
+| 3C | READY_WITH_TRANSFORMATION | A→C reduces shrinkage | same | Derive/verify from probabilities. |
+| 3D | READY_WITH_TRANSFORMATION | A→C increases rare-vs-adjacent logit margin | same plus saved margin CSVs | RPS margin is derived from saved logits, not prose. |
+| 4A | READY | Balanced sampling is the dominant adaptation factor for C4 MAE in one frozen-RPS OOF factorial | Phase 3.19 `summary/summary.json` | One backbone seed; not a severity result. |
+| 4B | READY | The same factorial separates `z4-z3` margins | Phase 3.19 `metrics/margins.csv` | One backbone seed; no causal continuity with 4C--E. |
+| 4C | READY | Lower support weakens mean p4 | Phase 3.20A per-seed and mean/SD CSVs | Full CE retraining; five seeds per support. |
+| 4D | READY | Lower support weakens mean `z4-z3` | same | Show all five traces; no smoothing. |
+| 4E | READY | Shrinkage is non-monotonic/seed-variable | same | Show all five traces; no smoothing. |
 
-## Figure 1 — original CE phenomenon baseline
+## Figure 1 — original CE phenomenon
 
-Use original pre-intervention CE, seed 0, and exact discrete L1 Bayes decision. Do not choose the objective with the largest failure.
+All Figure 1 panels are frozen to the original, pre-intervention CE seed-0
+model and exact discrete L1 Bayes decision. CE/RPS robustness is exclusively a
+Figure 3 result.
 
-| Dataset / panel | Required fields | Exact source / expected source | Support and status |
-|---|---|---|---|
-| Solar CE 1A/1B | `sample_ids`, `labels`, `l1`, `probabilities` | `outputs/solar/phase3_8_shrinkage_confirmation/ce/seed_0/evaluation/predictions.npz` | X=921; READY for routing, READY_WITH_TRANSFORMATION for `mu=sum(k*p_k)` and `S=4-mu`. |
-| Solar CE 1C | class-0 and X L1 MAE | `outputs/solar/phase3_8_shrinkage_confirmation/ce/seed_0/evaluation/metrics.json` | class 0=5,284, X=921; READY. |
-| Retina CE 1A–C | IDs, labels, L1, probabilities/metrics | Expected Phase 3.3 CE lineage `outputs/retinamnist/native28/phase3_3_representation_audit_replay_verified/ce/seed_0/features.npz` plus referenced CE prediction artifact; absent | Phase note has test C4=20; BLOCKED. |
-| UTKFace CE 1A–C | same | Expected `outputs/utkface/phase3_7a_failure_replication/`; absent | Phase note has test C4=67; BLOCKED. |
+| Panel / dataset | Exact artifact path(s) | Fields and deterministic work | IDs and alignment | Status / caveat |
+| --- | --- | --- | --- | --- |
+| 1A/1B/1C RetinaMNIST CE | `outputs/retinamnist/resolution_sanity_check/seed_0/size_28/predictions.csv`; `classwise_metrics.csv`; `config.json` | `sample_id`, `true_label`, `logits`, `probabilities`, stored predictive mean. Parse probabilities; compute exact L1 action, `mu=sum(k*p_k)`, `S=4-mu`, routing, and endpoint MAE. | Integer test IDs; one original seed-0 test population (`n=400`, C4=`20`). | READY_WITH_TRANSFORMATION. The stored `predicted_label` is nominal/mode, not the Figure 1 L1 action. |
+| 1A/1B/1C UTKFace CE | `outputs/utkface/phase3_7a_failure_replication/ce/seed_0/predictions.csv`; `endpoint_routing.csv`; `endpoint_metrics.csv`; `metrics.json`; `config.json` | IDs, labels, logits, probabilities, and `l1_bayes_decision` are stored. Derive `mu` and endpoint shrinkage. | Stable string IDs; aligned test population `n=2,371`, C4=`67`. | READY_WITH_TRANSFORMATION. This is the original CE seed-0 matched replication, not a direction intervention. |
+| 1A/1B/1C Solar CE | `outputs/solar/phase3_8_shrinkage_confirmation/ce/seed_0/evaluation/predictions.npz`; `metrics.json`; `../config.json`; `../alignment_audit.json` | NPZ stores `sample_ids`, `labels`, `logits`, `probabilities`, `mode`, `l1`, `l2`, and risk. Derive `mu`/`S`; metrics directly contain class-0/X L1 MAE. | Integer IDs; aligned test `n=28,006`, X=`921`; unique IDs must be asserted. | READY_WITH_TRANSFORMATION. Retained aligned future-period test; Table 1/caption must retain temporal-overlap and retained-alignment caveat. |
 
-Solar is a retained alignment subset (28,006 aligned test rows, X=921) and uses a future-period test with temporal overlap in train/validation; retain this Table 1 and Figure 1 caveat.
+## Figure 2 — CE representation → original CE head → CE direction
 
-## Figure 2 — frozen CE mechanism decomposition
+The panel is a CE-only mechanism decomposition. It does not combine the
+Phase 3.3 Retina test population with Phase 3.18A OOF cases, and it does not
+claim that a representation-inward sample is intrinsically unrecoverable.
 
-Retina must use Phase 3.18A training-only OOF CE (`n=1,080`, C4=66), never the Phase 3.3 test C4=20. Solar uses Phase 3.9 CE raw train centroids and the Phase 3.18B archived CE A/C readout (`n=28,006`, X=921).
+| Panel | Dataset / conditions | Exact artifact path(s) | Population, fields, and alignment | Status / caveat |
+| --- | --- | --- | --- | --- |
+| 2A | Retina CE centroid strata | `outputs/retinamnist/native28/phase3_3_representation_audit_replay_verified/ce/seed_0/features.npz`; `outputs/retinamnist/phase3_18a_ce_direction_robustness/subgroups/class4_centroid_groups.csv` | NPZ stores `train_sample_id`, `train_labels`, `train_features`; compute raw train centroids and nearest centroid for true C4. Expected 48 nearest-4 and 18 representation-inward. Aggregate CSV is an independent saved check. | READY_WITH_TRANSFORMATION. Derive a per-ID group table before joining A/C. |
+| 2B/2C/2D | Retina original A → CE C | `outputs/retinamnist/phase3_18a_ce_direction_robustness/predictions/A_CE_original.csv`; `C_CE_direction_only.csv`; `metrics/margins.csv`; `summary/results.json` | Both prediction CSVs store `sample_id`, `fold`, `label`, logits, probabilities, L1 action, and risk. Direct audit: 1,080 unique equal IDs and labels. Join their true-C4 rows to 2A groups. Expected exact A→C: 0→11, all 11 nearest-4, none among 18 inward. | READY_WITH_TRANSFORMATION. Recompute `mu`, `S`, exact flags and deltas from per-ID probabilities. |
+| 2A | Solar CE centroid strata | `outputs/solar/phase3_9_mechanism_audit/features/ce/train.npz`; `test.npz`; `geometry/geometry.json` | `sample_ids`, labels, features, logits, probabilities and decisions are stored. Recompute Phase 3.9 raw train centroids and true-X nearest assignment. Expected X-like=`724`, inward=`197`. | READY_WITH_TRANSFORMATION. Assert IDs/labels against 3.18B before joining. |
+| 2B/2C/2D | Solar original A → CE C | `outputs/solar/phase3_18b_ce_direction_robustness/evaluation/A_original_ce/predictions.npz`; `evaluation/C_direction_only/predictions.npz`; `x_representation_subgroups.csv`; `x_logit_margins.csv`; `summary.json` | A/C NPZs store IDs, labels, logits, probabilities, and L1 decisions. Saved subgroup check: X-like A `0/0/9/715/0` → C `0/0/49/116/559` (exact 0→559); inward A `0/23/51/123/0` → C `0/23/83/91/0` (0→0). | READY_WITH_TRANSFORMATION. The recovery concentration is descriptive; it is not an irrecoverability conclusion. |
 
-| Panel | Retina CE source/status | Solar CE source/status | Required transformation/caveat |
-|---|---|---|---|
-| 2A representation state | Expected Phase 3.18A plus Phase 3.3 CE feature source; absent, BLOCKED | `outputs/solar/phase3_9_mechanism_audit/features/ce/{train,test}.npz`, READY_WITH_TRANSFORMATION | Compute raw train centroids, then group true rare-end IDs. Expected Solar 724 X-like/197 inward; Retina 48 nearest-4/18 inward. |
-| 2B A routing by state | Expected Phase 3.18A A OOF predictions; absent, BLOCKED | Phase 3.9 CE test NPZ + `outputs/solar/phase3_18b_ce_direction_robustness/evaluation/A_original_ce/predictions.npz`, READY_WITH_TRANSFORMATION | Join by IDs, not position. |
-| 2C A→C exact recovery | Expected Phase 3.18A A/C OOF predictions; absent, BLOCKED | Phase 3.9 CE cache; Phase 3.18B A/C NPZ; `x_representation_subgroups.csv`, READY_WITH_TRANSFORMATION | CSV records Solar X-like 0→559 exact and inward 0→0; regenerate groups from centroids for sample-level table. |
-| 2D A→C movement | Expected Phase 3.18A A/C probabilities; absent, BLOCKED | same Solar sources, READY_WITH_TRANSFORMATION | ID-keyed join; compute `S_C-S_A` or `mu_C-mu_A`. |
+## Figure 3 — direction response across objectives and domains
 
-Solar subgroup provenance is explicit: X-like=724, A routing `0/0/9/715/0`, C `0/0/49/116/559`, MAE `1.012→.296`, exact `0→559`; inward=197, A `0/23/51/123/0`, C `0/23/83/91/0`, MAE `1.492→1.655`, exact `0→0`. All exact recoveries are X-like, descriptively—not proof that inward cases are intrinsically unrecoverable.
+Use four within-setting A→C comparisons: Retina RPS, Retina CE, Solar RPS,
+Solar CE. Panel B must plot exact **fraction**; `0→2`, `0→11`, `0→496/921`,
+and `0→559/921` are annotations, not four directly comparable counts. Retina
+is training-only five-fold OOF head evaluation; Solar is the predeclared
+archived confirmatory readout. The comparison concerns sign and qualitative
+consistency, not four equivalent independent test-set replications.
 
-## Figure 3 — A→C direction response
+| Setting | Exact artifact path(s) | Population / fields | Required transformation and status |
+| --- | --- | --- | --- |
+| Retina RPS A/C | `outputs/retinamnist/phase3_10a_rop_objective_falsification/oof_predictions/A_original_rps.csv`; `outputs/retinamnist/phase3_10c_direction_only_head/oof_predictions/predictions.csv`; `summary/summary.json`; `margins/condition_c.csv` | Training-only OOF, seed 0, `n=1,080`, C4=`66`; CSVs provide IDs, labels, logits, probabilities, L1 action. | READY_WITH_TRANSFORMATION. Assert A/C C4 IDs/labels; derive A `z4-z3` from A logits and read/verify C margin from its CSV/logits. Known recovery 0→2 and shrinkage 1.797→1.384. |
+| Retina CE A/C | `outputs/retinamnist/phase3_18a_ce_direction_robustness/predictions/A_CE_original.csv`; `C_CE_direction_only.csv`; `metrics/margins.csv`; `summary/results.json` | Training-only OOF, seed 0, `n=1,080`, C4=`66`; audited A/C IDs and labels match. | READY_WITH_TRANSFORMATION. Derive all summary fields from the paired CSVs. Saved CE margin is -0.903→+0.261; recovery 0→11; shrinkage 1.678→1.244. |
+| Solar RPS A/C | `outputs/solar/phase3_15_direction_scale_mechanism_confirmation_retry3_qgpu24/evaluation/A_original_rps/{predictions.npz,metrics.json}`; `evaluation/C_direction_only/{predictions.npz,metrics.json}`; `summary.json`; `split_integrity.json` | Archived seed-0 aligned test, `n=28,006`, X=`921`; NPZ fields include IDs, labels, logits, probabilities, L1 decisions, risks. | READY_WITH_TRANSFORMATION. Derive `zX-zM` from logits and exact fraction; known recovery 0→496/921 and shrinkage 1.228→.773. |
+| Solar CE A/C | `outputs/solar/phase3_18b_ce_direction_robustness/evaluation/A_original_ce/{predictions.npz,metrics.json}`; `evaluation/C_direction_only/{predictions.npz,metrics.json}`; `x_logit_margins.csv`; `summary.json`; `split_integrity.json` | Archived seed-0 aligned test, `n=28,006`, X=`921`; same NPZ field contract. | READY_WITH_TRANSFORMATION. Margin CSV verifies -3.1086407→+1.1899806; known recovery 0→559/921 and shrinkage 1.136→.656. |
 
-RetinaMNIST is training-only OOF head evaluation; Solar is the predeclared archived confirmatory readout. Compare sign and qualitative consistency, not four equivalent independent test-set replications. Plot exact rare-end **fraction**, with raw counts as annotations only.
+## Figure 4 — two explicitly separate regimes
 
-| Setting | Exact present source | Population / needed fields | Status |
-|---|---|---|---|
-| Retina RPS | Expected `outputs/retinamnist/phase3_10c_direction_only_head/`; absent | OOF seed 0; recover denominator, MAE, shrinkage, logits | BLOCKED. |
-| Retina CE | Expected `outputs/retinamnist/phase3_18a_ce_direction_robustness/`; absent | OOF seed 0, C4=66; same fields | BLOCKED. |
-| Solar RPS | `outputs/solar/phase3_15_direction_scale_mechanism_confirmation_retry3_qgpu24/evaluation/{A_original_rps,C_direction_only}/{metrics.json,predictions.npz}` and `summary.json` | archived seed 0, X=921 | READY_WITH_TRANSFORMATION; derive `zX-zM` from logits. |
-| Solar CE | `outputs/solar/phase3_18b_ce_direction_robustness/evaluation/{A_original_ce,C_direction_only}/{metrics.json,predictions.npz}`, `summary.json`, `x_logit_margins.csv` | archived seed 0, X=921 | READY_WITH_TRANSFORMATION; margin CSV directly gives A -3.1086407, C 1.1899806. |
+**Block A — Phase 3.19 mechanism intervention study:** frozen Retina RPS
+representation, direction-only heads, training-only OOF, one backbone seed,
+natural/balanced × CE/RPS factorial. **Block B — Phase 3.20A controlled
+severity study:** full CE backbone-plus-head retraining, five supports × five
+seeds, validation checkpoint selection, and final predeclared test evaluation.
+They must never be drawn as one causal trajectory. In particular, the
+Phase 3.18A frozen-head OOF CE A baseline (C4 MAE about 1.439) is not
+interchangeable with Phase 3.20A full-model `N4=66` baseline (2.330 ± .239).
 
-Solar CE/RPS NPZs contain IDs, labels, logits, probabilities, mode/L1/L2, and risks. Solar RPS has no separately located margin summary, but logits provide the deterministic source. Do not copy Retina note values into a future figure table; restore artifacts first.
+| Panel | Exact artifact path(s) | Fields, IDs, and verification | Status / caveat |
+| --- | --- | --- | --- |
+| 4A Block A C4 MAE | `outputs/retinamnist/phase3_19_sampling_objective_direction_disentanglement/summary/summary.json`; `metrics/factorial_contrasts.csv` | C/F/E/G conditions, pooled OOF C4=`66`; source values E=1.697, G=1.712, C=1.348, F=1.318. | READY. One frozen RPS backbone seed; heading/caption: “Balanced sampling is the dominant adaptation factor.” |
+| 4B Block A `z4-z3` | `outputs/retinamnist/phase3_19_sampling_objective_direction_disentanglement/metrics/margins.csv`; `predictions/oof_predictions.csv`; `parameters/direction_cosines.csv`; `subgroups/feature_nearest_c4.csv`; `metadata/provenance.json` | Margin CSV contains mean/median/positive fraction; prediction CSV contains IDs, labels, logits, probabilities and decisions. Direction cosine requires documented per-fold/class aggregation. | READY. Source means C=.030, E=-.912, F=.083, G=-.878; optional routing/shrinkage/p4/cosine appendix fields are available. |
+| 4C Block B mean p4 | `outputs/retinamnist/phase3_20a_imbalance_severity_dose_response/analysis/per_seed_severity_metrics.csv`; `severity_mean_std.csv`; `completeness.json` | Per-seed CSV contains seed, support, p4, all endpoints/control metrics; mean/SD CSV is the saved aggregation. All 25 unique cells verified. | READY. Plot five seed traces plus saved mean; no smoothing. |
+| 4D Block B mean `z4-z3` | same as 4C; each `n4_*/seed_*/{summary.json,config.json,manifest.json,evaluation.npz}` | Per-seed mean margin and positive fraction available; run files preserve validation-selected checkpoint provenance. | READY. Plot five traces plus saved mean; no smoothing. |
+| 4E Block B shrinkage | same as 4C | Per-seed shrinkage and saved mean/SD available. | READY. Preserve non-monotonicity and seed variation; do not present a dose law. |
 
-## Figure 4 — two distinct experimental regimes
+## Main tables
 
-### Block A: Phase 3.19 mechanism intervention
+| Table | Machine-readable sources | Status and required caveat |
+| --- | --- | --- |
+| Table 1 — dataset/protocol | Retina `outputs/retinamnist/resolution_sanity_check/seed_0/size_28/config.json`; UTK `outputs/utkface/phase3_7a_failure_replication/dataset_audit/{dataset_audit.json,split_class_counts.csv}` and CE `config.json`; Solar Phase 3.8 CE `config.json`, `alignment_audit.json`, `metrics.json`; phase notes only for concise canonical-backbone prose. | READY_WITH_TRANSFORMATION. Keep native Retina setup, frozen historical UTK manifest, and Solar retained-aligned future-period/temporal-overlap caveat. |
+| Table 2 — Figure 3 A/C direction summary | The four Figure 3 source pairs and their saved `metrics.json`/summary JSON/CSV files. | READY_WITH_TRANSFORMATION. Report within-setting rare MAE, exact fraction with count annotation, shrinkage, and global L1 MAE without crossing OOF and archived-test protocols. |
 
-Frozen Retina RPS features; direction-only heads; five-fold training-only OOF; one backbone seed; natural/balanced × CE/RPS. Expected directory `outputs/retinamnist/phase3_19_sampling_objective_direction_disentanglement/` is absent. Thus 4A (C4 MAE: E 1.697, G 1.712, C 1.348, F 1.318), 4B (mean `z4-z3`: C .030, E -.912, F .083, G -.878), and appendix candidates (shrinkage/routing/p4/positive fraction/cosine) are **BLOCKED**. These values are note-only in this checkout.
-
-### Block B: Phase 3.20A controlled severity
-
-Full CE backbone-plus-head retraining; supports `66,50,33,16,8` × five seeds; validation checkpoint selection; final predeclared test evaluation. Expected directory `outputs/retinamnist/phase3_20a_imbalance_severity_dose_response/` is absent. Therefore 4C mean p4, 4D mean `z4-z3`, and 4E shrinkage are all **BLOCKED**. No audit can verify 25 unique `(seed,n4_support)` cells, full seed/support coverage, or agreement with phase-summary aggregation. Do not connect its full-model `N4=66` baseline to Phase 3.18A frozen-head OOF CE.
-
-## Future main tables
-
-| Table | Sources | Status | Caveat |
-|---|---|---|---|
-| Table 1 dataset/protocol | Phase 3.3, 3.7A, 3.8 notes plus original configs/manifests | PARTIALLY_SUPPORTED | Solar source metadata is present; Retina/UTK source configs/artifacts are absent. Preserve Solar retained-subset and temporal-split caveat. |
-| Table 2 direction summary | Phase 3.10C, 3.18A, 3.15, 3.18B A/C summaries/predictions | PARTIALLY_SUPPORTED | Solar CE/RPS present; Retina cells absent. Every value must remain within its setting's protocol. |
-
-## Missing-data / unresolved-gap register
+## Missing-data and transformation register
 
 ### Fully supported locally
 
-- Solar CE Figure 1 routing, probability location, shrinkage, and endpoint MAE.
-- Solar CE/RPS Figure 3 rare MAE, exact fraction, shrinkage, global L1 metrics, and logits/probabilities for deterministic recomputation.
+- Original CE phenomenon inputs for RetinaMNIST, UTKFace, and Solar.
+- CE mechanism-path inputs for Retina OOF and Solar aligned test.
+- All four Figure 3 A/C settings, including saved logits for margins.
+- Phase 3.19 factorial and Phase 3.20A 25-cell severity grid.
 
-### Deterministic transformations required
+### Deterministic transformations required before plotting
 
-- Derive predictive mean/shrinkage and normalized exact fractions.
-- Derive Solar CE Figure 2 centroid groups and ID-keyed A/C joins.
-- Derive Solar RPS `zX-zM` from logits.
+- Parse serialized probability/logit vectors; compute exact discrete L1 actions
+  where not stored, predictive mean, shrinkage, endpoint MAE, exact fractions,
+  and margins.
+- Recompute raw training centroids and the Figure 2 per-ID group label, then
+  perform ID-keyed A/C joins with uniqueness and label assertions.
+- Aggregate the Phase 3.19 saved per-fold class-direction cosine only under a
+  declared aggregation rule; use saved Phase 3.20A mean/SD only after checking
+  it against the 25 per-seed rows.
 
-### Note-only or blocked in this checkout
+### Note-only or blocked sources
 
-- Retina CE/RPS Figure 2/3 sources; UTKFace CE Figure 1 source.
-- Phase 3.19 factorial source files.
-- Phase 3.20A per-run 25-cell severity files.
+None for the proposed Figure 1--4 panels. Phase notes remain scientific
+interpretation and cross-checks, not extraction sources. Do not promote
+unsupported historical exploratory plots into the main figures merely because a
+note reports an aggregate.
 
-**Smallest remediation:** restore/copy the cited historic output directories and configs into a read-only accessible artifact location; then run only deterministic extraction, uniqueness, and provenance checks. This is artifact recovery, not a new experiment.
+## Extraction stop conditions
+
+Stop data consolidation and report the conflict if any ID set, label set,
+split/protocol field, checkpoint/objective lineage, rare support, or saved
+aggregate disagrees with this audit. Deterministic extraction is authorized by
+this plan; new experiments, new metric selection, retraining, validation/test
+reuse beyond the saved artifacts, and final figures are not.

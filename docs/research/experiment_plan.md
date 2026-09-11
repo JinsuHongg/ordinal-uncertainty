@@ -389,7 +389,7 @@ mechanism paper must retain this boundary. See
 
 ## Immediate Next Action
 
-The dedicated [Figure 1--4 source-artifact and data-availability audit](figure_source_artifact_audit.md) is complete. It found material local source gaps: the cited RetinaMNIST/UTKFace and Phase 3.19/3.20A output directories are absent, while Solar sources are present. Review or restore the historical artifacts into a read-only accessible location before any deterministic figure-data extraction; do not infer missing values from notes or generate final figures.
+The dedicated [Figure 1--4 source-artifact and data-availability audit](figure_source_artifact_audit.md) is complete with **A — FIGURE SOURCES READY FOR DATA CONSOLIDATION**. Canonical tables were generated from the cited RetinaMNIST, UTKFace, Solar, Phase 3.19, and Phase 3.20A artifacts, and all 55 recorded ID, label, split, lineage, and aggregate checks passed. Do not infer values from notes or generate final figures.
 
 No method design, training/evaluation, tuning, new dataset, seed expansion, or
 test access is authorized. The manuscript must separate the consistently observed
