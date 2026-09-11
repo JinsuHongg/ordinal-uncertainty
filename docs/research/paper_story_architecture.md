@@ -68,7 +68,7 @@ these settings, while scale, bias, and collateral effects are dataset-dependent.
 It is not universal, necessarily causal, the best classifier, the only relevant
 head component, or objective-independent.
 
-### C4 — Balanced sampling is the dominant adaptation driver
+### C4 — Balanced sampling is the dominant adaptation factor
 
 On frozen RetinaMNIST RPS features, the direction-only 2x2 study gives C4 MAE
 `C=1.348`, `F=1.318`, versus natural-sampling `E=1.697`, `G=1.712`:
@@ -146,7 +146,7 @@ recovery is Retina RPS `0->2`, Retina CE `0->11`, Solar RPS `0->496/921`, and
 Solar CE `0->559/921`. Conclude only that the response is not restricted to
 RPS-trained representations in these two evaluated domains.
 
-### 4.5 Balanced sampling drives beneficial direction adaptation in RetinaMNIST
+### 4.5 Balanced sampling is the dominant adaptation factor in RetinaMNIST
 
 Show the 2x2 factorial pattern `C approximately F < E approximately G` for C4
 MAE, alongside shrinkage, routing, and `z4-z3`. Conclude balanced sampling is
@@ -164,6 +164,8 @@ Use about four figures.
 
 ### Figure 1 — Phenomenon: rare upper extremes exhibit inward localization
 
+Freeze this figure to the original **CE** baseline for RetinaMNIST, UTKFace, and Solar: the original, pre-intervention seed-0 model and exact discrete L1 Bayes decision. CE is the standard baseline for the phenomenon figure; CE/RPS robustness belongs in Figure 3.
+
 - **A:** Three small-multiple L1-Bayes routing bars for `Y=K-1` in RetinaMNIST,
   UTKFace, and Solar.
 - **B:** Predictive location `mu_p=sum_k k p_k` and shrinkage
@@ -175,16 +177,18 @@ cross-task-severity inference.
 
 ### Figure 2 — Failure is mixed between representation and head
 
-Prefer CE representations when valid aligned CE artifacts support all panels:
-`CE representation -> original head -> direction recovery`; Figure 3 separately
-shows RPS robustness.
+Freeze this figure to the CE mechanism pathway where valid aligned artifacts exist:
+`CE representation -> original CE head -> CE direction-only adaptation`; Figure 3 separately
+shows CE/RPS robustness.
 
 - **A:** RetinaMNIST and Solar stacked bars of train-centroid states:
   representation-inward versus rare-end-like.
 - **B:** Original A-head L1 routing conditioned on those states.
 - **C:** A->C exact recovery by state. Retina CE has 11 recoveries, all among
-  feature-nearest-4 samples. Derive Solar counts only when Phase 3.9 CE
-  assignments align with Phase 3.18B A/C sample IDs.
+  feature-nearest-4 samples. Solar CE is confirmed: 724 X-like cases change `0/0/9/715/0` to
+  `0/0/49/116/559` (0→559 exact), while 197 representation-inward cases
+  change `0/23/51/123/0` to `0/23/83/91/0` (0→0 exact). All exact recoveries
+  are X-like; this remains descriptive.
 - **D:** `Delta shrinkage = S_C-S_A` (or `Delta mu_p`) by state.
 
 Never mix incompatible populations, particularly Phase 3.3 Retina test C4
@@ -193,16 +197,20 @@ with Phase 3.18A OOF C4, in one sample-level analysis.
 ### Figure 3 — Direction adapts across objectives and domains
 
 For Retina RPS/CE and Solar RPS/CE, show paired A->C plots for (A) rare-end
-MAE, (B) normalized exact endpoint recovery with useful raw annotations, (C)
+MAE, (B) **exact rare-end fraction** with useful raw-count annotations only, (C)
 shrinkage, and (D) rare-versus-adjacent margin (`z4-z3` or `zX-zM`) centred at
-zero. Known shrinkage values are Retina RPS `1.797->1.384`, Retina CE
+zero. Verify the Retina rare-end denominator from artifacts before creating any figure table.
+
+RetinaMNIST direction results are training-only OOF head evaluations, whereas Solar results are the predeclared archived confirmatory readout. Treat the scientific comparison as sign and qualitative consistency of A→C localization response, not as four equivalent independent test-set replications. Known shrinkage values are Retina RPS `1.797->1.384`, Retina CE
 `1.678->1.244`, Solar RPS `1.228->0.773`, Solar CE `1.136->0.656`; retrieve
 exact saved RPS margins rather than hard-coding them. Known CE margin changes
 are Retina `-0.903->+0.261` and Solar `-3.109->+1.190`. Do not claim mediation.
 
-### Figure 4 — Sampling driver and severity boundary
+### Figure 4 — Dominant sampling signal and severity boundary
 
-Clearly label two distinct experimental regimes.
+Clearly label two distinct experimental regimes; do not draw them as one continuous causal chain. **Mechanism intervention study (Phase 3.19):** frozen RetinaMNIST RPS representation, direction-only heads, training-only OOF, one backbone seed, natural/balanced × CE/RPS factorial. **Controlled severity study (Phase 3.20A):** full CE backbone-plus-head retraining, five support levels × five seeds, validation checkpoint selection, and final predeclared test evaluation.
+
+Do not numerically connect the Phase 3.18A Retina CE A baseline (C4 MAE approximately 1.439 in frozen-head OOF) with the separate Phase 3.20A full-model `N4=66` CE baseline (approximately 2.330 ± .239): protocols and populations differ. Severity panels must identify the Phase 3.20A full-model protocol.
 
 - **A:** Factorial C4 MAE grouped plot using the C/F/E/G values above.
 - **B:** Factorial `z4-z3`; retrieve exact Phase 3.19 artifact values.
@@ -210,7 +218,7 @@ Clearly label two distinct experimental regimes.
 - **D:** Same for `z4-z3`.
 - **E:** Same for shrinkage, preserving non-monotonicity.
 
-The Figure 4 message is: balanced sampling drives beneficial direction
+The Figure 4 message is: balanced sampling is the dominant adaptation factor providing the beneficial training signal for direction
 adaptation in the Retina frozen-RPS factorial study, while lower support
 consistently weakens direct endpoint evidence but does not yield a clean
 localization dose response. Do not interpret sample-level uncertainty as

@@ -389,12 +389,7 @@ mechanism paper must retain this boundary. See
 
 ## Immediate Next Action
 
-Perform the dedicated Figure 1--4 source-artifact and data-availability audit
-specified by the [paper story architecture](paper_story_architecture.md), then
-construct reproducible figure-data tables and plotting scripts. This audit
-must verify source artifacts, populations, split roles, objectives, seeds,
-checkpoints, and cross-phase sample-ID alignment; it must flag unsupported
-panels rather than infer values. Do not generate final figures before it.
+The dedicated [Figure 1--4 source-artifact and data-availability audit](figure_source_artifact_audit.md) is complete. It found material local source gaps: the cited RetinaMNIST/UTKFace and Phase 3.19/3.20A output directories are absent, while Solar sources are present. Review or restore the historical artifacts into a read-only accessible location before any deterministic figure-data extraction; do not infer missing values from notes or generate final figures.
 
 No method design, training/evaluation, tuning, new dataset, seed expansion, or
 test access is authorized. The manuscript must separate the consistently observed

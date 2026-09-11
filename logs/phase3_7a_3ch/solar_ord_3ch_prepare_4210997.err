@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/users/jhong36/project/ordinal-uncertainty/scripts/phase3_7a_solar_3ch.py", line 112, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/users/jhong36/project/ordinal-uncertainty/scripts/phase3_7a_solar_3ch.py", line 88, in main
+    a=argparse.ArgumentParser();a.add_argument('mode',choices=['prepare','smoke','train']);a.add_argument('--method',choices=['ce','rps']);a.add_argument('--root',default='/scratch/users/jhong36/data/surya-bench-224.zarr');a.add_argument('--index',default='/scratch/users/jhong36/data');a.add_argument('--out',required=True);a.add_argument('--stats');a.add_argument('--epochs',type=int,default=300);a.add_argument('--batch',type=int,default=16);a.add_argument('--workers',type=int,default=8);args=a.parse_args(); out=Path(args.out);out.mkdir(parents=True,exist_ok=False); source_channels(args.root)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/users/jhong36/miniforge3/envs/ocqr/lib/python3.11/pathlib.py", line 1116, in mkdir
+    os.mkdir(self, mode)
+FileExistsError: [Errno 17] File exists: 'outputs/solar/phase3_7a_3ch/normalization/train_only'

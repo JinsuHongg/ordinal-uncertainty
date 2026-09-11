@@ -1,0 +1,4 @@
+  File "/home/users/jhong36/project/ordinal-uncertainty/scripts/run_phase3_15_solar_direction_scale.py", line 2
+    \"\"\"Frozen Phase 3.15 Solar RPS A/B/C/D direction-scale confirmation.\"\"\"
+     ^
+SyntaxError: unexpected character after line continuation character

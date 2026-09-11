@@ -1,0 +1,22 @@
+hostname=acidsgcn011 job_id=4368045 cwd=/home/users/jhong36/project/ordinal-uncertainty
+python=/home/users/jhong36/miniforge3/envs/ocqr/bin/python conda_env=ocqr
+Tesla V100-SXM2-32GB
+{'cuda_available': True, 'cuda_device_count': 1, 'torch': '2.6.0+cu124', 'torch_cuda': '12.4'}
+{'gpu': 'Tesla V100-SXM2-32GB'}
+{
+  "hostname": "acidsgcn011",
+  "slurm_job_id": "4368045",
+  "python": "/home/users/jhong36/miniforge3/envs/ocqr/bin/python",
+  "torch": "2.6.0+cu124",
+  "torch_cuda": "12.4",
+  "cuda_available": true,
+  "gpu": "Tesla V100-SXM2-32GB",
+  "checkpoint": "outputs/solar/phase3_8_shrinkage_confirmation/ce/seed_0/selected_checkpoint.pt",
+  "feature_cache": "outputs/solar/phase3_9_mechanism_audit/features/ce"
+}
+{
+  "output": "outputs/solar/phase3_18b_ce_direction_robustness",
+  "c_initialization_replay_max_abs_error": 1.9073486328125e-06,
+  "max_c_norm_error": 5.960464477539063e-08,
+  "max_c_bias_error": 0.0
+}

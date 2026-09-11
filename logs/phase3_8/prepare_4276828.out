@@ -1,0 +1,2 @@
+hostname=acidscn020 job_id=4276828 python=/home/users/jhong36/miniforge3/envs/ocqr/bin/python env=ocqr
+git=cbdfa44ef8e51377c6f6b4745b517bea9c863f7d cwd=/home/users/jhong36/project/ordinal-uncertainty config=scripts/phase3_8_solar_confirmation.py dataset=/scratch/users/jhong36/data/surya-bench-224.zarr output=outputs/solar/phase3_8_shrinkage_confirmation/data_audit seed=0

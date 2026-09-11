@@ -1,0 +1,13 @@
+/home/users/jhong36/project/ordinal-uncertainty/scripts/phase3_7a_solar_3ch.py:57: RuntimeWarning: invalid value encountered in divide
+  mean=total/count; std=np.sqrt(np.maximum(squared/count-mean*mean,1e-12))
+Traceback (most recent call last):
+  File "/home/users/jhong36/project/ordinal-uncertainty/scripts/phase3_7a_solar_3ch.py", line 112, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/users/jhong36/project/ordinal-uncertainty/scripts/phase3_7a_solar_3ch.py", line 91, in main
+    ds=stat_dataset(splits[0],args.root); mean,std=statistics(ds); payload={'channels':list(CHANNELS),'channel_indices':list(CHANNEL_INDICES),'shape':[3,224,224],'source_counts':[list(x) for x in EXPECTED],'image_aligned_train_count':len(ds),'mean':mean,'std':std,'transform':'sign(x)*log1p(abs(x))','fit_split':'train'}; (out/'normalization.json').write_text(json.dumps(payload,indent=2)+'\n');return
+                                                   ^^^^^^^^^^^^^^
+  File "/home/users/jhong36/project/ordinal-uncertainty/scripts/phase3_7a_solar_3ch.py", line 58, in statistics
+    if not(np.isfinite(mean).all() and np.isfinite(std).all() and (std>0).all()): raise ValueError('invalid train-only stats')
+                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid train-only stats

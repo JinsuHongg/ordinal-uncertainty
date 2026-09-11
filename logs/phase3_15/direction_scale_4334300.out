@@ -1,0 +1,13 @@
+hostname=acidsgn006 job_id=4334300 cwd=/home/users/jhong36/project/ordinal-uncertainty
+python=/home/users/jhong36/miniforge3/envs/ocqr/bin/python conda_env=ocqr
+NVIDIA GeForce RTX 2080 Ti
+{'cuda_available': True, 'cuda_device_count': 1, 'torch': '2.6.0+cu124'}
+{'gpu': 'NVIDIA GeForce RTX 2080 Ti'}
+{
+  "hostname": "acidsgn006",
+  "slurm_job_id": "4334300",
+  "cuda_available": true,
+  "gpu": "NVIDIA GeForce RTX 2080 Ti",
+  "python": "/home/users/jhong36/miniforge3/envs/ocqr/bin/python",
+  "torch": "2.6.0+cu124"
+}

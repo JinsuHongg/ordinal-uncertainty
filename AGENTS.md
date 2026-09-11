@@ -424,10 +424,7 @@ claim. See `docs/research/phase3_20a_retinamnist_imbalance_severity_dose_respons
 
 ## Next Authorized Work
 
-The next stage is the Figure 1--4 source-artifact and data-availability audit
-specified in `docs/research/paper_story_architecture.md`, followed by
-reproducible figure-data tables and plotting scripts. Do not generate final
-figures before that audit. No method design, training, evaluation, tuning,
+The Figure 1--4 source-artifact and data-availability audit is complete; see `docs/research/figure_source_artifact_audit.md`. It found material local source gaps, including absent cited RetinaMNIST/UTKFace and Phase 3.19/3.20A output trees. Do not build figure-data tables or final figures without a separate artifact-recovery review and deterministic provenance check. No method design, training, evaluation, tuning,
 ROP/bias revival, extra seed, or dataset run is authorized automatically. The
 framing does not authorize method freeze or final test evaluation.
 

@@ -1,0 +1,22 @@
+hostname=acidsgn002 job_id=4276835 python=/home/users/jhong36/miniforge3/envs/ocqr/bin/python env=ocqr
+Fri Sep  4 13:17:01 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.159.04             Driver Version: 580.159.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 2080 Ti     Off |   00000000:C1:00.0 Off |                  N/A |
+|  0%   25C    P8             30W /  260W |       0MiB /  11264MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+git=cbdfa44ef8e51377c6f6b4745b517bea9c863f7d cwd=/home/users/jhong36/project/ordinal-uncertainty config=scripts/phase3_8_solar_confirmation.py dataset=/scratch/users/jhong36/data/surya-bench-224.zarr output=outputs/solar/phase3_8_shrinkage_confirmation/rps/seed_0 seed=0
