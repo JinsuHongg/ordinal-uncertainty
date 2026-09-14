@@ -1,0 +1,14 @@
+hostname=acidsgcn013 job_id=4391248 array_task=2 cwd=/home/users/jhong36/project/ordinal-uncertainty
+method=ce seed=3 output=outputs/solar/mechanism_replication/backbones/ce/seed_3 python=/home/users/jhong36/miniforge3/envs/ocqr/bin/python conda_env=ocqr
+NVIDIA A30
+{'cuda_available': True, 'cuda_device_count': 1, 'torch': '2.6.0+cu124', 'torch_cuda': '12.4'}
+{'gpu': 'NVIDIA A30'}
+{
+  "output": "outputs/solar/mechanism_replication/backbones/ce/seed_3",
+  "method": "ce",
+  "seed": 3,
+  "selected_epoch": 1,
+  "validation_loss": 1.096287224245699,
+  "device": "cuda:0",
+  "gpu": "NVIDIA A30"
+}

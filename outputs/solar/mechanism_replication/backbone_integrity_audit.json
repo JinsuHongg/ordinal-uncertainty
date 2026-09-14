@@ -1,0 +1,167 @@
+{
+  "audit_scope": "CPU-only backbone integrity/provenance; no model inference or scientific outcome analysis",
+  "normalization_artifact": "outputs/solar/phase3_7a_3ch/normalization/train_only_retry_1/normalization.json",
+  "normalization_ok": true,
+  "records": [
+    {
+      "objective": "ce",
+      "seed": 1,
+      "checkpoint_path": "outputs/solar/mechanism_replication/backbones/ce/seed_1/selected_checkpoint.pt",
+      "artifacts": {
+        "selected_checkpoint.pt": true,
+        "training_history.csv": true,
+        "config.json": true,
+        "alignment_audit.json": true
+      },
+      "checkpoint_ok": true,
+      "selected_epoch": 1,
+      "validation_loss": 1.2213913387569941,
+      "config_ok": true,
+      "alignment_ok": true,
+      "no_test_evaluation": true,
+      "forbidden_artifacts": [],
+      "status": "READY",
+      "errors": []
+    },
+    {
+      "objective": "ce",
+      "seed": 2,
+      "checkpoint_path": "outputs/solar/mechanism_replication/backbones/ce/seed_2/selected_checkpoint.pt",
+      "artifacts": {
+        "selected_checkpoint.pt": true,
+        "training_history.csv": true,
+        "config.json": true,
+        "alignment_audit.json": true
+      },
+      "checkpoint_ok": true,
+      "selected_epoch": 1,
+      "validation_loss": 1.0379710869226408,
+      "config_ok": true,
+      "alignment_ok": true,
+      "no_test_evaluation": true,
+      "forbidden_artifacts": [],
+      "status": "READY",
+      "errors": []
+    },
+    {
+      "objective": "ce",
+      "seed": 3,
+      "checkpoint_path": "outputs/solar/mechanism_replication/backbones/ce/seed_3/selected_checkpoint.pt",
+      "artifacts": {
+        "selected_checkpoint.pt": true,
+        "training_history.csv": true,
+        "config.json": true,
+        "alignment_audit.json": true
+      },
+      "checkpoint_ok": true,
+      "selected_epoch": 1,
+      "validation_loss": 1.096287224245699,
+      "config_ok": true,
+      "alignment_ok": true,
+      "no_test_evaluation": true,
+      "forbidden_artifacts": [],
+      "status": "READY",
+      "errors": []
+    },
+    {
+      "objective": "ce",
+      "seed": 4,
+      "checkpoint_path": "outputs/solar/mechanism_replication/backbones/ce/seed_4/selected_checkpoint.pt",
+      "artifacts": {
+        "selected_checkpoint.pt": true,
+        "training_history.csv": true,
+        "config.json": true,
+        "alignment_audit.json": true
+      },
+      "checkpoint_ok": true,
+      "selected_epoch": 1,
+      "validation_loss": 1.1555229590617513,
+      "config_ok": true,
+      "alignment_ok": true,
+      "no_test_evaluation": true,
+      "forbidden_artifacts": [],
+      "status": "READY",
+      "errors": []
+    },
+    {
+      "objective": "rps",
+      "seed": 1,
+      "checkpoint_path": "outputs/solar/mechanism_replication/backbones/rps/seed_1/selected_checkpoint.pt",
+      "artifacts": {
+        "selected_checkpoint.pt": true,
+        "training_history.csv": true,
+        "config.json": true,
+        "alignment_audit.json": true
+      },
+      "checkpoint_ok": true,
+      "selected_epoch": 2,
+      "validation_loss": 0.09817176025949505,
+      "config_ok": true,
+      "alignment_ok": true,
+      "no_test_evaluation": true,
+      "forbidden_artifacts": [],
+      "status": "READY",
+      "errors": []
+    },
+    {
+      "objective": "rps",
+      "seed": 2,
+      "checkpoint_path": "outputs/solar/mechanism_replication/backbones/rps/seed_2/selected_checkpoint.pt",
+      "artifacts": {
+        "selected_checkpoint.pt": true,
+        "training_history.csv": true,
+        "config.json": true,
+        "alignment_audit.json": true
+      },
+      "checkpoint_ok": true,
+      "selected_epoch": 1,
+      "validation_loss": 0.08258761904634364,
+      "config_ok": true,
+      "alignment_ok": true,
+      "no_test_evaluation": true,
+      "forbidden_artifacts": [],
+      "status": "READY",
+      "errors": []
+    },
+    {
+      "objective": "rps",
+      "seed": 3,
+      "checkpoint_path": "outputs/solar/mechanism_replication/backbones/rps/seed_3/selected_checkpoint.pt",
+      "artifacts": {
+        "selected_checkpoint.pt": true,
+        "training_history.csv": true,
+        "config.json": true,
+        "alignment_audit.json": true
+      },
+      "checkpoint_ok": true,
+      "selected_epoch": 1,
+      "validation_loss": 0.0868841041458501,
+      "config_ok": true,
+      "alignment_ok": true,
+      "no_test_evaluation": true,
+      "forbidden_artifacts": [],
+      "status": "READY",
+      "errors": []
+    },
+    {
+      "objective": "rps",
+      "seed": 4,
+      "checkpoint_path": "outputs/solar/mechanism_replication/backbones/rps/seed_4/selected_checkpoint.pt",
+      "artifacts": {
+        "selected_checkpoint.pt": true,
+        "training_history.csv": true,
+        "config.json": true,
+        "alignment_audit.json": true
+      },
+      "checkpoint_ok": true,
+      "selected_epoch": 1,
+      "validation_loss": 0.09188030174506198,
+      "config_ok": true,
+      "alignment_ok": true,
+      "no_test_evaluation": true,
+      "forbidden_artifacts": [],
+      "status": "READY",
+      "errors": []
+    }
+  ]
+}
