@@ -1,10 +1,10 @@
 # Mechanism Replication Protocol
 
-**Status:** Pre-registration-style internal protocol for ICLR 2027 mechanism replication  
+**Status:** **FROZEN FOR EXECUTION** — ICLR 2027 mechanism replication
 **Project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Last updated:** 2026-09-13 (freeze-candidate revision after analysis-rule review)
+**Last updated:** 2026-09-13 (Stage 1 provenance audit completed; execution freeze)
 
-No new replication training should begin until the protocol/provenance audit items marked **MUST VERIFY** are resolved and this document is frozen.
+The scientific protocol, analysis rules, and execution configuration are now **FROZEN FOR EXECUTION**. Seed 0 remains hypothesis-forming; seeds 1–4 are the confirmatory replication set. The deterministic saved-logit replay has verified that RetinaMNIST RPS seeds 1–4 may be reused under this frozen protocol; see `docs/research/stage1_mechanism_provenance_audit.md`.
 
 ---
 
@@ -220,11 +220,11 @@ Allowed compatibility labels:
 
 - `COMPATIBLE`
 - `NOT_COMPATIBLE`
-- `UNKNOWN_REQUIRES_AUDIT`
+- `AMBIGUOUS`
 
 Only exact protocol matches may count toward the five backbone seeds.
 
-**MUST VERIFY before training:** which current RetinaMNIST and Solar checkpoints satisfy the replication protocol exactly.
+**Stage 1 audit result:** 12/20 existing backbone conditions are confirmed compatible. RetinaMNIST CE seeds 0–4 and RPS seeds 0–4 are compatible; Solar CE/RPS seed 0 are compatible. RetinaMNIST RPS seeds 1–4 each uniquely replayed their saved logits with `Normalize((0.5,)*3, (0.5,)*3)`, exact official-test sample IDs and labels, and maximum absolute errors no larger than `3.052e-05`. Solar CE/RPS seeds 1–4 are missing, so eight new backbone trainings are required before the full inventory exists. Seed 0 is descriptive/hypothesis-forming only and does not count toward confirmatory success criteria.
 
 ---
 
@@ -333,23 +333,23 @@ A violation invalidates the run as a direction-only intervention.
 
 The primary A-vs-C replication must reproduce the canonical direction-only procedure underlying the current Figure 3 evidence.
 
-The following must be recovered from existing artifacts and frozen before execution:
+The canonical C adaptation configuration is now frozen from the audited historical CE/RPS implementations:
 
-- sampler definition;
-- balanced-versus-natural rule used for canonical C;
-- replacement behavior;
-- batch size;
-- adaptation objective;
-- optimizer;
-- learning rate;
-- weight decay if any;
-- training epochs;
-- checkpoint selection, if any;
-- random seed handling for the head;
-- OOF handling for RetinaMNIST;
-- Solar readout protocol.
+- replacement class-balanced sampling;
+- cross-entropy head-adaptation objective for both CE- and RPS-trained backbones;
+- batch size `64`;
+- AdamW optimizer;
+- learning rate `1e-3`;
+- direction-parameter weight decay `0`;
+- fixed `100` epochs;
+- initialization from the original A classifier head;
+- original per-class row norms fixed;
+- original biases fixed;
+- only the direction parameter trainable;
+- RetinaMNIST uses deterministic five-fold training-only OOF head evaluation on a fixed representation;
+- Solar fits C on aligned training features and evaluates on the fixed archived readout population.
 
-**MUST VERIFY:** exact canonical C adaptation configuration from the existing implementation/artifacts.
+Runtime assertions are mandatory: cached/original-head replay and C initialization replay must each have maximum absolute logit error `<=2e-5`; C norm and bias preservation errors must each be `<=1e-6`.
 
 Do not tune these choices using the new replication outcomes.
 
@@ -376,7 +376,7 @@ If the audit confirms that only the head is OOF, use precise manuscript wording 
 
 Do not describe it as fully OOF backbone evaluation.
 
-**MUST VERIFY:** exact fold and centroid provenance from the current pipeline.
+**Frozen result:** the backbone is trained before OOF; only head fitting/evaluation is five-fold OOF. Historical all-centroid subgroups used full-training-feature centroids and remain descriptive only. Confirmatory H2 geometry must instead use fitting-fold-only centroids for each held RetinaMNIST fold, then concatenate held-fold geometry values.
 
 ---
 
@@ -398,7 +398,7 @@ The existing Solar readout must not be described as a newly independent confirma
 
 The replication can still test **backbone-realization robustness** on the same fixed readout population, but the manuscript must distinguish this from a new external validation set.
 
-**MUST VERIFY:** exact temporal/readout provenance before new Solar training.
+**Frozen result:** the Solar evaluation population is the same archived aligned readout used previously (approximately 2020–2024 test; train/validation primarily 2010–2019). It is reused for backbone-realization robustness and must not be described as a new independent external confirmation. Centroids for H2 are computed from aligned training features only; no validation/test sample contributes to centroid construction or model selection.
 
 ---
 
@@ -930,20 +930,20 @@ The manuscript-data pipeline should aggregate from these saved artifacts, not fr
 
 - [x] Initial novelty audit completed.
 - [x] Central novelty narrowed to endpoint representation/head mismatch and recoverability.
-- [ ] Audit any newly discovered directly overlapping paper before final protocol freeze.
+- [x] Targeted novelty-positioning audit completed through the current literature review; any later-discovered direct overlap must be documented without changing outcomes post hoc.
 
 ### Stage 1 — protocol/provenance audit
 
-- [ ] Recover exact canonical A/C implementation details.
-- [ ] Audit RetinaMNIST OOF semantics.
-- [ ] Audit Solar evaluation/readout provenance.
-- [ ] Build checkpoint compatibility inventory.
-- [ ] Set numerical tolerances for norm/bias checks.
-- [ ] Freeze the historical all-centroid subgroup definition separately from the endpoint-vs-adjacent margin.
-- [ ] Freeze the H2a regression/association model and confidence-interval method.
-- [ ] Freeze the generic centroid-separation control definition.
-- [ ] Record seed 0 as hypothesis-forming and seeds 1--4 as the new replication subset.
-- [ ] Freeze all configs and analysis definitions.
+- [x] Recover exact canonical A/C implementation details.
+- [x] Audit RetinaMNIST OOF semantics.
+- [x] Audit Solar evaluation/readout provenance.
+- [x] Build checkpoint compatibility inventory (12/20 compatible; Retina RPS seeds 1–4 replay-verified).
+- [x] Set numerical tolerances for replay/norm/bias checks.
+- [x] Freeze the historical all-centroid subgroup definition separately from the endpoint-vs-adjacent margin.
+- [x] Freeze the H2a regression/association model and confidence-interval method.
+- [x] Freeze the generic centroid-separation control definition.
+- [x] Record seed 0 as hypothesis-forming and seeds 1--4 as the new replication subset.
+- [x] Freeze all configs and analysis definitions.
 
 ### Stage 2 — RetinaMNIST replication
 
@@ -1047,16 +1047,16 @@ The intended contribution remains a bounded empirical mechanism characterization
 
 ## 26. Current authorization status
 
-> **NO NEW REPLICATION TRAINING AUTHORIZED BY THIS DOCUMENT YET.**
+> **FROZEN FOR EXECUTION.**
 
-The immediate next action is the Stage 1 protocol/provenance audit:
+The experimental design, H1/H2 definitions, confirmatory seed roles, head-adaptation protocol, centroid rules, generic-difficulty control, success criteria, and numerical integrity tolerances are frozen before new replication outcomes are inspected.
 
-1. recover the exact canonical A/C implementation;
-2. verify RetinaMNIST OOF semantics;
-3. verify Solar readout provenance;
-4. inventory compatible checkpoints;
-5. freeze configs and numerical checks.
+Execution authorization:
 
-Only after those items are resolved should the GPU replication budget be finalized.
+1. **Solar CE/RPS seeds 1–4:** authorized for backbone training under the frozen Phase 3.8-compatible protocol. This is eight new backbone trainings.
+2. **RetinaMNIST CE seeds 1–4:** compatible existing checkpoints may be reused; no retraining is authorized unless a later integrity failure is documented.
+3. **RetinaMNIST RPS seeds 1–4:** deterministic saved-logit replay against the canonical local RetinaMNIST split is complete. Reuse the verified checkpoints with `Normalize((0.5,)*3, (0.5,)*3)`; do not alter H1/H2 rules.
+4. **Seed 0:** historical/hypothesis-forming only; it may appear in all-seed descriptive summaries but is excluded from confirmatory success decisions.
+5. **A/C replication:** authorized once a backbone condition is verified compatible or newly trained under this frozen protocol.
 
-This document is now a **freeze candidate for analysis rules**, not yet `FROZEN FOR EXECUTION`. Stage 1 may verify provenance, implementation details, numerical tolerances, and checkpoint compatibility, but it must not change the H1/H2 outcome definitions or success criteria after new replication outcomes are inspected.
+No method redesign, scale/bias replication, Phase 3.19 factorial replication, dataset expansion, threshold tuning, or success-criterion change is authorized by this freeze. Any technical correction required to execute the frozen design must be documented without using scientific outcomes to choose the correction.
