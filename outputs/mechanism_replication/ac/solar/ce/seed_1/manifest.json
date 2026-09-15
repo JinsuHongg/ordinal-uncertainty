@@ -1,0 +1,47 @@
+{
+  "protocol": "FROZEN FOR EXECUTION A/C mechanism replication",
+  "dataset": "solar",
+  "backbone_objective": "ce",
+  "backbone_seed": 1,
+  "checkpoint": "outputs/solar/mechanism_replication/backbones/ce/seed_1/selected_checkpoint.pt",
+  "feature_definition": "512-D input to model.fc after average pooling/flatten",
+  "retina_data_provenance": null,
+  "retina_preprocessing": null,
+  "seed_role": "confirmatory",
+  "A": "original frozen head",
+  "C": {
+    "objective": "cross_entropy",
+    "sampling": "replacement class-balanced",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "epochs": 100,
+    "direction_weight_decay": 0.0,
+    "fixed_original_norms": true,
+    "fixed_original_biases": true
+  },
+  "integrity_tolerances": {
+    "a_replay_max_abs_error": 2e-05,
+    "c_initialization_replay_max_abs_error": 2e-05,
+    "c_norm_error": 1e-06,
+    "c_bias_error": 1e-06
+  },
+  "integrity": {
+    "a_replay_max_abs_error": 5.7220458984375e-06,
+    "c_initialization_replay_max_abs_error": 9.5367431640625e-07,
+    "c_max_norm_error": 0.0,
+    "c_max_bias_error": 0.0,
+    "evaluation_population": "reused archived aligned Solar readout; not a new external confirmation",
+    "centroid_rule": "aligned training features only"
+  },
+  "rare_end_h1_summary": {
+    "support": 921,
+    "a_mae": 1.0521172638436482,
+    "c_mae": 0.4223669923995657,
+    "delta_mae_c_minus_a": -0.6297502714440826,
+    "a_exact": 0,
+    "c_exact": 656,
+    "a_mean_shrinkage": 1.018169529933606,
+    "c_mean_shrinkage": 0.536519478343059
+  }
+}
