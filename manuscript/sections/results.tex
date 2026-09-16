@@ -1,0 +1,145 @@
+\subsection{Rare-end inward localization}
+\label{sec:results-phenomenon}
+
+In the studied imbalanced ordinal settings, rare upper extremes exhibit
+systematic inward localization. This pattern is distinct from generic
+misclassification because the predicted ordinal location is displaced toward
+interior classes. Under the original CE classifiers, upper-end routing, the
+predictive mean, and inward shrinkage all indicate an interior displacement in
+RetinaMNIST and Solar. The severity differs by dataset and is not compared as a
+common scale. Figure~\ref{fig:phenomenon} summarizes the phenomenon using
+rare-end routing, predictive location, and lower-versus-upper endpoint MAE.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figure1.png}
+\caption{Rare upper-end inward localization in the studied ordinal tasks. The
+canonical figure shows routing, predictive location, and endpoint asymmetry
+under the original CE classifiers. UTKFace is historical supporting evidence,
+not part of the multi-seed confirmatory block.}
+\label{fig:phenomenon}
+\end{figure}
+
+\subsection{Representation and classifier-head decomposition}
+\label{sec:results-decomposition}
+
+Historical seed-0 analyses provide a descriptive decomposition of this
+failure. Some true rare-end samples are representation-inward under the
+training-centroid diagnostic, whereas others retain rare-end-like geometry but
+are mapped inward by the original classifier head. The latter group motivates a
+head-level intervention because its localization is not fixed by the original
+head output. Centroid routing is a diagnostic, not causal proof of
+representation collapse or irrecoverability. These historical analyses are
+mechanism-forming evidence and are not part of the multi-seed confirmatory
+block.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figure2.png}
+\caption{Historical representation/head decomposition in audited
+RetinaMNIST training-only OOF and Solar aligned-readout CE populations.
+Centroid groups are descriptive; the figure does not establish a universal
+causal decomposition.}
+\label{fig:decomposition}
+\end{figure}
+
+\subsection{Direction-only adaptation: historical evidence}
+\label{sec:results-historical-direction}
+
+The original A/C comparisons treated the classifier head as a controlled
+intervention. Condition A uses the original frozen head. Condition C preserves
+the frozen representation, original class-specific row norms, and original
+biases while adapting classifier direction under balanced replacement
+sampling. In the historical seed-0 RetinaMNIST and Solar analyses, C moved
+rare-end predictions outward, reduced rare-end MAE, and increased exact
+rare-end decisions relative to A. These results motivated the confirmatory
+backbone-seed protocol below. They are historical/hypothesis-forming results,
+not observations included in the confirmatory seed summaries.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figure3.png}
+\caption{Historical A-to-C direction-only response across the evaluated CE-
+and RPS-trained representations. RetinaMNIST uses training-only OOF head
+evaluation and Solar uses a fixed archived readout. Confirmatory backbone-seed
+evidence is summarized separately in Table~\ref{tab:confirmatory-h1}.}
+\label{fig:historical-direction}
+\end{figure}
+
+\subsection{Confirmatory direction-only replication across backbone seeds}
+\label{sec:results-h1}
+
+We next evaluated the frozen H1 criterion on new backbone seeds 1--4 in each
+dataset-objective setting. The primary paired endpoint was
+$\Delta\mathrm{MAE}=\mathrm{MAE}_{C}-\mathrm{MAE}_{A}$ for rare-end exact-L1
+decisions; negative values indicate improved localization. The backbone seed,
+not an OOF fold or an individual sample, is the replication unit.
+
+Across all four dataset-objective settings, the direction of the effect
+replicated in all four confirmatory backbone seeds
+(Table~\ref{tab:confirmatory-h1}). The mean $\Delta\mathrm{MAE}$ was negative
+for RetinaMNIST CE and RPS and for Solar CE and RPS. The frozen H1 verdict is
+therefore replicated in every setting. The 95\% intervals are descriptive
+rather than additional decision gates. In particular, the RetinaMNIST CE
+interval crosses zero, but the setting meets the preregistered four-of-four
+negative-sign criterion. These results support a reproducible direction-only
+localization response under the tested frozen protocols; they do not establish
+objective equivalence, a universal classifier correction, or global/UQ
+improvement.
+
+\input{tables/table_confirmatory_h1}
+
+\subsection{Endpoint-specific geometry as a setting-dependent diagnostic}
+\label{sec:results-h2a}
+
+H2a asks whether endpoint-specific representation geometry adds information
+about final C inward shrinkage beyond original-head state and generic centroid
+separation. The primary comparison uses $M_0$, which includes the original-head
+state and generic separation, and $M_1$, which additionally includes the
+endpoint-versus-adjacent representation margin. The outcome is final C inward
+shrinkage. H2b is secondary and does not alter this analysis.
+
+The H2a result is setting-dependent (Table~\ref{tab:confirmatory-h2a}). Solar
+CE and Solar RPS meet the strong preregistered criterion. RetinaMNIST CE has a
+beneficial coefficient sign in all four seeds, but positive incremental
+leave-one-out value in only two of four, yielding a partial verdict.
+RetinaMNIST RPS has the beneficial coefficient sign in two of four seeds and
+does not support H2a. Endpoint-specific geometry therefore provides additional
+explanatory value in some settings, rather than a universal explanation for
+direction-only recovery.
+
+\input{tables/table_confirmatory_h2a}
+
+\subsection{Controlled adaptation-factor study}
+\label{sec:results-factorial}
+
+Within the controlled RetinaMNIST study on one frozen RPS representation,
+balanced sampling was the dominant observed adaptation factor. Balanced CE and
+balanced RPS heads both improved class-4 MAE and the class-4-versus-class-3
+margin relative to their natural-sampling counterparts. Differences between CE
+and RPS adaptation objectives within a sampling regime were smaller. This
+result identifies an associated training signal in this frozen, one-backbone
+factorial study. It does not establish that balanced sampling universally drives
+direction change or define a new classifier method.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figure4.png}
+\caption{Controlled RetinaMNIST factor and severity studies. The frozen-RPS
+factorial and full-CE support-severity sweep are distinct regimes and are not
+interpreted as one causal chain.}
+\label{fig:factor-severity}
+\end{figure}
+
+\subsection{Rare-support severity study}
+\label{sec:results-severity}
+
+The separate full-CE RetinaMNIST support-severity grid provides a boundary on
+the imbalance interpretation. Lower class-4 support consistently reduced direct
+class-4 evidence, including mean $p_4$ and the class-4-versus-class-3 margin.
+However, class-4 MAE, inward shrinkage, severe-error prevalence, and
+centroid-routing outcomes were seed-variable and non-monotonic. Support
+reduction alone therefore did not produce a clean localization dose-response
+explanation. These full-model results are not numerically combined with the
+historical frozen-head RetinaMNIST baselines because their protocols and
+evaluation populations differ.

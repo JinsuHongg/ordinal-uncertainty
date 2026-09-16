@@ -496,15 +496,29 @@ This claim should not enter the abstract as an established result until the repl
 
 ## 8. Recommended central positioning
 
-### Current defensible positioning
+### Final positioning after frozen replication
 
-> **We study a failure mode in imbalanced ordinal classification where rare endpoint samples may retain endpoint-aligned feature geometry but are nevertheless localized inward by the classifier head. A controlled direction-only intervention shows that part of this failure can be recovered without changing the representation.**
+> **We characterize rare-end inward localization in imbalanced ordinal
+> classification and show that a fixed-norm, fixed-bias direction-only head
+> intervention reproducibly improves rare-end localization across the tested
+> CE- and RPS-based representations in RetinaMNIST and Solar, without changing
+> the representation.**
 
-### Stronger target positioning, conditional on replication
+This is a controlled empirical mechanism claim, not a new classifier method,
+not a claim that direction is novel, and not a universal correction claim.
 
-> **Endpoint-specific representation geometry adds explanatory value for direction-only rare-end recovery beyond generic sample difficulty and original-head confidence.**
+### Geometry-conditioned recoverability: final status
 
-The stronger statement is the more distinctive ICLR mechanism contribution, but it must be earned by the replication study. The paper should describe samples only as recovered or not recovered under the tested direction-only intervention; failure to recover does not establish that the representation is the limiting cause.
+> **Endpoint-specific representation geometry can add explanatory value for
+> final direction-only localization beyond original-head state and generic
+> centroid geometry, but this is setting-dependent: strong in Solar, partial in
+> Retina CE, and unsupported under the preregistered H2a criterion in Retina
+> RPS.**
+
+Geometry-conditioned recoverability is consequently a supporting diagnostic,
+not the central novelty or an abstract-level universal mechanism claim.  The
+paper may report the setting-specific H2a pattern, but failure to recover must
+not be labeled as a representation-limited causal failure.
 
 ---
 
@@ -590,16 +604,17 @@ Do not spend substantial GPU budget if prior work is found that already establis
 
 ---
 
-## 12. Current decision
+## 12. Final decision
 
-> **PROVISIONAL GO — narrow mechanism claim cleared for replication, not yet for final novelty claim.**
+> **GO — bounded mechanism paper claim locked after replication.**
 
-The strongest currently defensible contribution is not that balancing helps a rare class, nor that classifier direction matters. It is the proposed decomposition:
+The primary contribution is not that balancing helps a rare class, that
+classifier direction matters, or that generic representation/head decoupling
+exists.  It is the reproducible ordinal localization response under the
+controlled frozen-head intervention across the four RetinaMNIST/Solar
+dataset-objective settings.  Endpoint-specific geometry is reported as a
+setting-dependent diagnostic rather than a universal explanatory layer.
 
-
-a retained endpoint representation  
-→ possible classifier-head mislocalization  
-→ controlled direction-only recovery  
-→ recovery associated with endpoint-specific geometry beyond generic difficulty.
-
-The next document, `mechanism_replication_protocol.md`, must therefore treat **independent-backbone reproducibility** and **endpoint-specific geometry beyond generic difficulty** as the central tests.
+The completed replication outcome is summarized in
+`docs/research/mechanism_cross_setting_synthesis.md`.  No new metric search or
+post-hoc H2 alteration is justified by the partial/unsupported Retina results.

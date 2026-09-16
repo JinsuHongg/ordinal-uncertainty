@@ -1,0 +1,97 @@
+Ordinal labels encode both class identity and position. An error from class
+$4$ to class $3$ differs structurally from an error from class $4$ to class
+$0$, even when both are exact-class errors. This distinction is especially
+important for rare endpoint classes in imbalanced ordinal settings, where
+aggregate accuracy or mean error can obscure the direction of an error. A rare
+upper endpoint may be assigned to an adjacent interior class, or its predicted
+probability mass may be distributed across more central classes. These outcomes
+have different implications for ordinal decisions, but are often grouped under
+the same tail-class performance summary.
+
+The distinction is not merely semantic. A prediction rule that preserves much
+of the endpoint probability mass but makes an adjacent decision has a different
+ordinal profile from one whose distribution is centered several classes inward.
+For applications that use the ordered label itself, this difference affects the
+size and direction of the downstream decision error. A standard class-wise
+recall result cannot determine whether an endpoint failure is a local boundary
+error or a broader displacement toward the interior.
+
+We study this pattern as \emph{rare-end inward localization}. For a true upper
+endpoint, inward localization is visible in discrete routing, predictive
+location, and inward shrinkage of the predictive distribution. It is not
+defined by low exact-class accuracy alone. Standard imbalance analyses can show
+that a rare class is difficult, while leaving open whether its errors are
+directionally displaced toward the interior of the ordered label space. This
+distinction also separates a modest adjacent error from a larger ordinal
+mislocalization. We describe inward localization in the studied imbalanced
+settings; we do not assume that imbalance alone causes it.
+
+This perspective complements, rather than replaces, standard evaluation.
+Accuracy, MAE, and calibration remain useful summaries, but they do not by
+themselves identify the location of a predictive distribution relative to the
+true endpoint. We therefore use routing together with predictive mean and
+inward shrinkage to characterize the observed phenomenon. These diagnostics
+keep the ordered structure visible without treating any one scalar score as a
+complete account of rare-end behavior.
+
+Prior work has established that long-tail recognition can involve both
+representation and classifier head effects. It has also developed decoupled
+training, balanced classifier retraining, and logit adjustment
+\cite{kang2020decoupling,alshammari2022weight,menon2021logit}; related work
+also analyzes classifier and feature geometry
+\cite{c2am2022angular,zhu2022balanced,yi2025geometry,wang2026alignment}.
+Ordinal classification work similarly uses ordering-aware costs and
+resampling to improve predictive performance under ordered labels
+\cite{zhu2019smor,lazaro2023bayesian}. These directions
+motivate attention to classifier heads and geometry, but they do not by
+themselves characterize rare ordinal endpoints as an inward-localization
+phenomenon. Our question is narrower: when a rare upper endpoint is localized
+inward, how much of that localization can be altered by a classifier-head
+direction intervention while the representation, class-specific scale, and bias
+are held fixed?
+
+This question does not require an assumption that every rare-end sample has the
+same failure mode. A representation may already place some endpoint samples
+closer to an interior class, whereas other samples may retain endpoint-like
+geometry before the original head maps them inward. The distinction motivates a
+decomposition and a constrained intervention, while leaving the centroid-based
+representation diagnostic descriptive rather than causal.
+
+We address this question through a mechanism analysis rather than a new
+classifier proposal. We first diagnose rare-end inward localization and use
+historical centroid-based analyses to distinguish representation-inward samples
+from samples that retain rare-end-like geometry but are mapped inward by the
+original head. We then compare the original frozen head with a direction-only
+head adaptation that preserves the original row norms and biases. The primary
+test uses independently trained CE- and RPS-based backbone seeds in
+RetinaMNIST and Solar. Across both datasets and objectives, all four
+confirmatory backbone seeds per setting reduce rare-end localization error under
+the direction-only intervention. Endpoint-specific representation geometry adds
+explanatory value strongly in Solar, is partial in RetinaMNIST CE, and is not
+supported by the preregistered criterion in RetinaMNIST RPS. We also use
+controlled RetinaMNIST studies to examine the adaptation signal and the
+boundary of a rare-support interpretation.
+
+The cross-setting replication and the geometry analysis answer different
+questions. The former asks whether the direction-only response recurs across
+independently trained backbones within each tested setting. The latter asks
+whether one endpoint-specific representation measure adds explanatory value
+after accounting for original-head state and generic geometry. Reporting both
+the strong and mixed outcomes prevents the more stable intervention response
+from being mistaken for a universal account of recoverability.
+
+Our contributions are:
+\begin{itemize}
+    \item We define and characterize rare-end inward localization using
+    ordinal routing, predictive location, and shrinkage in the studied
+    imbalanced ordinal settings.
+    \item We show that a fixed-norm, fixed-bias direction-only classifier-head
+    intervention reproducibly improves rare-end localization across
+    RetinaMNIST and Solar under CE- and RPS-trained representations, with the
+    effect sign replicated in all four confirmatory backbone seeds per setting.
+    \item We bound the mechanism interpretation: the historical
+    representation/head decomposition is descriptive, endpoint-specific
+    geometry is setting-dependent, and the controlled factor and support
+    studies do not justify a universal rebalancing or imbalance-causality
+    claim.
+\end{itemize}

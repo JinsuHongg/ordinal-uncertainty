@@ -1,0 +1,38 @@
+\section{Secondary diagnostics and additional metrics}
+
+\subsection{H2b secondary analysis}
+
+H2b uses the A--C movement parameterization and is secondary, non-independent,
+and unable to rescue H2a. The locally retained Retina outputs give the following
+mean changes over 66 class-4 OOF examples.
+
+\begin{center}
+\begin{tabular}{llrr}
+\toprule
+Objective & Seed & Mean $\Delta\mu_p$ & Mean $\Delta p_4$ \\
+\midrule
+CE & 1 & .225 & .131 \\
+CE & 2 & .766 & .254 \\
+CE & 3 & .437 & .190 \\
+CE & 4 & .821 & .320 \\
+RPS & 1 & .388 & .270 \\
+RPS & 2 & .648 & .282 \\
+RPS & 3 & .635 & .200 \\
+RPS & 4 & .660 & .282 \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Retina H2b secondary output.}
+\end{center}
+
+\subsection{Global and uncertainty-quality context}
+
+Rare-end localization improvement is not asserted to imply universal global or
+uncertainty-quality improvement. The retained historical seed-0 direction
+summaries illustrate this separation: global exact-L1 MAE changes from .696 to
+.721 for Retina RPS, .693 to .709 for Retina CE, .452 to .552 for Solar RPS,
+and .456 to .595 for Solar CE under A to C. The Phase 3.19 summary additionally
+retains NLL, Brier, RPS, ECE, risk--error Spearman, severe AUROC/AUPRC, and
+selective MAE for A/C/E/F/G. These diagnostics are historical, single-backbone
+context rather than an additional confirmatory endpoint.
+
+No new UQ metric, seed aggregation, or selective analysis is introduced here.

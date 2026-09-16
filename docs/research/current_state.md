@@ -2,8 +2,8 @@
 
 ## Status
 **Active project:** Ordinal Uncertainty Quantification for Imbalanced Ordinal Classification  
-**Current stage:** Phase 3.20A RetinaMNIST Controlled Imbalance-Severity Dose
-Response complete — **B — PARTIAL / NON-MONOTONIC IMBALANCE EFFECT**.
+**Current stage:** Cross-setting mechanism synthesis complete — **A — READY
+FOR MANUSCRIPT WRITING WITH A BOUNDED CLAIM SET**.
 
 ### Project-level observed phenomenon
 
@@ -14,13 +14,16 @@ representation quality, dataset structure, or label ambiguity.
 
 ### Cross-dataset frozen-head mechanism
 
-Across the tested frozen RPS representations on RetinaMNIST, UTKFace, and
-Solar, rare upper-end localization consistently improves under classifier
-direction adaptation. Phase 3.18A and 3.18B additionally reproduce the A→C
-response on frozen CE representations in RetinaMNIST and Solar. Direct
-cross-objective direction evidence therefore covers CE and RPS in those two
-domains, within evaluated one-backbone-seed protocols; it is not architecture-,
-objective-, or population-universal.
+Frozen H1 is replicated across all four new backbone seeds in each of the
+RetinaMNIST CE, RetinaMNIST RPS, Solar CE, and Solar RPS settings.  Thus,
+direction-only adaptation reproducibly improves rare-end localization across
+the tested CE/RPS representations in the two confirmatory datasets.  This is
+not architecture-, objective-, population-, or intervention-universal.
+
+Frozen H2a is setting-dependent: strong in Solar CE/RPS, partial in Retina CE,
+and not supported in Retina RPS.  Endpoint-specific geometry is therefore a
+supporting explanatory diagnostic, not a universal recovery mechanism or the
+central manuscript novelty.
 
 ### Dataset-specific mechanism findings
 
@@ -413,6 +416,17 @@ full CE grid, reduced C4 support consistently lowers p4 and the C4-vs-C3
 margin, but C4 MAE, shrinkage, severe burden, and train-centroid routing are
 seed-variable and non-monotonic. This controlled result does not support a
 universal dose-response claim. See [Phase 3.20A](phase3_20a_retinamnist_imbalance_severity_dose_response.md).
+
+## Cross-Setting Mechanism Synthesis
+
+**A — READY FOR MANUSCRIPT WRITING WITH A BOUNDED CLAIM SET.**  H1 is strongly
+replicated across two datasets, two objectives, and four new backbone seeds per
+setting.  H2a remains setting-dependent and cannot support a universal
+geometry-conditioned recoverability claim.  UTKFace has a provenance-clean
+seed-0 historical record but no seed-1–4 backbones; it remains supporting-only,
+not part of the primary confirmatory block.  See the
+[cross-setting synthesis](mechanism_cross_setting_synthesis.md) and
+[UTKFace supporting audit](utkface_supporting_replication_audit.md).
 
 ## Next Authorized Work
 

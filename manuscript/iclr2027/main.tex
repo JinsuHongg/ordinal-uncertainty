@@ -1,0 +1,20 @@
+\documentclass{article}
+\usepackage{iclr2027_conference,times}
+\usepackage{booktabs,graphicx,amsmath,longtable,array,capt-of,hyperref,url}
+\graphicspath{{../../outputs/manuscript/figures/figure1/}{../../outputs/manuscript/figures/figure2/}{../../outputs/manuscript/figures/figure3/}{../../outputs/manuscript/figures/figure4/}}
+\title{Classifier-Head Contributions to Rare-End Inward Localization in Imbalanced Ordinal Classification}
+\author{Anonymous Authors}
+\begin{document}\maketitle
+\begin{abstract}Rare ordinal endpoints can be mislocalized toward interior classes, a failure not determined by aggregate accuracy or ordinal error alone. We characterize this pattern as rare-end inward localization and separate representation and classifier-head contributions with a fixed-norm, fixed-bias direction-only head probe. Across RetinaMNIST and Solar with CE- and RPS-trained frozen representations, the probe improves rare-end exact-L1 localization in every confirmatory backbone seed. Endpoint-specific centroid geometry adds predictive value in Solar, is partial in RetinaMNIST CE, and is not supported in RetinaMNIST RPS. Controlled RetinaMNIST analyses identify balanced sampling as the dominant observed adaptation signal but do not yield a monotonic rare-support dose response. The results establish a reproducible, head-actionable component of rare-end localization in these settings while bounding any universal correction claim.\end{abstract}
+\input{sections/body}
+\section*{AI use statement}Generative AI tools assisted with manuscript drafting and editing, code and documentation assistance, citation organization, and analysis scripting. Authors reviewed the resulting text, code, and artifacts and remain responsible for all scientific claims, experimental decisions, and the final submission. The empirical results reported here come from the stated saved experiments and artifacts; AI assistance did not replace author verification.
+\section*{Ethics statement}This work analyzes existing RetinaMNIST, UTKFace, and Solar datasets and does not collect new data or make clinical or individual-level deployment claims. The medical and face/age datasets are used only for the reported research analyses.
+\section*{Reproducibility statement}The main text specifies the frozen A/C intervention, data roles, H1 and H2a decision rules, and confirmatory seed definition. The appendix provides configuration details, seed-level results, historical analyses, and provenance information. Code and corresponding artifacts will be released anonymously if permitted by the submission process.
+\bibliographystyle{iclr2027_conference}\bibliography{references}
+\clearpage\appendix
+\section{Reproducibility and configurations}\input{appendix/reproducibility}
+\section{Confirmatory seed-level results}\input{appendix/confirmatory_seed_results}
+\section{Historical mechanism analyses}\input{appendix/historical_mechanism}
+\section{UTKFace historical support}\input{appendix/utkface_supporting}
+\section{Secondary diagnostics}\input{appendix/secondary_diagnostics}
+\end{document}

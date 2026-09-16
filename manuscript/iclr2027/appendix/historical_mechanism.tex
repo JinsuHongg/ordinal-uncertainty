@@ -1,0 +1,89 @@
+\section{Historical mechanism evidence and controlled diagnostics}
+
+\subsection{Historical seed-0 centroid decomposition}
+
+The following results are historical/hypothesis-forming evidence only. They
+motivate the representation/head decomposition but are not confirmatory
+replications. Table~\ref{tab:supp-historical-groups} reports the retained CE
+centroid strata and A/C exact-L1 outcomes.
+
+\begin{center}
+\begin{tabular}{llrrrrrr}
+\toprule
+Dataset & Centroid stratum & $n$ & A exact & C exact & A MAE & C MAE & $\Delta\mu_p$ \\
+\midrule
+RetinaMNIST & rare-end-like & 48 & 0 & 11 & 1.250 & .854 & .470 \\
+RetinaMNIST & representation-inward & 18 & 0 & 0 & 1.944 & 1.500 & .338 \\
+Solar & rare-end-like & 724 & 0 & 559 & 1.012 & .296 & .598 \\
+Solar & representation-inward & 197 & 0 & 0 & 1.492 & 1.655 & .044 \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Historical seed-0 CE centroid strata. Centroids are
+training-derived diagnostics, not causal labels.}
+\label{tab:supp-historical-groups}
+\end{center}
+
+The historical original-head endpoint routes are also retained: Retina CE
+seed-0 has class-4 L1 routing \([1,1,9,9,0]\) (MAE 1.700; shrinkage 1.955),
+and Solar CE seed-0 has X routing \([0,23,60,838,0]\) (MAE 1.115;
+shrinkage 1.136). These values describe a fixed historical population and are
+not pooled with the seed-1--4 evidence.
+
+\subsection{Historical B/D head probes}
+
+B denotes a balanced full-head refit; D denotes a controlled-scale probe. Both
+are historical mechanism controls, not candidate methods or confirmatory
+comparators. Their role is limited to showing why A/C is the controlled primary
+contrast: B can change directions, norms, and biases together, and D isolates
+one scale manipulation. The retained Solar RPS seed-0 control includes A, B,
+C, and D at fixed \(\alpha=.50\); its frozen phase note reports that scale did
+not improve over direction-only C. This setting-specific historical observation
+does not support a universal scale conclusion.
+
+\subsection{Phase 3.19 factorial and Phase 3.20A severity study}
+
+The Phase 3.19 study is one frozen Retina RPS representation (seed 0), using
+training-only OOF direction adaptation. It crosses replacement-balanced versus
+natural sampling with CE versus RPS adaptation objectives. Table~\ref{tab:supp-factorial}
+reports the saved rare-class outcomes; it does not establish a cross-dataset
+method claim.
+
+\begin{center}
+\begin{tabular}{llrrrr}
+\toprule
+Condition & Sampling/objective & C4 MAE & Exact & Shrinkage & $z_4-z_3$ \\
+\midrule
+C & balanced / CE & 1.348 & 2/66 & 1.384 & .030 \\
+E & natural / CE & 1.697 & 0/66 & 1.843 & -.912 \\
+F & balanced / RPS & 1.318 & 2/66 & 1.363 & .083 \\
+G & natural / RPS & 1.712 & 0/66 & 1.847 & -.878 \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Phase 3.19 frozen-RPS factorial summary.}
+\label{tab:supp-factorial}
+\end{center}
+
+Phase 3.20A separately retrains full CE models for supports
+\(66,50,33,16,8\) across seeds 0--4; it is not numerically interchangeable
+with A/C. Table~\ref{tab:supp-severity} reproduces saved five-seed means.
+
+\begin{center}
+\begin{tabular}{rrrrrr}
+\toprule
+$N_4$ & C4 MAE & Shrinkage & Mean $p_4$ & Severe C4 & Mean $z_4-z_3$ \\
+\midrule
+66 & 2.330 & 2.356 & .092 & .830 & -1.230 \\
+50 & 2.280 & 2.323 & .062 & .880 & -1.615 \\
+33 & 2.380 & 2.398 & .045 & .890 & -1.878 \\
+16 & 2.410 & 2.472 & .025 & .970 & -2.396 \\
+8 & 2.380 & 2.464 & .012 & .880 & -3.221 \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Phase 3.20A saved five-seed mean outcomes.}
+\label{tab:supp-severity}
+\end{center}
+
+The controlled grid shows direct class-4 probability and adjacent-margin
+degradation as support falls, while MAE, shrinkage, and severe burden are not a
+clean monotonic localization response. This is a bounded full-model severity
+diagnostic, not causal identification of imbalance.

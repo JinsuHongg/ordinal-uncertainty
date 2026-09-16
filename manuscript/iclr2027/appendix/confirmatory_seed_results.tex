@@ -1,0 +1,82 @@
+\section{Confirmatory seed-level results}
+
+\subsection{H1: rare-end exact-L1 MAE}
+
+Table~\ref{tab:supp-h1} gives saved paired values for seeds 1--4 only.
+\(\Delta\mathrm{MAE}=\mathrm{MAE}_C-\mathrm{MAE}_A\); negative values favor
+C. The H1 gate is four negative effects out of four within a setting. The `+'
+symbol denotes the beneficial negative sign.
+
+\begin{longtable}{llrrrrc}
+\caption{Saved confirmatory H1 effects.}\label{tab:supp-h1}\\
+\toprule
+Dataset & Objective & Seed & $\mathrm{MAE}_A$ & $\mathrm{MAE}_C$ & $\Delta\mathrm{MAE}$ & Sign \\
+\midrule
+\endfirsthead
+\toprule
+Dataset & Objective & Seed & $\mathrm{MAE}_A$ & $\mathrm{MAE}_C$ & $\Delta\mathrm{MAE}$ & Sign \\
+\midrule
+\endhead
+RetinaMNIST & CE & 1 & 1.227 & 1.167 & -0.061 & + \\
+RetinaMNIST & CE & 2 & 2.242 & 1.182 & -1.061 & + \\
+RetinaMNIST & CE & 3 & 1.712 & 1.318 & -0.394 & + \\
+RetinaMNIST & CE & 4 & 1.970 & 0.864 & -1.106 & + \\
+RetinaMNIST & RPS & 1 & 1.621 & 1.439 & -0.182 & + \\
+RetinaMNIST & RPS & 2 & 1.667 & 1.379 & -0.288 & + \\
+RetinaMNIST & RPS & 3 & 1.939 & 1.258 & -0.682 & + \\
+RetinaMNIST & RPS & 4 & 1.879 & 1.318 & -0.561 & + \\
+Solar & CE & 1 & 1.052 & 0.422 & -0.630 & + \\
+Solar & CE & 2 & 1.823 & 0.608 & -1.215 & + \\
+Solar & CE & 3 & 1.590 & 0.518 & -1.072 & + \\
+Solar & CE & 4 & 1.413 & 0.637 & -0.775 & + \\
+Solar & RPS & 1 & 1.825 & 0.827 & -0.998 & + \\
+Solar & RPS & 2 & 1.841 & 0.622 & -1.219 & + \\
+Solar & RPS & 3 & 1.582 & 0.503 & -1.079 & + \\
+Solar & RPS & 4 & 1.493 & 0.666 & -0.827 & + \\
+\bottomrule
+\end{longtable}
+
+All four settings satisfy the 4/4 sign gate. Mean/SD/descriptive interval
+summaries remain in the main text and do not replace the backbone-seed unit.
+
+\subsection{H2a: endpoint-specific geometry}
+
+\begin{longtable}{llrrrrr}
+\caption{RetinaMNIST seed-level H2a results.}\label{tab:supp-h2a-retina}\\
+\toprule
+Objective & Seed & $\beta_{\rm ord}$ & HC3 lower & HC3 upper & $\Delta\mathrm{LOO}$ & Signs \\
+\midrule
+\endfirsthead
+\toprule
+Objective & Seed & $\beta_{\rm ord}$ & HC3 lower & HC3 upper & $\Delta\mathrm{LOO}$ & Signs \\
+\midrule
+\endhead
+CE & 1 & -.069 & -.207 & .069 & -.00018 & $(-,-)$ \\
+CE & 2 & -.070 & -.238 & .098 & -.00147 & $(-,-)$ \\
+CE & 3 & -.073 & -.142 & -.004 & .00044 & $(-,+)$ \\
+CE & 4 & -.181 & -.308 & -.053 & .00799 & $(-,+)$ \\
+RPS & 1 & .143 & .094 & .192 & .00652 & $(+,+)$ \\
+RPS & 2 & -.081 & -.149 & -.013 & .00083 & $(-,+)$ \\
+RPS & 3 & -.038 & -.174 & .099 & -.00600 & $(-,-)$ \\
+RPS & 4 & .025 & -.033 & .083 & .00025 & $(+,+)$ \\
+\bottomrule
+\end{longtable}
+
+\begin{center}
+\begin{tabular}{lcccl}
+\toprule
+Dataset & Objective & $\beta_{\rm ord}<0$ & $\Delta\mathrm{LOO}>0$ & Frozen H2a verdict \\
+\midrule
+RetinaMNIST & CE & 4/4 & 2/4 & PARTIAL \\
+RetinaMNIST & RPS & 2/4 & 3/4 & NOT SUPPORTED \\
+Solar & CE & 4/4 & 4/4 & STRONG \\
+Solar & RPS & 4/4 & 4/4 & STRONG \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+For H2a, a negative \(\beta_{\rm ord}\) and positive
+\(\Delta\mathrm{LOO}\) are beneficial. The recovered Solar CE/RPS per-seed
+H2a tables retain the regression output, HC3 intervals, and LOO deltas for all
+four confirmatory seeds; their checksummed provenance index is stored with the
+Solar mechanism-replication artifacts. H2b cannot rescue H2a.

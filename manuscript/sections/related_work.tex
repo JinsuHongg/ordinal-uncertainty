@@ -1,0 +1,105 @@
+\subsection{Long-tail recognition and classifier rebalancing}
+
+Long-tail recognition has developed several ways to separate representation
+learning from classifier fitting. These include class-balanced classifier
+retraining, decoupled representation/classifier procedures, score or logit
+adjustment, and corrections based on classifier norms or class frequencies
+\cite{kang2020decoupling,alshammari2022weight,menon2021logit}. Such methods establish that a classifier head can be a useful
+intervention point after or alongside representation learning. They also make
+clear that balanced head retraining is not, by itself, a new contribution.
+
+These approaches differ in their optimization goals and deployment intent, but
+they share the premise that class-frequency effects need not be addressed only
+through the representation. They provide important controls for interpreting a
+rare-class improvement: a change after head adaptation need not imply that the
+feature extractor has changed. At the same time, a nominal tail-class gain does
+not specify where a mistaken ordinal decision lies relative to its true class.
+This gap motivates the localization-focused endpoint used here.
+
+Our analysis uses this literature as motivation, not as an algorithmic target.
+The direction-only intervention is not proposed as a replacement for balanced
+retraining or as a general long-tail classifier. It is a constrained probe that
+holds the representation, original row norms, and biases fixed. This lets the
+analysis ask whether rare-end ordinal localization can change with the
+direction component of the head. The primary outcome is an ordinal localization
+endpoint rather than a generic tail-class accuracy measure.
+
+The constraint is also important for the paper's claim boundary. Full-head
+retraining can change directions, norms, and biases simultaneously, making it
+hard to attribute a localization change to one head component. The present
+comparison is not intended to rank all rebalancing strategies. It tests whether
+a direction change remains associated with rare-end movement when these other
+head quantities are fixed.
+
+\subsection{Classifier and representation geometry under imbalance}
+
+Prior work has examined angular classifier structure, classifier weight norms,
+long-tail representation geometry, and alignment between features and
+classifier weights
+\cite{c2am2022angular,zhu2022balanced,yi2025geometry,wang2026alignment}. These studies establish that feature and head
+geometry can matter under imbalance. The present work does not claim that
+classifier direction, norm effects, representation distortion, or
+feature/classifier misalignment are new observations.
+
+Geometry can be used at several levels of analysis. It can describe the
+separation of class features, the orientation of classifier weights, or the
+relation between a feature and multiple class prototypes. Our use of
+train-derived centroids is deliberately limited to a diagnostic role. It does
+not turn nearest-centroid routing into a ground-truth label for representation
+failure, and it does not imply that a sample without exact recovery lacks useful
+endpoint information.
+
+Our focus is more specific. We study rare upper endpoints in an ordered label
+space and measure their movement toward adjacent interior classes. The
+fixed-norm, fixed-bias direction-only comparison tests a head-actionable part
+of this localization under frozen representations. We then ask whether an
+endpoint-versus-adjacent centroid margin adds information about final
+post-adaptation localization beyond original-head state and generic centroid
+separation. The result is deliberately reported with its boundary: the geometry
+diagnostic is strong in Solar but partial or unsupported in the two
+RetinaMNIST settings. It is therefore not presented as a universal
+geometry-conditioned recovery mechanism.
+
+This distinction is central to the interpretation of the negative results.
+The geometry analysis is not a post-hoc criterion for selecting successful
+samples or a substitute for the cross-seed H1 replication. It is a fixed
+diagnostic layered on top of a replicated intervention result. The strong Solar
+outcomes and mixed RetinaMNIST outcomes therefore delimit the claim rather than
+forming evidence for a general geometric law.
+
+\subsection{Ordinal classification under imbalance}
+
+Ordinal classification methods account for label order through structured
+losses, thresholds, costs, ranking objectives, or representation constraints.
+Imbalance-aware variants also use weighting, resampling, or other mechanisms to
+improve minority-class predictive performance
+\cite{zhu2019smor,lazaro2023bayesian}. These approaches
+address important aspects of ordered prediction, but their usual objective is
+overall classification or ordinal-error improvement. They need not distinguish
+whether errors of a rare upper endpoint move one step inward, several steps
+inward, or remain centered below the endpoint in the predictive distribution.
+
+The ordered setting also makes endpoint asymmetry relevant. A lower and upper
+endpoint can have different local neighborhoods and different directions of
+possible displacement. The paper focuses on the rare upper endpoint because its
+inward movement is directly measurable along the observed ordered scale. This
+focus does not imply that lower-end behavior is unimportant or that all ordinal
+imbalance problems share the same asymmetry.
+
+This paper instead treats rare-end inward localization as the empirical object
+of analysis. It uses routing, predictive location, shrinkage, and rare-end
+ordinal error to describe the phenomenon, then separates descriptive
+representation/head diagnostics from a replicated head intervention. The aim
+is not to claim that existing ordinal imbalance methods omit all endpoint
+analysis, but to provide a controlled characterization of this particular
+failure mode.
+
+\subsection{Position of this work}
+
+The paper is a mechanism and empirical analysis study. It does not propose a
+new rebalancing algorithm, claim that classifier direction is novel, or assert
+that geometry universally explains rare-end recovery. Its contribution is to
+characterize an ordinal endpoint-localization failure, show a reproducible
+fixed-norm, fixed-bias direction-only response in the tested RetinaMNIST and
+Solar settings, and report the setting-dependent limits of the associated
+geometry diagnostic.

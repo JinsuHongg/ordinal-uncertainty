@@ -1,0 +1,81 @@
+\section{Reproducibility, configuration, and provenance}
+
+This supplement records completed analyses only. The independent confirmatory
+unit is an independently trained backbone seed; seeds 1--4 are confirmatory
+and seed 0 is historical/hypothesis-forming. In every A/C analysis, C uses
+replacement class-balanced batches, CE loss, AdamW (learning rate \(10^{-3}\)),
+batch size 64, 100 epochs, and zero direction weight decay. It starts from A
+while original per-class norms and biases remain fixed.
+
+\begin{longtable}{p{.16\linewidth}p{.14\linewidth}p{.29\linewidth}p{.30\linewidth}}
+\caption{Consolidated configuration record. ``Frozen runner'' values come from
+the saved execution script/protocol.}\label{tab:supp-config}\\
+\toprule
+Dataset & Objective & Backbone/data configuration & Training and evaluation role \\
+\midrule
+\endfirsthead
+\toprule
+Dataset & Objective & Backbone/data configuration & Training and evaluation role \\
+\midrule
+\endhead
+RetinaMNIST & CE & Unpretrained small-image ResNet18; native \(28\times28\) RGB; \texttt{ToTensor} and normalization \((.5,.5,.5)\); 512-D feature and 5-way head. & Official train split: 1,080 samples, counts \([486,128,206,194,66]\). Existing compatible checkpoints; deterministic stratified five-fold training-only OOF C evaluation and fitting-fold-only centroids. \\
+RetinaMNIST & RPS & Same canonical architecture, input, feature, and head dimensions as CE. & Replay-verified compatible checkpoints; identical OOF C protocol. Source checkpoint training hyperparameters remain artifact-level metadata. \\
+Solar & CE & Unpretrained torchvision ResNet18; \(3\times224\times224\); 512-D feature and 5-way head; train-only signed-log normalization. & Frozen runner: AdamW, \(5\times10^{-5}\) learning rate, .01 weight decay, batch 16, maximum 300 epochs, patience 3; minimum validation CE checkpoint. Seeds 1--4; archived aligned readout. \\
+Solar & RPS & Same architecture, channels, preprocessing, feature, and head dimensions as CE. & Same frozen runner values; minimum validation RPS checkpoint. Seeds 1--4; same archived readout role. \\
+\bottomrule
+\end{longtable}
+
+Retina OOF folds are not replications: the backbone is fixed before head
+fitting, every train example is held out once from its C fit, and centroids are
+estimated only from the corresponding fitting-fold features. Solar's archived
+readout is excluded from backbone model selection and centroid fitting.
+
+\subsection{Solar provenance record}
+
+\begin{longtable}{p{.34\linewidth}p{.57\linewidth}}
+\caption{Solar provenance record from retained normalization, integrity, and
+A/C manifests.}\label{tab:supp-solar-provenance}\\
+\toprule
+Field & Retained record \\
+\midrule
+\endfirsthead
+\toprule
+Field & Retained record \\
+\midrule
+\endhead
+Canonical data/index roots & Frozen runner: \url{/scratch/users/jhong36/data/surya-bench-224.zarr} and \url{/scratch/users/jhong36/data}. \\
+Channels and indices & \texttt{hmi\_m}, \texttt{aia1600}, \texttt{aia131}; indices \([8,7,1]\). \\
+Normalization & \url{outputs/solar/phase3_7a_3ch/normalization/train_only_retry_1/normalization.json}; \texttt{sign(x)*log1p(abs(x))}; fit split \texttt{train}. \\
+Aligned populations & Aligned train/validation/test counts are \(45{,}047/2{,}431/28{,}006\); archived readout rare-X support is \(921\). \\
+Backbone provenance & The integrity audit records each CE/RPS seed 1--4 selected epoch, validation loss, exact archived checkpoint path, and READY status. \\
+Readout role & Reused archived aligned readout, not a new external test; it was not used for backbone model selection. Centroids use aligned training features only. \\
+\bottomrule
+\end{longtable}
+
+The corresponding project provenance index distinguishes protocol-level
+verification from per-seed path/metadata recovery. The checkpoint binaries and
+per-seed configuration directory tree are not retained in this checkout; the
+integrity audit records their presence and READY status at audit time.
+
+\begin{center}
+\footnotesize
+\begin{tabular}{llrlll}
+\toprule
+Objective & Seed & Epoch & Checkpoint ID & Config source & Status \\
+\midrule
+CE & 1 & 1 & \texttt{ce/seed\_1} & frozen runner + audit & PATH/METADATA \\
+CE & 2 & 1 & \texttt{ce/seed\_2} & frozen runner + audit & PATH/METADATA \\
+CE & 3 & 1 & \texttt{ce/seed\_3} & frozen runner + audit & PATH/METADATA \\
+CE & 4 & 1 & \texttt{ce/seed\_4} & frozen runner + audit & PATH/METADATA \\
+RPS & 1 & 2 & \texttt{rps/seed\_1} & frozen runner + audit & PATH/METADATA \\
+RPS & 2 & 1 & \texttt{rps/seed\_2} & frozen runner + audit & PATH/METADATA \\
+RPS & 3 & 1 & \texttt{rps/seed\_3} & frozen runner + audit & PATH/METADATA \\
+RPS & 4 & 1 & \texttt{rps/seed\_4} & frozen runner + audit & PATH/METADATA \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Solar confirmatory backbone provenance recovered from the
+frozen runner, integrity audit, and A/C manifests. Checkpoint IDs abbreviate
+the archived project output-tree paths; the provenance index records each exact
+path and validation selection metadata.}
+\label{tab:supp-solar-backbone-provenance}
+\end{center}

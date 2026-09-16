@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{../outputs/manuscript/figures/figure1/}{../outputs/manuscript/figures/figure2/}{../outputs/manuscript/figures/figure3/}{../outputs/manuscript/figures/figure4/}}
+
+\title{Classifier-Head Contributions to Rare-End Inward Localization in Imbalanced Ordinal Classification}
+\author{Anonymous Authors}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Rare upper ordinal endpoints can be difficult to localize under class
+imbalance, but aggregate accuracy and ordinal error do not reveal whether their
+predictions are displaced toward interior classes. We study this pattern as
+rare-end inward localization and analyze its representation and
+classifier-head components. Using routing, predictive location, and inward
+shrinkage diagnostics, we identify systematic inward localization in the
+studied imbalanced ordinal settings. We then use a fixed-norm, fixed-bias
+direction-only classifier-head intervention as a controlled probe. Across
+RetinaMNIST and Solar under CE- and RPS-trained representations, the
+intervention reduces rare-end localization error, with the effect sign
+replicated across all four confirmatory backbone seeds per setting.
+Endpoint-specific representation geometry provides additional explanatory value
+in Solar, but is partial in RetinaMNIST CE and unsupported under the
+preregistered criterion in RetinaMNIST RPS. In controlled RetinaMNIST studies,
+balanced sampling is the dominant observed adaptation signal, whereas reduced
+rare-class support does not yield a clean monotonic localization dose response.
+These results characterize a reproducible head-actionable component of
+rare-end localization in the studied settings while bounding the role of
+centroid geometry and avoiding a claim of a universal classifier correction.
+\end{abstract}
+
+\section{Introduction}
+\input{sections/introduction}
+
+\section{Related Work}
+\input{sections/related_work}
+
+\section{Problem Setup and Experimental Protocol}
+\input{sections/problem_setup}
+\input{sections/experimental_setup}
+
+\section{Results}
+\input{sections/results}
+
+\section{Discussion}
+\input{sections/discussion}
+
+\section{Limitations}
+\input{sections/limitations}
+
+\section{Conclusion}
+\input{sections/conclusion}
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

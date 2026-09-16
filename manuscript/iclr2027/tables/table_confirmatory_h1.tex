@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\caption{Confirmatory H1: $\Delta\mathrm{MAE}=\mathrm{MAE}_{C}-\mathrm{MAE}_{A}$ for rare-end exact-L1 decisions. Negative values favor C; each row has four backbone seeds. Seed-level intervals are in the appendix.}
+\label{tab:confirmatory-h1}
+\small
+\begin{tabular}{llccc}
+\toprule
+Dataset & Objective & Negative seeds & Mean $\Delta$MAE & Verdict \\
+\midrule
+RetinaMNIST & CE  & 4/4 & -0.6553 & REPLICATED \\
+RetinaMNIST & RPS & 4/4 & -0.4280 & REPLICATED \\
+Solar & CE       & 4/4 & -0.9230 & REPLICATED \\
+Solar & RPS      & 4/4 & -1.0310 & REPLICATED \\
+\bottomrule
+\end{tabular}
+\end{table}
