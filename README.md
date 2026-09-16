@@ -41,7 +41,10 @@ The confirmed cross-dataset finding is:
 
 Within RetinaMNIST and Solar, the controlled direction-only head response now
 appears on both frozen CE and RPS representations. This remains a bounded
-two-domain finding, not objective independence or a universal claim.
+two-domain finding, not objective independence or a universal claim. The
+RetinaMNIST confirmatory natural-sampling follow-up further shows that its
+Retina response depends materially on balanced sampling; it is not a generic
+natural-sampling direction effect.
 
 ## Canonical setup
 

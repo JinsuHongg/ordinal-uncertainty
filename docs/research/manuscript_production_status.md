@@ -22,6 +22,20 @@ endpoint improvement with average global-MAE cost and macro-MAE improvement.
 The ICLR Results now records this redistribution boundary; see
 `docs/research/confirmatory_global_tradeoff_analysis.md`.
 
+**Retina confirmatory feature regeneration:** deterministic frozen 512-D
+feature archives for CE/RPS seeds 1–4 are now available and reproduce archived
+A outputs exactly. This makes the separately authorized Retina natural-sampling
+head follow-up technically possible; it does not change manuscript claims.
+Solar remains separate cluster work. See
+`docs/research/retina_confirmatory_frozen_feature_regeneration.md`.
+
+**Retina natural-sampling follow-up:** natural direction-only N improves the
+endpoint in only 2/4 CE and 2/4 RPS seeds, while balanced C improves every
+archived seed. The Retina wording is consequently narrowed to a balanced
+direction-only response. A bias/prior-only control remains a lower-priority
+reviewer concern; Solar remains separate. See
+`docs/research/retina_natural_sampling_direction_only_analysis.md`.
+
 **Full consistency audit complete; Solar provenance recovery complete
 (2026-09-15).** The manuscript uses an article-compatible anonymous layout so
 that a conference template can be adopted later without changing the frozen

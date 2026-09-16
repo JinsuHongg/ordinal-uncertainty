@@ -417,6 +417,16 @@ margin, but C4 MAE, shrinkage, severe burden, and train-centroid routing are
 seed-variable and non-monotonic. This controlled result does not support a
 universal dose-response claim. See [Phase 3.20A](phase3_20a_retinamnist_imbalance_severity_dose_response.md).
 
+## RetinaMNIST Natural-Sampling Direction-Only Follow-Up
+
+**C — BALANCED SAMPLING IS PRIMARY IN THIS RETINA FOLLOW-UP.** Across the four
+confirmatory CE and four confirmatory RPS backbones, natural-sampling N improves
+class-4 exact-L1 MAE in only 2/4 seeds per objective, whereas archived balanced
+C improves all four. N produces substantially less endpoint-mass redistribution
+than C. This is Retina-only descriptive evidence and changes neither frozen
+H1/H2a nor Solar status. See
+[the N analysis](retina_natural_sampling_direction_only_analysis.md).
+
 ## Cross-Setting Mechanism Synthesis
 
 **A — READY FOR MANUSCRIPT WRITING WITH A BOUNDED CLAIM SET.**  H1 is strongly

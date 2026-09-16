@@ -424,6 +424,14 @@ claim. See `docs/research/phase3_20a_retinamnist_imbalance_severity_dose_respons
 
 ## Next Authorized Work
 
+The RetinaMNIST natural-sampling direction-only follow-up is complete:
+natural N improves endpoint MAE in only 2/4 CE and 2/4 RPS confirmatory seeds,
+while balanced C improves all archived seeds. Treat the Retina result as a
+balanced direction-only response, not a generic natural-sampling direction
+effect. No bias/prior-only baseline or Solar follow-up is authorized
+automatically; Solar remains separate cluster work. See
+`docs/research/retina_natural_sampling_direction_only_analysis.md`.
+
 The Figure 1--4 source-artifact and data-availability audit is complete; see `docs/research/figure_source_artifact_audit.md`. It found material local source gaps, including absent cited RetinaMNIST/UTKFace and Phase 3.19/3.20A output trees. Do not build figure-data tables or final figures without a separate artifact-recovery review and deterministic provenance check. No method design, training, evaluation, tuning,
 ROP/bias revival, extra seed, or dataset run is authorized automatically. The
 framing does not authorize method freeze or final test evaluation.
