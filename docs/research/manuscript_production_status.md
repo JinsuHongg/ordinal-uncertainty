@@ -17,6 +17,11 @@ references begin on page 7. The restored motivation and compact positioning use
 only verified existing citations; see
 `docs/research/iclr2027_intro_relatedwork_restoration.md`.
 
+**Confirmatory global trade-off analysis:** all 16 saved A/C conditions show
+endpoint improvement with average global-MAE cost and macro-MAE improvement.
+The ICLR Results now records this redistribution boundary; see
+`docs/research/confirmatory_global_tradeoff_analysis.md`.
+
 **Full consistency audit complete; Solar provenance recovery complete
 (2026-09-15).** The manuscript uses an article-compatible anonymous layout so
 that a conference template can be adopted later without changing the frozen
