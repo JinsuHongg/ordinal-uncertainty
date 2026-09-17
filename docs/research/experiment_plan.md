@@ -4,6 +4,12 @@
 Completed through **Phase 3.20A RetinaMNIST controlled imbalance-severity dose
 response**. Current status: **B — PARTIAL / NON-MONOTONIC IMBALANCE EFFECT**.
 
+The separately authorized Solar RPS natural-sampling follow-up is complete:
+N improves X exact-L1 MAE in 3/4 seeds but is weaker than balanced C in all
+four. This is a mixed RPS-only descriptive result; Solar CE remains unresolved
+and untouched, and frozen H1/H2a conclusions are unchanged. See
+[the RPS-only analysis](solar_rps_natural_sampling_direction_only_analysis.md).
+
 Experiment development is paused. Plan and draft the mechanism paper from
 completed evidence only. In the three evaluated frozen-RPS settings,
 direction-only head adaptation improved rare-end localization; scale, bias,

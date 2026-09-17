@@ -86,11 +86,17 @@ def compare_a_eval(data: dict[str, np.ndarray], archived: Path, weight: torch.Te
         expected_l1 = bayes_decisions(prob)["l1_bayes_decision"].astype(np.int64)
         archived_l1 = z["a_l1"]
         logit_error = float(np.abs(logits - z["a_logits"]).max())
+        logit_mean_error = float(np.abs(logits - z["a_logits"]).mean())
+        logit_median_error = float(np.median(np.abs(logits - z["a_logits"])))
         probability_error = float(np.abs(prob - z["a_probabilities"]).max())
         mean_error = float(np.abs(prob @ np.arange(5) - z["a_predictive_mean"]).max())
         exact_l1 = bool(np.array_equal(expected_l1, archived_l1))
+        mode = prob.argmax(axis=1).astype(np.int64)
+        archived_mode = z["a_probabilities"].argmax(axis=1).astype(np.int64)
+        mode_differences = int((mode != archived_mode).sum())
+        l1_differences = int((expected_l1 != archived_l1).sum())
     ok = logit_error <= TOL_LOGIT and probability_error <= TOL_PROB and exact_l1
-    return {"status": "PASS" if ok else "MISMATCH", "logit_max_abs_error": logit_error, "probability_max_abs_error": probability_error, "predictive_mean_max_abs_error": mean_error, "exact_l1_match": exact_l1, "tolerances": {"logits": TOL_LOGIT, "probabilities": TOL_PROB}}
+    return {"status": "PASS" if ok else "MISMATCH", "logit_max_abs_error": logit_error, "logit_mean_abs_error": logit_mean_error, "logit_median_abs_error": logit_median_error, "probability_max_abs_error": probability_error, "predictive_mean_max_abs_error": mean_error, "mode_difference_count": mode_differences, "exact_l1_difference_count": l1_differences, "exact_l1_match": exact_l1, "tolerances": {"logits": TOL_LOGIT, "probabilities": TOL_PROB}}
 
 
 def compare_c_eval(data: dict[str, np.ndarray], archived: Path, c_head: Path, weight: torch.Tensor, bias: torch.Tensor) -> dict[str, object]:
@@ -116,12 +122,18 @@ def main() -> None:
     p.add_argument("--checkpoint", type=Path, required=True); p.add_argument("--stats", type=Path, required=True)
     p.add_argument("--root", default="/scratch/users/jhong36/data/surya-bench-224.zarr"); p.add_argument("--index", default="/scratch/users/jhong36/data")
     p.add_argument("--batch-size", type=int, default=128); p.add_argument("--workers", type=int, default=4); p.add_argument("--device", default="cuda:0")
+    p.add_argument("--strict-fp32", action="store_true", help="disable TF32 and require float32-compatible inference")
     a = p.parse_args(); out = FEATURE_ROOT / a.objective / f"seed_{a.seed}"
     if out.exists(): raise FileExistsError(f"refusing to overwrite {out}")
     if not torch.cuda.is_available() or not str(a.device).startswith("cuda"): raise RuntimeError("Phase A requires an allocated CUDA device")
     audit = json.loads(INTEGRITY.read_text()); record = next((x for x in audit["records"] if x["objective"] == a.objective and x["seed"] == a.seed), None)
     if not record or record["status"] != "READY" or Path(record["checkpoint_path"]) != a.checkpoint: raise RuntimeError("checkpoint integrity identity is ambiguous")
     if not a.checkpoint.is_file(): raise FileNotFoundError(a.checkpoint)
+    if a.strict_fp32:
+        if a.objective != "ce": raise RuntimeError("strict-FP32 regeneration is authorized only for CE")
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        torch.set_float32_matmul_precision("highest")
     stats = verify_stats(a.stats); source_channels(a.root)
     frames = [manifest(Path(a.index) / f"{name}.csv", expected) for name, expected in zip(("train", "validation", "test"), EXPECTED)]
     datasets = [Solar(frame, a.root, (stats["mean"], stats["std"]), augment=False) for frame in frames]
@@ -142,7 +154,7 @@ def main() -> None:
     for name, data in zip(("train", "val", "eval"), outputs):
         path = out / f"{name}_features.npz"; np.savez_compressed(path, features=data["features"], labels=data["labels"], sample_ids=data["sample_ids"])
         file_info[name] = {"path": str(path), "sha256": sha256(path), "rows": int(len(data["labels"])), "class_counts": np.bincount(data["labels"], minlength=5).tolist()}
-    manifest_out = {"dataset":"solar", "objective":a.objective, "seed":a.seed, "checkpoint_path":str(a.checkpoint), "checkpoint_sha256":sha256(a.checkpoint), "selected_epoch":record["selected_epoch"], "checkpoint_integrity":"READY", "architecture":"torchvision ResNet18 weights=None; fc Linear(512,5)", "feature_definition":"float32 512-D input to model.fc after average pooling/flatten", "class_count":5, "preprocessing":{"channels":stats["channels"],"channel_indices":stats["channel_indices"],"transform":stats["transform"],"normalization_artifact":str(a.stats)}, "splits":file_info, "extraction":{"script":"scripts/export_solar_confirmatory_frozen_features.py","device":str(a.device),"cluster_job_id":os.getenv("SLURM_JOB_ID","unset"),"deterministic_inference":"model.eval(); torch.inference_mode(); augment=False; shuffle=False; no optimizer; no training"}, "a_output_reproduction":a_check, "c_output_replay":c_check, "no_training":True, "created_utc":datetime.now(timezone.utc).isoformat()}
+    manifest_out = {"dataset":"solar", "objective":a.objective, "seed":a.seed, "checkpoint_path":str(a.checkpoint), "checkpoint_sha256":sha256(a.checkpoint), "selected_epoch":record["selected_epoch"], "checkpoint_integrity":"READY", "gpu_model":torch.cuda.get_device_name(0), "architecture":"torchvision ResNet18 weights=None; fc Linear(512,5)", "feature_definition":"float32 512-D input to model.fc after average pooling/flatten", "class_count":5, "preprocessing":{"channels":stats["channels"],"channel_indices":stats["channel_indices"],"transform":stats["transform"],"normalization_artifact":str(a.stats),"normalization_sha256":sha256(a.stats)}, "splits":file_info, "extraction":{"script":"scripts/export_solar_confirmatory_frozen_features.py","device":str(a.device),"cluster_job_id":os.getenv("SLURM_JOB_ID","unset"),"batch_size":a.batch_size,"strict_fp32":a.strict_fp32,"tf32_matmul_enabled":torch.backends.cuda.matmul.allow_tf32,"tf32_cudnn_enabled":torch.backends.cudnn.allow_tf32,"float32_matmul_precision":torch.get_float32_matmul_precision(),"autocast":False,"model_dtype":str(next(model.parameters()).dtype),"input_dtype":"torch.float32","deterministic_inference":"model.eval(); torch.inference_mode(); augment=False; shuffle=False; no optimizer; no training"}, "a_output_reproduction":a_check, "c_output_replay":c_check, "no_training":True, "created_utc":datetime.now(timezone.utc).isoformat()}
     (out / "feature_manifest.json").write_text(json.dumps(manifest_out, indent=2) + "\n")
     print(json.dumps(manifest_out, indent=2))
 

@@ -36,6 +36,29 @@ direction-only response. A bias/prior-only control remains a lower-priority
 reviewer concern; Solar remains separate. See
 `docs/research/retina_natural_sampling_direction_only_analysis.md`.
 
+**Solar RPS natural-sampling follow-up:** natural N improves X exact-L1 MAE in
+3/4 validated frozen-RPS seeds but remains weaker than balanced C in all four
+and does not reproduce C's broad endpoint-mass redistribution. This is a
+Solar-RPS-only mixed descriptive result; Solar CE is unresolved and untouched.
+It does not change frozen H1/H2a or manuscript wording absent separate writing
+authorization. See `docs/research/solar_rps_natural_sampling_direction_only_analysis.md`.
+
+**Solar CE feature-identity audit:** direct scheduler and runtime records now
+verify historical CE A/C execution on V100 and recent CE regeneration on A30.
+The 64-row strict-FP32 A30 audit supports a TF32 contribution, but the later
+full strict-FP32 identity gate still exceeded frozen numerical tolerances;
+therefore V100-versus-A30 is not yet a complete exclusive causal explanation.
+CE N fitting remains blocked. See
+`docs/research/solar_ce_gpu_provenance_audit.md` and
+`docs/research/solar_ce_feature_identity_mismatch_audit.md`.
+
+**Solar CE strict-FP32 full regeneration:** all four CE jobs preserved exact
+IDs, labels, mode, and L1 decisions, but full-readout logit/probability errors
+still exceeded frozen identity tolerances. No CE feature archive was promoted
+and CE N fitting remains blocked. This is provenance/debug status only and
+does not change manuscript scientific claims. See
+`docs/research/solar_ce_strict_fp32_feature_regeneration.md`.
+
 **Full consistency audit complete; Solar provenance recovery complete
 (2026-09-15).** The manuscript uses an article-compatible anonymous layout so
 that a conference template can be adopted later without changing the frozen

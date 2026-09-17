@@ -46,6 +46,10 @@ RetinaMNIST confirmatory natural-sampling follow-up further shows that its
 Retina response depends materially on balanced sampling; it is not a generic
 natural-sampling direction effect.
 
+The Solar RPS-only natural-sampling follow-up is mixed: N improves the rare
+endpoint in 3/4 seeds but remains weaker than balanced C in every seed. Solar
+CE remains unresolved, so this does not establish a Solar-wide sampling claim.
+
 ## Canonical setup
 
 - RetinaMNIST, official train/validation/test splits

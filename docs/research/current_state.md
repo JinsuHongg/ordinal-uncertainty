@@ -427,6 +427,16 @@ than C. This is Retina-only descriptive evidence and changes neither frozen
 H1/H2a nor Solar status. See
 [the N analysis](retina_natural_sampling_direction_only_analysis.md).
 
+## Solar RPS Natural-Sampling Direction-Only Follow-Up
+
+**D — SOLAR RPS NATURAL DIRECTION-ONLY IS MIXED.** On validated RPS frozen
+features, N improves exact-L1 X MAE in 3/4 seeds (`1.685 -> 1.472` on average)
+but remains weaker than balanced C in every seed (`.654` under C). N does not
+reproduce C's broad endpoint-mass redistribution and has lower global
+MAE/severe error than C. This is RPS-only descriptive evidence; Solar CE is
+unresolved and untouched, and frozen H1/H2a conclusions are unchanged. See
+[the RPS-only N analysis](solar_rps_natural_sampling_direction_only_analysis.md).
+
 ## Cross-Setting Mechanism Synthesis
 
 **A — READY FOR MANUSCRIPT WRITING WITH A BOUNDED CLAIM SET.**  H1 is strongly

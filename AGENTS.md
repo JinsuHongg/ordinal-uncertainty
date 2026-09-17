@@ -16,6 +16,11 @@ repository is a separate research archive.
 **Phase 3.20A RetinaMNIST Controlled Imbalance-Severity Dose Response complete
 — B — PARTIAL / NON-MONOTONIC IMBALANCE EFFECT.**
 
+**Solar RPS natural-sampling direction-only follow-up complete — D — MIXED.**
+Natural N improves X exact-L1 MAE in 3/4 seeds but is weaker than balanced C
+in all four; Solar CE remains unresolved and untouched. This changes neither
+frozen H1/H2a nor the bounded mechanism claim.
+
 Completed:
 
 - Experiment 0 / Phase 1
@@ -432,6 +437,13 @@ effect. No bias/prior-only baseline or Solar follow-up is authorized
 automatically; Solar remains separate cluster work. See
 `docs/research/retina_natural_sampling_direction_only_analysis.md`.
 
+The Solar RPS-only natural-sampling follow-up is complete: N has a mixed
+3/4-seed endpoint improvement versus A and is weaker than C in every seed.
+N does not reproduce C's broad endpoint-mass redistribution. Treat this as
+RPS-only descriptive evidence; Solar CE remains unresolved and must not be
+inferred or touched automatically. See
+`docs/research/solar_rps_natural_sampling_direction_only_analysis.md`.
+
 The Figure 1--4 source-artifact and data-availability audit is complete; see `docs/research/figure_source_artifact_audit.md`. It found material local source gaps, including absent cited RetinaMNIST/UTKFace and Phase 3.19/3.20A output trees. Do not build figure-data tables or final figures without a separate artifact-recovery review and deterministic provenance check. No method design, training, evaluation, tuning,
 ROP/bias revival, extra seed, or dataset run is authorized automatically. The
 framing does not authorize method freeze or final test evaluation.
@@ -449,7 +461,7 @@ Phase 3.20A does **not** authorize:
 - representation retraining;
 - historical validation/test evaluation;
 - seeds 1–4;
-- UTKFace CE, other datasets, or any further Solar execution;
+- UTKFace CE, Solar CE, other datasets, or any further Solar execution;
 - commit or push.
 
 Do not proceed from this mechanism result without separate authorization.
