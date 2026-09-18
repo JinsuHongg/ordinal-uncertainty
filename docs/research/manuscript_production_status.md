@@ -59,6 +59,16 @@ and CE N fitting remains blocked. This is provenance/debug status only and
 does not change manuscript scientific claims. See
 `docs/research/solar_ce_strict_fp32_feature_regeneration.md`.
 
+**Solar CE historical execution-recipe audit:** the original V100 seed-2
+evaluation recipe (128-row batches, four workers, sequential pinned-memory
+loader, `eval()` and `no_grad()`) reproduced the frozen gate on a fixed
+64-row subset, but not on the full archived readout: maximum probability error
+was `2.3392936e-06`, above the existing `2e-06` threshold, while IDs, labels,
+mode, and exact-L1 decisions agreed. CE features were not promoted and CE N
+remains blocked. This is a numerical-provenance status only, not a manuscript
+scientific-claim change; see
+`docs/research/solar_ce_historical_execution_recipe_audit.md`.
+
 **Full consistency audit complete; Solar provenance recovery complete
 (2026-09-15).** The manuscript uses an article-compatible anonymous layout so
 that a conference template can be adopted later without changing the frozen
