@@ -36,26 +36,21 @@ direction-only response. A bias/prior-only control remains a lower-priority
 reviewer concern; Solar remains separate. See
 `docs/research/retina_natural_sampling_direction_only_analysis.md`.
 
-**Solar RPS natural-sampling follow-up:** natural N improves X exact-L1 MAE in
-3/4 validated frozen-RPS seeds but remains weaker than balanced C in all four
-and does not reproduce C's broad endpoint-mass redistribution. This is a
-Solar-RPS-only mixed descriptive result; Solar CE is unresolved and untouched.
-It does not change frozen H1/H2a or manuscript wording absent separate writing
-authorization. See `docs/research/solar_rps_natural_sampling_direction_only_analysis.md`.
+**Solar natural-sampling follow-ups:** RPS is mixed (N improves X exact-L1 MAE in 3/4 validated frozen-feature units and is weaker than C in all four). The completed replacement-aware CE follow-up is not consistent (N improves 2/4 units and is weaker than C in all four). In both, N does not reproduce C's broad endpoint-mass redistribution. These are auxiliary descriptive results only; frozen H1/H2a and manuscript wording remain unchanged. See `docs/research/solar_rps_natural_sampling_direction_only_analysis.md` and `docs/research/solar_ce_natural_sampling_direction_only_analysis.md`.
 
 **Solar CE feature-identity audit:** direct scheduler and runtime records now
 verify historical CE A/C execution on V100 and recent CE regeneration on A30.
 The 64-row strict-FP32 A30 audit supports a TF32 contribution, but the later
 full strict-FP32 identity gate still exceeded frozen numerical tolerances;
 therefore V100-versus-A30 is not yet a complete exclusive causal explanation.
-CE N fitting remains blocked. See
+Only the historical original seed-2 N path remains blocked; the replacement-aware CE N follow-up is complete. See
 `docs/research/solar_ce_gpu_provenance_audit.md` and
 `docs/research/solar_ce_feature_identity_mismatch_audit.md`.
 
 **Solar CE strict-FP32 full regeneration:** all four CE jobs preserved exact
 IDs, labels, mode, and L1 decisions, but full-readout logit/probability errors
 still exceeded frozen identity tolerances. No CE feature archive was promoted
-and CE N fitting remains blocked. This is provenance/debug status only and
+and only the historical original seed-2 N path remains blocked. The replacement-aware CE N follow-up is complete. This is provenance/debug status only and
 does not change manuscript scientific claims. See
 `docs/research/solar_ce_strict_fp32_feature_regeneration.md`.
 
@@ -68,6 +63,8 @@ mode, and exact-L1 decisions agreed. CE features were not promoted and CE N
 remains blocked. This is a numerical-provenance status only, not a manuscript
 scientific-claim change; see
 `docs/research/solar_ce_historical_execution_recipe_audit.md`.
+
+**Solar CE seed-2 provenance:** the original historical seed 2 remains archived and invalid for this auxiliary N follow-up after its frozen feature-identity failure. Its pre-declared V100 replacement is a coherent A/C/N unit and, together with newly fitted original seeds 1, 3, and 4, yields the completed replacement-aware CE N result reported above. No manuscript scientific wording changed; see `docs/research/solar_ce_seed2_replacement_run.md` and `docs/research/solar_ce_natural_sampling_direction_only_analysis.md`.
 
 **Full consistency audit complete; Solar provenance recovery complete
 (2026-09-15).** The manuscript uses an article-compatible anonymous layout so

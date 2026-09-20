@@ -433,9 +433,7 @@ H1/H2a nor Solar status. See
 features, N improves exact-L1 X MAE in 3/4 seeds (`1.685 -> 1.472` on average)
 but remains weaker than balanced C in every seed (`.654` under C). N does not
 reproduce C's broad endpoint-mass redistribution and has lower global
-MAE/severe error than C. This is RPS-only descriptive evidence; Solar CE is
-unresolved and untouched, and frozen H1/H2a conclusions are unchanged. See
-[the RPS-only N analysis](solar_rps_natural_sampling_direction_only_analysis.md).
+MAE/severe error than C. The completed replacement-aware CE companion is not consistent: N improves in 2/4 units and is weaker than C in all four; neither Solar N follow-up reproduces C's broad endpoint-mass redistribution. Both are auxiliary descriptive evidence, and frozen H1/H2a conclusions are unchanged. See [the RPS-only N analysis](solar_rps_natural_sampling_direction_only_analysis.md) and [the CE N analysis](solar_ce_natural_sampling_direction_only_analysis.md).
 
 ## Cross-Setting Mechanism Synthesis
 

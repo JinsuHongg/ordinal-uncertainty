@@ -16,10 +16,12 @@ repository is a separate research archive.
 **Phase 3.20A RetinaMNIST Controlled Imbalance-Severity Dose Response complete
 — B — PARTIAL / NON-MONOTONIC IMBALANCE EFFECT.**
 
-**Solar RPS natural-sampling direction-only follow-up complete — D — MIXED.**
-Natural N improves X exact-L1 MAE in 3/4 seeds but is weaker than balanced C
-in all four; Solar CE remains unresolved and untouched. This changes neither
-frozen H1/H2a nor the bounded mechanism claim.
+**Solar CE natural-sampling direction-only follow-up complete — C — NOT
+CONSISTENT.** Natural N improves X exact-L1 MAE in 2/4 replacement-aware CE
+units (seeds 1, replacement 2, 3, 4) and is weaker than balanced C in all four.
+Solar RPS remains mixed (3/4 N improvements, C stronger in all four). Across
+these auxiliary Solar follow-ups, N does not reproduce C's broad endpoint-mass
+redistribution. This changes neither frozen H1/H2a nor manuscript claims.
 
 Completed:
 
@@ -437,12 +439,14 @@ effect. No bias/prior-only baseline or Solar follow-up is authorized
 automatically; Solar remains separate cluster work. See
 `docs/research/retina_natural_sampling_direction_only_analysis.md`.
 
-The Solar RPS-only natural-sampling follow-up is complete: N has a mixed
-3/4-seed endpoint improvement versus A and is weaker than C in every seed.
-N does not reproduce C's broad endpoint-mass redistribution. Treat this as
-RPS-only descriptive evidence; Solar CE remains unresolved and must not be
-inferred or touched automatically. See
-`docs/research/solar_rps_natural_sampling_direction_only_analysis.md`.
+The Solar RPS natural-sampling follow-up is mixed (3/4 N improvements; C
+stronger in all four); the replacement-aware Solar CE follow-up is not
+consistent (2/4 N improvements; C stronger in all four). N does not reproduce
+C's broad endpoint-mass redistribution in either Solar setting. These are
+auxiliary descriptive results only and preserve frozen H1/H2a and manuscript
+claims. See `docs/research/solar_rps_natural_sampling_direction_only_analysis.md`
+and `docs/research/solar_ce_natural_sampling_direction_only_analysis.md`.
+The replacement provenance is `docs/research/solar_ce_seed2_replacement_run.md`.
 
 The Figure 1--4 source-artifact and data-availability audit is complete; see `docs/research/figure_source_artifact_audit.md`. It found material local source gaps, including absent cited RetinaMNIST/UTKFace and Phase 3.19/3.20A output trees. Do not build figure-data tables or final figures without a separate artifact-recovery review and deterministic provenance check. No method design, training, evaluation, tuning,
 ROP/bias revival, extra seed, or dataset run is authorized automatically. The

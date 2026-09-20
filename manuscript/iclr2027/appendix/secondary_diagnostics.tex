@@ -36,3 +36,25 @@ selective MAE for A/C/E/F/G. These diagnostics are historical, single-backbone
 context rather than an additional confirmatory endpoint.
 
 No new UQ metric, seed aggregation, or selective analysis is introduced here.
+
+
+\subsection{Natural-sampling direction-only follow-up}
+
+The natural-sampling direction-only analysis is auxiliary and was not part of the frozen H1/H2a confirmatory test. It holds the representation, original class-row norms, and original biases fixed, and changes the C protocol only from replacement-balanced to empirical natural sampling. N is weaker than C in every matched unit.
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Setting & N improves A & N weaker than C & Descriptive interpretation \\
+\midrule
+RetinaMNIST CE & 2/4 & 4/4 & Not consistent \\
+RetinaMNIST RPS & 2/4 & 4/4 & Not consistent \\
+Solar CE & 2/4 & 4/4 & Not consistent \\
+Solar RPS & 3/4 & 4/4 & Mixed/partial \\
+\bottomrule
+\end{tabular}
+\captionof{table}{Cross-setting natural-sampling direction-only follow-up. C is the balanced direction-constrained probe.}
+\label{tab:natural-followup}
+\end{center}
+
+For Solar CE, the four-unit auxiliary summary uses original seeds 1, 3, and 4 plus a pre-declared coherent replacement seed 2. The historical seed-2 features did not meet the frozen numerical identity requirement for this auxiliary follow-up; the original confirmatory record remains preserved. Solar CE mean endpoint MAE is \(1.430/1.426/.538\) for A/N/C, mean global MAE is \(.492/.436/.587\), mean macro MAE is \(.654/.605/.534\), and mean severe-error rate is \(.046/.037/.084\). N shifts endpoint mass only slightly in the upper classes (mean N--A changes \(+.022\) and \(+.038\) for true classes 3 and 4), whereas C produces broader, larger changes (mean C--A changes \(+.201,+.422,+.495\) for true classes 2, 3, and 4).

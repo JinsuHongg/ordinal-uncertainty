@@ -166,3 +166,11 @@ Keep Solar CE N fitting blocked.  Do not rerun CE features or change frozen
 tolerances.  If further work is separately authorized, first recover an exact
 historical environment/container or backend metadata; then conduct one bounded
 seed-2 reproduction diagnostic before considering any full regeneration.
+
+## Final bounded seed-2 historical replay
+
+The single authorized full-feature replay ran as job `4441691` on `acidsgcn007` under account `csc344r253` and partition `qGPU24`. Scheduler accounting and direct runtime output both recorded a `Tesla V100-SXM2-32GB` (driver `580.159.04`), with PyTorch `2.6.0+cu124`, torchvision `0.21.0+cu124`, CUDA `12.4`, and cuDNN `90100`. It used batch size 128, four workers, a pinned sequential loader, no drop-last, `eval()`, `torch.no_grad()`, no autocast, and float32 model and inputs. Current runtime values were cuDNN benchmark/deterministic false, deterministic algorithms false, matmul TF32 false, cuDNN TF32 true, and float32 matmul precision `highest`; the historical backend-flag values remain unknown.
+
+The original CE seed-2 checkpoint (SHA256 `c746ee847afd2305001195f0da47b77638f5549a11893390735bc8dcdf65fd01`) and normalization artifact (SHA256 `1178b05f9fafad22eec58608236ee5ba035a2f4629bfc17c10281797da8ed02b`) were used with strict state loading. The temporary archive has the expected 45,047/2,431/28,006 train/validation/evaluation rows; its SHA256 values are `7ccf6383f7a0ff88d8992226d4d42fc3de0101440d06460d31a5d4c3629ffef8`, `d2aaaf8ebca81c8dfaaa8c11aedde2d9ac7f221b0898ac2848cd3e6103480384`, and `ddb4af3817340a4d26b17f23aabb58c9d40cb6a84218fbe41b1f1379bbd34d5f`.
+
+The full frozen A gate retained exact sample IDs, labels, mode decisions, and exact-L1 decisions. Maximum/mean logit error was `1.0490417e-05` / `9.2778343e-07`, within the `2e-05` frozen logit limit. Maximum/mean probability error was `2.8676560e-06` / `6.2734405e-08`, exceeding the frozen `2e-06` probability limit. The result is therefore **MISMATCH**. The temporary tree `outputs/mechanism_replication/features/solar/ce/seed_2_historical_replay_tmp/` is retained, was not promoted, and must not be used for CE Phase B. No further retry is authorized; Solar CE remains 3/4 validated and CE N fitting remains blocked.
