@@ -58,7 +58,7 @@ def validate(rows: list[dict[str, str]]) -> dict[tuple[str, str, str], dict[str,
     if {row["representation_objective"] for row in rows} != set(OBJECTIVES):
         raise ValueError("Figure 3 must contain exactly CE and RPS")
     if {row["condition"] for row in rows} != set(CONDITIONS):
-        raise ValueError("Figure 3 must contain exactly A original and C direction-only")
+        raise ValueError("Figure 3 must contain exactly A original and C balanced direction-constrained rows")
     if any(row["seed"] != "0" or row["rare_class"] != "4" for row in rows):
         raise ValueError("Figure 3 contains an unexpected seed or rare class")
     if any(row["population"] != PROTOCOLS[row["dataset"]] for row in rows):
@@ -130,7 +130,7 @@ def draw_paired_metric(
                 ha="left", va="center", fontsize=7.6, color=style["color"],
             )
     axis.set_xlim(-0.12, 1.32 if annotate_counts else 1.12)
-    axis.set_xticks((0, 1), ("A original", "C direction-only"))
+    axis.set_xticks((0, 1), ("A original", "C: balanced direction-constrained"))
     axis.set_ylabel(ylabel)
     axis.grid(axis="y", linewidth=0.45, color="#d9dfe3", alpha=0.8)
     if zero_line:
@@ -174,7 +174,7 @@ def render(summary: dict[tuple[str, str, str], dict[str, str]]) -> None:
 def write_caption() -> None:
     caption = (
         "**Figure 3 | Classifier-direction adaptation improves rare-end localization across the evaluated CE- and RPS-trained representations.** "
-        "Across all four within-setting A→C comparisons, direction-only adaptation reduces rare-end L1 MAE and inward shrinkage, "
+        "Across all four within-setting A→C comparisons, balanced direction-constrained adaptation reduces rare-end L1 MAE and inward shrinkage, "
         "increases exact endpoint recovery, and improves the rare-end-versus-adjacent-class logit margin. RetinaMNIST results use "
         "training-only OOF head evaluation, whereas Solar results use the predeclared archived confirmatory readout. The consistent "
         "response direction is not interpreted as objective independence, equivalence, universal correction, or global/UQ improvement."

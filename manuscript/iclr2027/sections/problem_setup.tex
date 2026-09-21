@@ -1,0 +1,107 @@
+\subsection{Problem setup and localization diagnostics}
+
+We consider ordinal classification with ordered labels
+\(\mathcal{Y}=\{0,\ldots,K-1\}\). The upper endpoint \(K-1\) is the
+rare-end class in the settings studied here. A model maps an input \(x\) to a
+penultimate representation \(h(x)\in\mathrm{R}^d\), logits
+\(z_k(x)=w_k^\top h(x)+b_k\), and class probabilities
+\(p_k(x)=\exp\{z_k(x)\}/\sum_{j=0}^{K-1}\exp\{z_j(x)\}\). Our aim is not to
+propose a new classifier or to establish that class imbalance is an
+independently isolated cause of error. Instead, we characterize a recurring
+empirical pattern in the studied imbalanced settings: predictions for a rare
+upper endpoint are displaced toward interior ordinal classes. We call this
+pattern \emph{rare-end inward localization}.
+
+This terminology deliberately separates a model's probability distribution,
+its discrete decision, and the geometry of its learned representation. The
+modal decision is \(\hat y_{\mathrm{mode}}(x)=\arg\max_k p_k(x)\), whereas the
+exact discrete action for absolute ordinal loss is
+\[
+\hat y_{L1}(x)=\arg\min_{a\in\{0,\ldots,K-1\}}
+    \sum_{k=0}^{K-1}p_k(x)|k-a|.
+\]
+Thus \(\hat y_{L1}\) is a posterior median (with the deterministic tie rule
+used in the saved evaluation code), rather than a heuristic rounding of the
+predictive mean. We report both decisions when relevant and use the exact L1
+action for the primary ordinal-error summaries. An error is severe when
+\( |Y-\hat Y|\geq 2 \). This threshold is descriptive of errors that skip at
+least one adjacent ordinal category; it is not a new uncertainty metric.
+
+For a predicted distribution, its \emph{predictive location} is
+\[\mu_p(x)=\sum_{k=0}^{K-1} k p_k(x).\]
+For a true upper-endpoint observation (\(Y=K-1\)), we define \emph{inward
+shrinkage} as \[S(x)=(K-1)-\mu_p(x).\]
+Larger positive \(S\) means that probability mass is located farther inward
+from the upper endpoint; it is not the same quantity as discrete MAE. We
+therefore inspect routing counts, endpoint and adjacent-class probabilities,
+predictive location, shrinkage, L1 MAE, and severe-error prevalence together.
+The corresponding lower-endpoint diagnostics are retained as controls where
+reported, because a change that improves one endpoint can have asymmetric
+consequences elsewhere in the ordinal label space.
+
+All rare-end quantities condition on the true endpoint population rather than
+on samples predicted as the endpoint. This distinction is essential: a model
+that almost never routes a true endpoint to \(K-1\) can otherwise make the
+remaining predicted-endpoint subset appear deceptively easy. We summarize both
+the full rare-end population and its discrete routing distribution. In
+particular, endpoint probability \(p_{K-1}\), adjacent probability
+\(p_{K-2}\), and their joint allocation indicate whether an apparent movement
+in \(\mu_p\) is accompanied by greater endpoint support or simply a different
+spread among interior classes. These probability summaries complement, but do
+not replace, realized ordinal decisions. Conversely, a change in a decision
+rule cannot be interpreted as a change in representation or in the original
+probability distribution. This conditioning and decomposition are used
+throughout to avoid conflating localization, calibration-like probability
+behavior, and decision-dependent loss.
+
+The two backbone objectives are CE and the Ranked Probability Score (RPS). For
+a one-hot label \(y\), the per-example RPS used here is
+\[
+\operatorname{RPS}(p,y)=\frac{1}{K-1}\sum_{r=0}^{K-2}
+\left(\sum_{k=0}^{r}p_k-\mathbf{1}\{y\leq r\}\right)^2.
+\]
+CE is the nominal probabilistic baseline. RPS evaluates squared errors in
+cumulative probability and is an ordinal probabilistic baseline; the paper
+does not treat it as universally superior. Both objectives train backbones,
+while the head adaptation below uses a common controlled objective so that its
+interpretation does not rest on changing the representation simultaneously.
+
+Our representation diagnostics are training-derived and descriptive. For a
+given fitting set, the class centroid is
+\[\bar h_k=\frac{1}{n_k}\sum_{i:y_i=k} h(x_i).\]
+For a rare-end point, the endpoint-versus-adjacent margin is
+\[
+m_{\mathrm{adj}}^{\mathrm{rep}}(x)=
+\lVert h(x)-\bar h_{K-2}\rVert_2-
+\lVert h(x)-\bar h_{K-1}\rVert_2.
+\]
+A larger value means that the endpoint is closer than the immediately inward
+class. We also use the order-agnostic generic centroid gap
+\(g^{\mathrm{centroid}}(x)=d_{(2)}(x)-d_{(1)}(x)\), where \(d_{(1)}\) and
+\(d_{(2)}\) are the two smallest distances to any class centroids. These
+quantities help distinguish endpoint-specific alignment from generic feature
+separation. Nearest-centroid routing is a diagnostic summary only: it neither
+defines the classifier nor establishes a causal representation mechanism.
+
+The central intervention is designed around the decomposition
+\[\text{representation}\ \longrightarrow\ \text{probabilistic head}
+\ \longrightarrow\ \text{decision rule}\ \longrightarrow\ \text{ordinal risk}.\]
+Write each class row as \(w_k=s_kv_k\), where \(s_k=\lVert w_k\rVert_2\) and
+\(\lVert v_k\rVert_2=1\). Condition A is the original classifier head,
+including its directions, scales, and biases, applied to a frozen learned
+representation. Historical condition B is a balanced full-head refit, in which
+a new linear head is trained with class-balanced sampling and all head
+parameters may change. It is a comparative probe, not the primary
+confirmatory contrast.
+
+Condition C initializes from A but adapts only the unit directions:
+\(w_k^C=s_k^A v_k^C\). Every original per-class scale \(s_k^A\) and bias
+\(b_k^A\) is fixed. Consequently, an A--C difference is evidence about the
+head-actionable portion of localization for that fixed representation, not
+evidence that the representation itself was improved. C is a mechanistic probe,
+not a proposed deployment method. The historical D controlled-scale probe
+changes a prescribed scale component while retaining the direction-control
+logic; it is not part of the primary confirmatory comparison and its detailed
+mechanics are supplementary. Here, class-balanced sampling means
+replacement-based resampling to form balanced batches; it is an established
+control/intervention rather than a novel contribution.

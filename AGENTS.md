@@ -22,6 +22,10 @@ units (seeds 1, replacement 2, 3, 4) and is weaker than balanced C in all four.
 Solar RPS remains mixed (3/4 N improvements, C stronger in all four). Across
 these auxiliary Solar follow-ups, N does not reproduce C's broad endpoint-mass
 redistribution. This changes neither frozen H1/H2a nor manuscript claims.
+The authoritative final Solar CE N source is
+`docs/research/solar_ce_natural_sampling_direction_only_analysis.md`; the
+cross-seed limitation in `solar_ce_seed2_replacement_run.md` records the
+earlier state before N fitting for seeds 1, 3, and 4 was completed.
 
 Completed:
 
@@ -446,7 +450,8 @@ C's broad endpoint-mass redistribution in either Solar setting. These are
 auxiliary descriptive results only and preserve frozen H1/H2a and manuscript
 claims. See `docs/research/solar_rps_natural_sampling_direction_only_analysis.md`
 and `docs/research/solar_ce_natural_sampling_direction_only_analysis.md`.
-The replacement provenance is `docs/research/solar_ce_seed2_replacement_run.md`.
+The latter is authoritative for Solar CE N; the replacement provenance note
+records the earlier pre-follow-up state and its subsequent supersession.
 
 The Figure 1--4 source-artifact and data-availability audit is complete; see `docs/research/figure_source_artifact_audit.md`. It found material local source gaps, including absent cited RetinaMNIST/UTKFace and Phase 3.19/3.20A output trees. Do not build figure-data tables or final figures without a separate artifact-recovery review and deterministic provenance check. No method design, training, evaluation, tuning,
 ROP/bias revival, extra seed, or dataset run is authorized automatically. The

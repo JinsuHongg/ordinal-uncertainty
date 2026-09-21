@@ -435,6 +435,11 @@ but remains weaker than balanced C in every seed (`.654` under C). N does not
 reproduce C's broad endpoint-mass redistribution and has lower global
 MAE/severe error than C. The completed replacement-aware CE companion is not consistent: N improves in 2/4 units and is weaker than C in all four; neither Solar N follow-up reproduces C's broad endpoint-mass redistribution. Both are auxiliary descriptive evidence, and frozen H1/H2a conclusions are unchanged. See [the RPS-only N analysis](solar_rps_natural_sampling_direction_only_analysis.md) and [the CE N analysis](solar_ce_natural_sampling_direction_only_analysis.md).
 
+The CE analysis is the authoritative final Solar CE N source. Its four-unit
+summary supersedes the cross-seed limitation in
+`solar_ce_seed2_replacement_run.md`, which records the earlier state before the
+pre-specified N fits for original seeds 1, 3, and 4 were completed.
+
 ## Cross-Setting Mechanism Synthesis
 
 **A — READY FOR MANUSCRIPT WRITING WITH A BOUNDED CLAIM SET.**  H1 is strongly

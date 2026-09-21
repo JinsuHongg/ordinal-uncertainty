@@ -1,0 +1,39 @@
+The multi-seed confirmatory evidence covers two datasets, RetinaMNIST and
+Solar, under CE- and RPS-trained representations. This provides a focused
+cross-setting test of the frozen intervention, but it does not establish the
+same response for other ordinal tasks, data modalities, backbones, objectives,
+or imbalance regimes. UTKFace contributes provenance-clean historical seed-0
+evidence only. Its seeds 1--4 are unavailable, so it is supplementary
+supporting evidence and is not part of the primary H1/H2a confirmatory block.
+
+The two confirmatory populations also have different roles. RetinaMNIST uses a
+training-only OOF head evaluation, whereas Solar uses a fixed archived readout.
+The Solar readout supports the predeclared backbone-realization comparison, but
+it is not a new external cohort for each seed. Endpoint supports and dataset
+structures also differ, so the results should not be interpreted as directly
+comparable estimates of localization severity across datasets.
+
+The representation analysis is deliberately limited. Train-derived centroid
+distances provide a coarse diagnostic of endpoint-specific geometry; they do
+not identify a causal representation failure or determine whether an individual
+sample is recoverable. This limitation is reflected in the H2a outcome: the
+geometry diagnostic is strong in Solar, partial in RetinaMNIST CE, and not
+supported in RetinaMNIST RPS. The paper therefore does not claim a universal
+geometry-conditioned recovery mechanism.
+
+The controlled RetinaMNIST factor study is also narrow. It evaluates one frozen
+RPS representation and finds that balanced sampling is the dominant observed
+adaptation signal in that setting; it does not establish a general causal role
+for balanced sampling. The separate support-severity grid shows that lower
+class-4 support weakens direct endpoint evidence, but its localization outcomes
+are non-monotonic. These results do not causally identify imbalance severity as
+the source of inward localization.
+
+Finally, direction-only adaptation is an explanatory probe rather than a
+production method. It shows that changing classifier direction can alter
+rare-end localization under the fixed protocol, but it does not show that the
+head is the sole source of error, that all rare-end samples are recoverable, or
+that the intervention improves global accuracy, calibration, risk, or
+uncertainty quality. A practical correction would require separate evaluation
+of its broader predictive and deployment consequences. This scope remains
+intentional.

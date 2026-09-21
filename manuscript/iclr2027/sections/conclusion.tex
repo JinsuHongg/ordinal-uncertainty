@@ -1,0 +1,34 @@
+This paper characterizes rare-end inward localization in imbalanced ordinal
+classification. A rare upper endpoint can be mislocalized toward interior
+classes in a way that is not fully captured by exact-class accuracy or an
+aggregate ordinal error. Routing, predictive location, and inward shrinkage
+make this direction of failure visible and separate it from generic rare-class
+underperformance.
+
+The main replicated result is a direction-responsive classifier-head component.
+Under the frozen A/C protocol, direction-only adaptation reduced rare-end
+localization error in all four confirmatory backbone seeds in each of the
+RetinaMNIST CE, RetinaMNIST RPS, Solar CE, and Solar RPS settings. Because the
+intervention holds the representation, original class-specific row norms, and
+biases fixed, this result provides evidence that head direction is an actionable
+component of rare-end localization in the studied settings. It does not define
+a universally preferable classifier or imply a global predictive, calibration,
+or uncertainty-quantification improvement.
+
+The associated geometry analysis gives a narrower conclusion. Endpoint-specific
+representation geometry added explanatory value strongly in Solar, was partial
+in RetinaMNIST CE, and was not supported in RetinaMNIST RPS. The geometry
+diagnostic is therefore setting-dependent rather than a universal explanation
+for direction-only recovery. The controlled RetinaMNIST factor study similarly
+identified balanced sampling as the dominant observed adaptation signal only in
+its frozen one-backbone setting. The rare-support severity study showed weaker
+direct class-4 evidence at lower support without a clean monotonic localization
+dose response.
+
+Taken together, the results support an empirical mechanism account rather than
+a deployment method: rare-end inward localization has a reproducible
+direction-responsive head component, while representation diagnostics and
+support effects require setting-specific interpretation. Future work can test
+this account on broader ordinal datasets and backbones, develop richer
+representation diagnostics, and determine when a head-level response remains
+useful under different imbalance regimes.

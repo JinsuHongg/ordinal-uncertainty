@@ -95,6 +95,18 @@ A four-seed CE N consistency label cannot be computed: validated CE N heads
 for original seeds 1, 3, and 4 do not exist, and this task explicitly forbids
 modifying those seeds. The replacement makes no Solar-CE-wide sampling claim.
 
+### Superseded follow-up status
+
+This was the correct status at the time of the replacement run. A subsequent
+pre-specified follow-up completed the N fits for original Solar CE seeds 1, 3,
+and 4 under
+`docs/research/solar_ce_natural_sampling_remaining_seeds_protocol.md`. The
+authoritative final Solar CE N analysis is
+`docs/research/solar_ce_natural_sampling_direction_only_analysis.md`: N
+improves A in 2/4 units, and balanced C is better than N in all 4/4 matched
+units. This supersession does not alter the historical replacement-run record
+above.
+
 ## 13. Provenance statement
 
 `replacement_provenance.json` preserves the original/replacement relationship.

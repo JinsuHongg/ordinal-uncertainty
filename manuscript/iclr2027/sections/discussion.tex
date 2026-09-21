@@ -1,0 +1,128 @@
+\subsection{A reproducible direction-only localization response}
+
+The robust result is a repeated head-level localization response, not a
+universal classifier correction. In each of the RetinaMNIST CE, RetinaMNIST
+RPS, Solar CE, and Solar RPS settings, all four confirmatory backbone seeds
+had negative $\Delta\mathrm{MAE}$ under the frozen A-to-C comparison
+(Table~\ref{tab:confirmatory-h1}). The direction of the effect therefore
+replicated across the four tested dataset-objective settings. The replication
+unit is the independently trained backbone seed. It is not an OOF fold, an
+individual sample, or a separate dataset.
+
+The A/C comparison constrains the interpretation more tightly than a full-head
+retraining comparison. Condition C holds the representation, class-specific
+row norms, and biases fixed while adapting classifier direction. The result
+therefore supports the conclusion that the direction component of the
+classifier head is a reproducible actionable component of rare-end localization
+in the studied settings. It does not show that direction is the only relevant
+head component, that all rare-end errors have the same source, or that the
+intervention is universally preferable for prediction. In particular, the
+localization response does not imply a global accuracy, calibration, risk, or
+uncertainty-quantification improvement.
+
+The descriptive confidence intervals in Table~\ref{tab:confirmatory-h1} also
+illustrate why the frozen sign-consistency gate should be reported directly.
+The RetinaMNIST CE interval crosses zero, but all four predeclared backbone
+seeds improved under the paired endpoint. The setting consequently satisfies
+the H1 criterion without requiring an additional significance decision. This
+separation between a replication rule and descriptive uncertainty avoids
+recasting a small number of backbone realizations as a large collection of
+independent experiments.
+
+\subsection{Endpoint-specific geometry is a setting-dependent diagnostic}
+
+The direction-only effect is more robust than the centroid-based explanation of
+that effect. H2a tests whether an endpoint-versus-adjacent representation margin
+adds information about final C inward shrinkage beyond original-head state and
+generic centroid separation. The result is strong in both Solar settings,
+partial in RetinaMNIST CE, and not supported in RetinaMNIST RPS
+(Table~\ref{tab:confirmatory-h2a}). Thus, endpoint-specific representation
+geometry can provide explanatory value beyond the prespecified controls, but
+it does not do so uniformly across the studied settings.
+
+The contrast between Solar and Retina is informative. In RetinaMNIST CE, the
+coefficient has the expected sign in all four seeds, but incremental
+leave-one-out value is positive in only two. In RetinaMNIST RPS, only two seeds
+have the expected coefficient sign. These outcomes do not support weakening the
+Retina RPS negative result or replacing H2a with a more favorable analysis.
+H2b remains secondary and cannot alter the H2a verdict. The appropriate
+interpretation is that centroid geometry is a setting-dependent diagnostic of
+post-adaptation localization, not a universal mechanism of recovery.
+
+This boundary also separates two questions that can otherwise be conflated.
+H1 asks whether direction-only adaptation improves rare-end localization. H2a
+asks whether a particular representation diagnostic helps account for final
+localization after that adaptation. A stable H1 response can therefore coexist
+with a mixed H2a result. The present evidence supports the first question more
+strongly than the second.
+
+\subsection{Relation to long-tail classifier and representation studies}
+
+The contribution is the ordinal localization object and the controlled
+diagnostic, rather than classifier retraining or classifier geometry itself.
+Balanced classifier retraining, decoupled representation/classifier training,
+classifier norm and direction effects, and feature/classifier misalignment are
+established themes in long-tail recognition
+\cite{kang2020decoupling,alshammari2022weight,c2am2022angular,wang2026alignment}. This work does not
+claim novelty for those components. It instead studies an ordinal failure mode:
+a rare upper endpoint is routed toward adjacent interior classes, with a
+corresponding shift in predictive location and inward shrinkage.
+
+That distinction matters because nominal tail accuracy alone does not identify
+where an error lies in the ordinal label space. The same exact-class error can
+be adjacent to the endpoint or can be displaced several classes inward. The
+frozen direction-only probe then tests whether part of this localization error
+is head-actionable while the representation, row norms, and biases are held
+fixed. This design provides a bounded classifier-head analysis of an
+ordinal-specific endpoint phenomenon. It should not be presented as a new
+balanced-head algorithm, a general result that classifier direction matters, or
+a replacement for established long-tail methods.
+
+\subsection{What the intervention establishes and what it does not}
+
+The intervention shows that changing head direction alone can alter rare-end
+localization. Historical seed-0 decomposition analyses give context for this
+result: some rare-end samples are representation-inward under the
+training-centroid diagnostic, whereas others retain rare-end-like geometry but
+are mapped inward by the original head. The latter pattern is consistent with a
+head-actionable component. These decomposition results are descriptive and
+mechanism-forming; they are not a multi-seed causal classification of every
+rare-end sample.
+
+Several stronger interpretations are not supported. The analyses do not show
+that the representation is irrelevant, that endpoint centroid position
+causally determines recoverability, or that all representation-inward samples
+are unrecoverable from frozen features. They also do not identify class
+imbalance as the sole cause of inward localization. The support-severity study
+is especially important on this point: lower class-4 support weakened direct
+class-4 evidence, but localization outcomes were not cleanly monotonic. The
+direction-only intervention is therefore best understood as an explanatory
+probe, not as a production classifier selected for broad deployment.
+
+\subsection{Controlled boundaries and limitations}
+
+The controlled RetinaMNIST studies further bound the mechanism interpretation.
+Within the frozen-RPS factorial, balanced sampling was the dominant observed
+adaptation factor, while the CE-versus-RPS head objective had a smaller effect
+within a sampling regime. This is a dataset-specific result from one frozen
+backbone representation. It provides evidence about the training signal
+associated with the beneficial direction change, but does not establish that
+balanced sampling universally drives that change.
+
+The support-severity grid provides a complementary boundary. Reducing class-4
+support consistently degraded direct class evidence such as mean $p_4$ and the
+class-4-versus-class-3 margin. Class-4 MAE, inward shrinkage, severe error, and
+centroid-routing outcomes remained seed-variable and non-monotonic. Rare
+support alone is therefore insufficient as an isolated causal account of
+localization severity.
+
+The confirmatory evidence is deliberately narrow. RetinaMNIST and Solar are
+the two multi-seed confirmatory datasets, and Solar uses a fixed archived
+readout rather than a new external cohort for each backbone seed. UTKFace has
+provenance-clean seed-0 artifacts but lacks the seed-1--4 checkpoint set and is
+historical supporting evidence only. Centroid distances are also a coarse
+representation diagnostic, particularly when endpoint support differs across
+datasets. These limitations do not remove the repeated H1 response, but they
+define its scope and motivate a conservative mechanism claim: rare-end inward
+localization has a reproducible direction-responsive head component in the
+studied settings, while its geometry-based explanation is setting-dependent.
