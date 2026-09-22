@@ -23,6 +23,7 @@ from ordinal_uncertainty.data.utkface import (
     UTKFaceDataset,
     class_counts,
     load_manifest,
+    parse_age,
     records_for_split,
     utkface_transform,
 )
@@ -35,8 +36,6 @@ from ordinal_uncertainty.models.ordinal import rps_loss
 from ordinal_uncertainty.models.resnet import make_resnet18
 
 
-MANIFEST = Path("/home/jhong90/github_proj/ordinal-cqr/data/manifests/conference_v0_3/utkface/manifest.jsonl")
-DATA_ROOT = Path("/mnt/storage/data/utkface/UTKFace")
 BACKBONE_BATCH, BACKBONE_EPOCHS = 32, 10
 HEAD_BATCH, HEAD_EPOCHS, HEAD_LR = 64, 100, 1e-3
 REPLAY_TOL, CONSTRAINT_TOL = 1e-4, 1e-6
@@ -77,8 +76,38 @@ def assert_disjoint_ids(train_ids: list[str] | np.ndarray, validation_ids: list[
         raise RuntimeError("training and validation sample IDs overlap")
 
 
-def records() -> dict[str, list[dict[str, object]]]:
-    frozen = load_manifest(MANIFEST, DATA_ROOT)
+def assert_feature_split_integrity(split_ids: dict[str, np.ndarray]) -> None:
+    names = tuple(split_ids)
+    for name, ids in split_ids.items():
+        values = list(map(str, ids))
+        if len(values) != len(set(values)):
+            raise RuntimeError(f"duplicate sample IDs in {name} feature archive")
+    for index, left in enumerate(names):
+        for right in names[index + 1:]:
+            if set(map(str, split_ids[left])) & set(map(str, split_ids[right])):
+                raise RuntimeError(f"sample ID overlap between {left} and {right} feature archives")
+
+
+def replay_original_head(features: np.ndarray, weight: np.ndarray, bias: np.ndarray, direct_logits: np.ndarray) -> dict[str, float | int]:
+    replayed_logits = features @ weight.T + bias
+    direct_probability = probabilities(direct_logits)
+    replayed_probability = probabilities(replayed_logits)
+    direct_decisions = bayes_decisions(direct_probability)
+    replayed_decisions = bayes_decisions(replayed_probability)
+    return {
+        "max_logit_diff": float(np.abs(replayed_logits - direct_logits).max()),
+        "max_probability_diff": float(np.abs(replayed_probability - direct_probability).max()),
+        "mode_differences": int(np.count_nonzero(replayed_decisions["mode_decision"] != direct_decisions["mode_decision"])),
+        "l1_differences": int(np.count_nonzero(replayed_decisions["l1_bayes_decision"] != direct_decisions["l1_bayes_decision"])),
+    }
+
+
+def records(manifest: Path, data_root: Path) -> dict[str, list[dict[str, object]]]:
+    if not manifest.is_file():
+        raise FileNotFoundError(f"manifest not found: {manifest}")
+    if not data_root.is_dir():
+        raise FileNotFoundError(f"data root not found: {data_root}")
+    frozen = load_manifest(manifest, data_root)
     splits = {name: records_for_split(frozen, name) for name in ("train", "validation")}
     if class_counts(splits["train"]) != [2756, 7128, 2726, 1210, 404]:
         raise RuntimeError("frozen train counts mismatch")
@@ -91,9 +120,28 @@ def records() -> dict[str, list[dict[str, object]]]:
     return splits
 
 
-def loader(items: list[dict[str, object]], *, train: bool, batch: int, shuffle: bool = False) -> DataLoader:
+def export_records(manifest: Path, data_root: Path) -> dict[str, list[dict[str, object]]]:
+    if not manifest.is_file():
+        raise FileNotFoundError(f"manifest not found: {manifest}")
+    if not data_root.is_dir():
+        raise FileNotFoundError(f"data root not found: {data_root}")
+    frozen = load_manifest(manifest, data_root)
+    splits = {name: records_for_split(frozen, name) for name in ("train", "validation", "test")}
+    expected = {
+        "train": [2756, 7128, 2726, 1210, 404],
+        "validation": [459, 1188, 455, 202, 67],
+        "test": [459, 1189, 454, 202, 67],
+    }
+    for name, counts in expected.items():
+        if class_counts(splits[name]) != counts:
+            raise RuntimeError(f"frozen {name} counts mismatch")
+    assert_feature_split_integrity({name: np.asarray([str(row["sample_id"]) for row in rows]) for name, rows in splits.items()})
+    return splits
+
+
+def loader(items: list[dict[str, object]], data_root: Path, *, train: bool, batch: int, shuffle: bool = False) -> DataLoader:
     return DataLoader(
-        UTKFaceDataset(items, DATA_ROOT, utkface_transform(train)),
+        UTKFaceDataset(items, data_root, utkface_transform(train)),
         batch_size=batch,
         shuffle=shuffle,
         num_workers=0,
@@ -158,9 +206,9 @@ def run_backbone(args: argparse.Namespace) -> None:
     out.mkdir(parents=True)
     set_seed(args.seed)
     device = torch.device(args.device)
-    splits = records()
-    train_loader = loader(splits["train"], train=True, batch=BACKBONE_BATCH, shuffle=True)
-    validation_loader = loader(splits["validation"], train=False, batch=BACKBONE_BATCH)
+    splits = records(args.manifest, args.data_root)
+    train_loader = loader(splits["train"], args.data_root, train=True, batch=BACKBONE_BATCH, shuffle=True)
+    validation_loader = loader(splits["validation"], args.data_root, train=False, batch=BACKBONE_BATCH)
     model = make_resnet18(K).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=.01)
     best, best_epoch, best_state, history = float("inf"), 0, None, []
@@ -185,7 +233,7 @@ def run_backbone(args: argparse.Namespace) -> None:
         "protocol": "UTKFace prospective replication frozen protocol",
         "objective": args.objective,
         "seed": args.seed,
-        "manifest_sha256": sha256(MANIFEST),
+        "manifest_sha256": sha256(args.manifest),
         "evaluation_split": "validation",
         "architecture": "unpretrained small-stem ResNet18, 3x3 stride-1 stem, no max-pool, 5-way head",
         "optimizer": "AdamW", "learning_rate": 1e-4, "weight_decay": .01,
@@ -273,6 +321,108 @@ def geometry(train_x: np.ndarray, train_y: np.ndarray, val_x: np.ndarray) -> dic
     return {"nearest_centroid": distances.argmin(1).astype(np.int64), "c4_vs_c3_margin": (distances[:, 3] - distances[:, 4]).astype(np.float64)}
 
 
+def export_archive_arrays(captured: dict[str, np.ndarray], items: list[dict[str, object]], split: str) -> dict[str, np.ndarray]:
+    sample_ids = captured["sample_ids"]
+    expected_ids = np.asarray([str(row["sample_id"]) for row in items], dtype=str)
+    if not np.array_equal(sample_ids, expected_ids):
+        raise RuntimeError(f"{split} capture IDs do not match frozen manifest order")
+    labels = np.asarray([int(row["Y_ord"]) for row in items], dtype=np.int64)
+    if not np.array_equal(captured["labels"], labels):
+        raise RuntimeError(f"{split} capture labels do not match frozen manifest")
+    filenames = np.asarray([sample_id.removeprefix("utkface:") for sample_id in sample_ids], dtype=str)
+    ages = np.asarray([parse_age(filename) for filename in filenames], dtype=np.float64)
+    probability = probabilities(captured["logits"])
+    decisions = bayes_decisions(probability)
+    return {
+        "sample_ids": sample_ids, "filenames": filenames, "ages": ages,
+        "split": np.full(len(sample_ids), split), "labels": labels,
+        "features": captured["features"], "logits": captured["logits"],
+        "probabilities": probability, **decisions,
+    }
+
+
+def a_baseline_metrics(arrays: dict[str, np.ndarray]) -> dict[str, object]:
+    labels, probability = arrays["labels"], arrays["probabilities"]
+    prediction = arrays["l1_bayes_decision"]
+    error = np.abs(labels - prediction)
+    endpoint = labels == 4
+    mean = probability @ np.arange(K)
+    shrinkage = inward_shrinkage(labels, probability)
+    return {
+        "global_l1_mae": float(error.mean()),
+        "macro_l1_mae": float(np.mean([error[labels == klass].mean() for klass in range(K)])),
+        "severe_error_rate_l1": float((error >= 2).mean()),
+        "endpoint_4": {
+            "support": int(endpoint.sum()),
+            "l1_mae": float(error[endpoint].mean()),
+            "exact_match_rate": float((prediction[endpoint] == 4).mean()),
+            "mean_predictive_mean": float(mean[endpoint].mean()),
+            "mean_inward_shrinkage": float(shrinkage[endpoint].mean()),
+            "mean_p4": float(probability[endpoint, 4].mean()),
+            "routing": [int((prediction[endpoint] == klass).sum()) for klass in range(K)],
+        },
+    }
+
+
+def run_export(args: argparse.Namespace) -> None:
+    out = args.out
+    if out.exists():
+        raise FileExistsError(f"refusing to overwrite {out}")
+    checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
+    if checkpoint.get("objective") != args.objective or checkpoint.get("seed") != args.seed:
+        raise RuntimeError("checkpoint objective or seed does not match requested export unit")
+    state = checkpoint["model_state_dict"]
+    weight, bias = state["fc.weight"].float(), state["fc.bias"].float()
+    if tuple(weight.shape) != (K, 512) or tuple(bias.shape) != (K,):
+        raise RuntimeError("checkpoint head shape does not match frozen contract")
+    device = torch.device(args.device)
+    splits = export_records(args.manifest, args.data_root)
+    model = make_resnet18(K)
+    model.load_state_dict(state)
+    model.to(device).eval()
+    archives: dict[str, dict[str, np.ndarray]] = {}
+    replay: dict[str, dict[str, float | int]] = {}
+    for split, items in splits.items():
+        captured = capture(model, loader(items, args.data_root, train=False, batch=BACKBONE_BATCH), device)
+        archive = export_archive_arrays(captured, items, split)
+        if not np.isfinite(archive["features"]).all() or not np.isfinite(archive["logits"]).all() or not np.isfinite(archive["probabilities"]).all():
+            raise FloatingPointError(f"non-finite {split} feature archive")
+        archives[split] = archive
+        replay[split] = replay_original_head(archive["features"], weight.numpy(), bias.numpy(), archive["logits"])
+        if replay[split]["max_logit_diff"] > REPLAY_TOL or replay[split]["max_probability_diff"] > REPLAY_TOL:
+            raise RuntimeError(f"{split} A feature replay failed: {replay[split]}")
+        if replay[split]["mode_differences"] or replay[split]["l1_differences"]:
+            raise RuntimeError(f"{split} A decision replay failed: {replay[split]}")
+    accepted = np.load(args.checkpoint.parent / "validation_backbone_arrays.npz")
+    exported_validation = archives["validation"]
+    if not np.array_equal(accepted["sample_ids"], exported_validation["sample_ids"]) or not np.array_equal(accepted["labels"], exported_validation["labels"]):
+        raise RuntimeError("exported validation IDs or labels differ from accepted backbone arrays")
+    accepted_validation = {
+        "max_logit_diff": float(np.abs(accepted["logits"] - exported_validation["logits"]).max()),
+        "max_probability_diff": float(np.abs(accepted["probabilities"] - exported_validation["probabilities"]).max()),
+    }
+    if max(accepted_validation.values()) > REPLAY_TOL:
+        raise RuntimeError(f"exported validation outputs differ from accepted backbone arrays: {accepted_validation}")
+    out.mkdir(parents=True)
+    for split, archive in archives.items():
+        np.savez_compressed(out / f"{split}_features.npz", **archive)
+    torch.save({"condition": "A_original", "weight": weight, "bias": bias}, out / "A_original_head.pt")
+    write_json(out / "feature_export_metadata.json", {
+        "protocol": "UTKFace prospective A/C/N frozen protocol",
+        "objective": args.objective, "seed": args.seed, "checkpoint": str(args.checkpoint),
+        "checkpoint_sha256": sha256(args.checkpoint), "manifest": str(args.manifest),
+        "manifest_sha256": sha256(args.manifest), "feature_definition": "penultimate feature immediately before model.fc",
+        "feature_dimension": int(weight.shape[1]), "model_mode": "eval",
+        "transform": "Resize(128,128), ToTensor, ImageNet normalization; no augmentation",
+        "replay_tolerance_max_abs": REPLAY_TOL, "replay": replay,
+        "accepted_validation_comparison": accepted_validation,
+        "split_counts": {name: int(len(archive["labels"])) for name, archive in archives.items()},
+        "class_counts": {name: np.bincount(archive["labels"], minlength=K).tolist() for name, archive in archives.items()},
+        "test_class_4_support": int((archives["test"]["labels"] == 4).sum()),
+        "test_a_metrics": a_baseline_metrics(archives["test"]),
+    })
+
+
 def run_heads(args: argparse.Namespace) -> None:
     out = args.out
     if out.exists():
@@ -283,10 +433,10 @@ def run_heads(args: argparse.Namespace) -> None:
     if tuple(weight.shape) != (K, 512) or tuple(bias.shape) != (K,):
         raise RuntimeError("checkpoint head shape does not match frozen contract")
     device = torch.device(args.device)
-    splits = records()
+    splits = records(args.manifest, args.data_root)
     model = make_resnet18(K); model.load_state_dict(state); model.to(device).eval()
-    train = capture(model, loader(splits["train"], train=False, batch=HEAD_BATCH), device)
-    validation = capture(model, loader(splits["validation"], train=False, batch=HEAD_BATCH), device)
+    train = capture(model, loader(splits["train"], args.data_root, train=False, batch=HEAD_BATCH), device)
+    validation = capture(model, loader(splits["validation"], args.data_root, train=False, batch=HEAD_BATCH), device)
     assert_disjoint_ids(train["sample_ids"], validation["sample_ids"])
     replay = float(np.abs(validation["features"] @ weight.numpy().T + bias.numpy() - validation["logits"]).max())
     if replay > REPLAY_TOL:
@@ -308,25 +458,33 @@ def run_heads(args: argparse.Namespace) -> None:
     geom = geometry(train["features"], train["labels"], validation["features"])
     np.savez_compressed(out / "validation_geometry.npz", sample_ids=validation["sample_ids"], labels=validation["labels"], **geom)
     deltas = {"N_minus_A_c4_mae": metrics["N"]["endpoints"]["4"]["mae_l1"] - metrics["A"]["endpoints"]["4"]["mae_l1"], "C_minus_A_c4_mae": metrics["C"]["endpoints"]["4"]["mae_l1"] - metrics["A"]["endpoints"]["4"]["mae_l1"], "C_minus_N_c4_mae": metrics["C"]["endpoints"]["4"]["mae_l1"] - metrics["N"]["endpoints"]["4"]["mae_l1"]}
-    write_json(out / "manifest.json", {"protocol": "UTKFace prospective A/C/N frozen protocol", "objective": args.objective, "seed": args.seed, "checkpoint": str(args.checkpoint), "checkpoint_sha256": sha256(args.checkpoint), "manifest_sha256": sha256(MANIFEST), "evaluation_split": "validation", "a_replay_max_abs_error": replay, "constraints": constraints, "deltas": deltas, "metrics": metrics})
+    write_json(out / "manifest.json", {"protocol": "UTKFace prospective A/C/N frozen protocol", "objective": args.objective, "seed": args.seed, "checkpoint": str(args.checkpoint), "checkpoint_sha256": sha256(args.checkpoint), "manifest_sha256": sha256(args.manifest), "evaluation_split": "validation", "a_replay_max_abs_error": replay, "constraints": constraints, "deltas": deltas, "metrics": metrics})
 
 
-def main() -> None:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
-    for name in ("backbone", "heads"):
+    for name in ("backbone", "heads", "export"):
         child = sub.add_parser(name)
         child.add_argument("--objective", choices=("ce", "rps"), required=True)
         child.add_argument("--seed", choices=(1, 2, 3, 4), type=int, required=True)
         child.add_argument("--out", type=Path, required=True)
+        child.add_argument("--data-root", type=Path, required=True, help="UTKFace image directory matching the frozen manifest")
+        child.add_argument("--manifest", type=Path, required=True, help="immutable UTKFace frozen split manifest")
         child.add_argument("--device", default="cuda:0")
-        if name == "heads":
+        if name in {"heads", "export"}:
             child.add_argument("--checkpoint", type=Path, required=True)
-    args = parser.parse_args()
+    return parser.parse_args(argv)
+
+
+def main() -> None:
+    args = parse_args()
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA is mandatory for this prospective protocol")
     if args.command == "backbone":
         run_backbone(args)
+    elif args.command == "export":
+        run_export(args)
     else:
         run_heads(args)
 
